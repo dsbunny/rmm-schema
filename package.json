@@ -1,0 +1,21 @@
+{
+	"name": "@dsbunny/rmm-schema",
+	"version": "3.1.0",
+	"description": "Schema for the RMM",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"author": "Steve-o <fnjordy@gmail.com>",
+	"license": "MIT",
+	"private": false,
+	"scripts": {
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"typescript": "^5.5.3"
+	}
+}
