@@ -6,19 +6,24 @@ export const DeviceBase = z.object({
         .describe('The name of the device'),
     tags: z.array(z.string())
         .describe('The tags of the device'),
-});
-export const DeviceMetadata = z.object({
+})
+    .describe('Base information of the device, which is used to create a device');
+export const DeviceRegistration = z.object({
     tenant_id: z.string()
         .describe('The tenant ID of the device'),
     device_id: z.string().uuid()
         .describe('The UUID of the device'),
     create_timestamp: z.string().datetime() // ISO 8601
         .describe('The timestamp of the device creation'),
+})
+    .describe('The registration of the device');
+export const DeviceMetadata = DeviceRegistration.merge(z.object({
     modify_timestamp: z.string().datetime()
         .describe('The timestamp of the device modification'),
     is_deleted: z.boolean().default(false)
         .describe('The flag of the device deletion'),
-});
+}))
+    .describe('The metadata of the device');
 export const DeviceStateBase = z.object({
     pull_interval: z.number().nullable()
         .describe('The pull interval of the device'),

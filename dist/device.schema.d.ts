@@ -10,13 +10,28 @@ export declare const DeviceBase: z.ZodObject<{
     tags: string[];
 }>;
 export type DeviceBase = z.infer<typeof DeviceBase>;
-export declare const DeviceMetadata: z.ZodObject<{
+export declare const DeviceRegistration: z.ZodObject<{
     tenant_id: z.ZodString;
     device_id: z.ZodString;
     create_timestamp: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    tenant_id: string;
+    device_id: string;
+    create_timestamp: string;
+}, {
+    tenant_id: string;
+    device_id: string;
+    create_timestamp: string;
+}>;
+export type DeviceRegistration = z.infer<typeof DeviceRegistration>;
+export declare const DeviceMetadata: z.ZodObject<z.objectUtil.extendShape<{
+    tenant_id: z.ZodString;
+    device_id: z.ZodString;
+    create_timestamp: z.ZodString;
+}, {
     modify_timestamp: z.ZodString;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}, "strip", z.ZodTypeAny, {
+}>, "strip", z.ZodTypeAny, {
     tenant_id: string;
     device_id: string;
     create_timestamp: string;
@@ -29,6 +44,7 @@ export declare const DeviceMetadata: z.ZodObject<{
     modify_timestamp: string;
     is_deleted?: boolean | undefined;
 }>;
+export type DeviceMetadata = z.infer<typeof DeviceMetadata>;
 export declare const DeviceStateBase: z.ZodObject<{
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -55,13 +71,14 @@ export declare const DeviceState: z.ZodObject<z.objectUtil.extendShape<{
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     agent_ids: z.ZodNullable<z.ZodArray<z.ZodString, "many">>;
-}, {
+}, z.objectUtil.extendShape<{
     tenant_id: z.ZodString;
     device_id: z.ZodString;
     create_timestamp: z.ZodString;
+}, {
     modify_timestamp: z.ZodString;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}>, "strip", z.ZodTypeAny, {
+}>>, "strip", z.ZodTypeAny, {
     tenant_id: string;
     device_id: string;
     create_timestamp: string;
@@ -620,13 +637,14 @@ export declare const DeviceStatus: z.ZodObject<z.objectUtil.extendShape<{
     }>>;
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
-}, {
+}, z.objectUtil.extendShape<{
     tenant_id: z.ZodString;
     device_id: z.ZodString;
     create_timestamp: z.ZodString;
+}, {
     modify_timestamp: z.ZodString;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}>, "strip", z.ZodTypeAny, {
+}>>, "strip", z.ZodTypeAny, {
     tenant_id: string;
     device_id: string;
     create_timestamp: string;
@@ -721,26 +739,28 @@ export type DeviceStatus = z.infer<typeof DeviceStatus>;
 export declare const Device: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString, "many">;
-}, {
+}, z.objectUtil.extendShape<{
     tenant_id: z.ZodString;
     device_id: z.ZodString;
     create_timestamp: z.ZodString;
+}, {
     modify_timestamp: z.ZodString;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}>, {
+}>>, {
     desired_state: z.ZodNullable<z.ZodObject<Omit<z.objectUtil.extendShape<{
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
         agent_ids: z.ZodNullable<z.ZodArray<z.ZodString, "many">>;
-    }, {
+    }, z.objectUtil.extendShape<{
         tenant_id: z.ZodString;
         device_id: z.ZodString;
         create_timestamp: z.ZodString;
+    }, {
         modify_timestamp: z.ZodString;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
+    }>>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
         create_timestamp: string;
         modify_timestamp: string;
         pull_interval: number | null;
@@ -763,13 +783,14 @@ export declare const Device: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.e
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
         agent_ids: z.ZodNullable<z.ZodArray<z.ZodString, "many">>;
-    }, {
+    }, z.objectUtil.extendShape<{
         tenant_id: z.ZodString;
         device_id: z.ZodString;
         create_timestamp: z.ZodString;
+    }, {
         modify_timestamp: z.ZodString;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
+    }>>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
         create_timestamp: string;
         modify_timestamp: string;
         pull_interval: number | null;
@@ -952,13 +973,14 @@ export declare const Device: z.ZodObject<z.objectUtil.extendShape<z.objectUtil.e
         }>>;
         has_error: z.ZodDefault<z.ZodBoolean>;
         error_stack: z.ZodNullable<z.ZodString>;
-    }, {
+    }, z.objectUtil.extendShape<{
         tenant_id: z.ZodString;
         device_id: z.ZodString;
         create_timestamp: z.ZodString;
+    }, {
         modify_timestamp: z.ZodString;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
+    }>>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
         create_timestamp: string;
         modify_timestamp: string;
         user_agent: string | null;
@@ -1364,26 +1386,28 @@ export declare const DbDtoFromDeviceBase: z.ZodEffects<z.ZodObject<{
 export declare const DbDtoFromDevice: z.ZodEffects<z.ZodObject<z.objectUtil.extendShape<z.objectUtil.extendShape<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString, "many">;
-}, {
+}, z.objectUtil.extendShape<{
     tenant_id: z.ZodString;
     device_id: z.ZodString;
     create_timestamp: z.ZodString;
+}, {
     modify_timestamp: z.ZodString;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}>, {
+}>>, {
     desired_state: z.ZodNullable<z.ZodObject<Omit<z.objectUtil.extendShape<{
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
         agent_ids: z.ZodNullable<z.ZodArray<z.ZodString, "many">>;
-    }, {
+    }, z.objectUtil.extendShape<{
         tenant_id: z.ZodString;
         device_id: z.ZodString;
         create_timestamp: z.ZodString;
+    }, {
         modify_timestamp: z.ZodString;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
+    }>>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
         create_timestamp: string;
         modify_timestamp: string;
         pull_interval: number | null;
@@ -1406,13 +1430,14 @@ export declare const DbDtoFromDevice: z.ZodEffects<z.ZodObject<z.objectUtil.exte
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
         agent_ids: z.ZodNullable<z.ZodArray<z.ZodString, "many">>;
-    }, {
+    }, z.objectUtil.extendShape<{
         tenant_id: z.ZodString;
         device_id: z.ZodString;
         create_timestamp: z.ZodString;
+    }, {
         modify_timestamp: z.ZodString;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
+    }>>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
         create_timestamp: string;
         modify_timestamp: string;
         pull_interval: number | null;
@@ -1595,13 +1620,14 @@ export declare const DbDtoFromDevice: z.ZodEffects<z.ZodObject<z.objectUtil.exte
         }>>;
         has_error: z.ZodDefault<z.ZodBoolean>;
         error_stack: z.ZodNullable<z.ZodString>;
-    }, {
+    }, z.objectUtil.extendShape<{
         tenant_id: z.ZodString;
         device_id: z.ZodString;
         create_timestamp: z.ZodString;
+    }, {
         modify_timestamp: z.ZodString;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
+    }>>, "tenant_id" | "device_id" | "is_deleted">, "strip", z.ZodTypeAny, {
         create_timestamp: string;
         modify_timestamp: string;
         user_agent: string | null;
