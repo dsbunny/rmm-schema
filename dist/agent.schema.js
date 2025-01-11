@@ -5,21 +5,26 @@ export const AgentBase = z.object({
         .describe('The name of the agent'),
     tags: z.array(z.string())
         .describe('The tags of the agent'),
-});
-export const AgentMetadata = z.object({
+})
+    .describe('Base information of the agent');
+export const AgentRegistration = z.object({
     tenant_id: z.string()
         .describe('The tenant ID of the agent'),
-    device_id: z.string()
-        .describe('The device ID of the agent'),
+    device_id: z.string().uuid()
+        .describe('The UUID of the host device'),
     agent_id: z.string().uuid()
         .describe('The UUID of the agent'),
     create_timestamp: z.string().datetime() // ISO 8601
         .describe('The timestamp of the agent creation'),
+})
+    .describe('The registration of the agent');
+export const AgentMetadata = AgentRegistration.merge(z.object({
     modify_timestamp: z.string().datetime()
         .describe('The timestamp of the agent modification'),
     is_deleted: z.boolean().default(false)
         .describe('The flag of the agent deletion'),
-});
+}))
+    .describe('The metadata of the agent');
 export const AgentStateBase = z.object({
     url: z.string().url().nullable()
         .describe('The URL of the agent'),
