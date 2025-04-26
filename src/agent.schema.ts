@@ -5,12 +5,12 @@ import { z } from 'zod';
 export const AgentRegistration = z.object({
 	tenant_id: z.string()
 		.describe('The tenant ID of the agent'),
-	device_id: z.string().uuid()
+	device_id: z.uuid()
 		.describe('The UUID of the host device'),
-	agent_id: z.string().uuid()
+	agent_id: z.uuid()
 		.describe('The UUID of the agent'),
-	create_timestamp: z.string().datetime()  // ISO 8601
-		.describe('The timestamp of the agent creation'),
+	create_timestamp: z.iso.datetime()  // ISO 8601
+		.describe('The ISO datetime of the agent creation'),
 })
 	.describe('The registration of the agent');
 export type AgentRegistration = z.infer<typeof AgentRegistration>;
@@ -27,14 +27,14 @@ export type AgentBase = z.infer<typeof AgentBase>;
 export const AgentMetadata = z.object({
 	tenant_id: z.string()
 		.describe('The tenant ID of the agent'),
-	device_id: z.string().uuid()
+	device_id: z.uuid()
 		.describe('The UUID of the host device'),
-	agent_id: z.string().uuid()
+	agent_id: z.uuid()
 		.describe('The UUID of the agent'),
-	create_timestamp: z.string().datetime()  // ISO 8601
-		.describe('The timestamp of the agent creation'),
-	modify_timestamp: z.string().datetime()
-		.describe('The timestamp of the agent modification'),
+	create_timestamp: z.iso.datetime()  // ISO 8601
+		.describe('The ISO datetime of the agent creation'),
+	modify_timestamp: z.iso.datetime()
+		.describe('The ISO datetime of the agent modification'),
 	is_deleted: z.boolean().default(false)
 		.describe('The flag of the agent deletion'),
 })
@@ -42,10 +42,10 @@ export const AgentMetadata = z.object({
 export type AgentMetadata = z.infer<typeof AgentMetadata>;
 
 export const AgentStateMetadata = z.object({
-	create_timestamp: z.string().datetime()  // ISO 8601
-		.describe('The timestamp of the agent state creation'),
-	modify_timestamp: z.string().datetime()
-		.describe('The timestamp of the agent state modification'),
+	create_timestamp: z.iso.datetime()  // ISO 8601
+		.describe('The ISO datetime of the agent state creation'),
+	modify_timestamp: z.iso.datetime()
+		.describe('The ISO datetime of the agent state modification'),
 	is_deleted: z.boolean().default(false)
 		.describe('The flag of the agent state deletion'),
 })
@@ -56,7 +56,7 @@ export const AgentStatusMetadata = AgentStateMetadata;
 export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadata>;
 
 export const AgentStateBase = z.object({
-	url: z.string().url().nullable()
+	url: z.url().nullable()
 		.describe('The URL of the agent'),
 	pull_interval: z.number().nullable()
 		.describe('The pull interval of the agent'),
@@ -66,33 +66,34 @@ export const AgentStateBase = z.object({
 		.describe('The minimum backoff interval of the agent'),
 	max_backoff_interval: z.number().nullable()
 		.describe('The maximum backoff interval of the agent'),
-	detail: z.record(z.any()).nullable()
+	detail: z.any().nullable()
+		.describe('The detail of the agent state'),
 })
 	.describe('The state of the agent');
 export type AgentStateBase = z.infer<typeof AgentStateBase>;
-export const AgentState = AgentStateBase.merge(AgentStateMetadata);
+export const AgentState = AgentStateBase.extend(AgentStateMetadata);
 export type AgentState = z.infer<typeof AgentState>;
 
 export const AgentStatusBase = z.object({
-	url: z.string().url().nullable()
+	url: z.url().nullable()
 		.describe('The URL of the agent'),
-	detail: z.record(z.any()).nullable()
+	detail: z.any().nullable()
 		.describe('The detail of the agent status'),
 })
 	.describe('The status of the agent');
 export type AgentStatusBase = z.infer<typeof AgentStatusBase>;
-export const AgentStatus = AgentStatusBase.merge(AgentStatusMetadata);
+export const AgentStatus = AgentStatusBase.extend(AgentStatusMetadata);
 export type AgentStatus = z.infer<typeof AgentStatus>;
 
-export const Agent = AgentBase.merge(AgentMetadata)
-	.merge(z.object({
-		desired_state: AgentStateBase.merge(AgentStateMetadata)
+export const Agent = AgentBase.extend(AgentMetadata)
+	.extend(z.object({
+		desired_state: AgentStateBase.extend(AgentStateMetadata)
 			.nullable()
 			.describe('The desired state of the agent'),
-		runtime_state: AgentStateBase.merge(AgentStateMetadata)
+		runtime_state: AgentStateBase.extend(AgentStateMetadata)
 			.nullable()
 			.describe('The runtime state of the agent'),
-		runtime_status: AgentStatusBase.merge(AgentStatusMetadata)
+		runtime_status: AgentStatusBase.extend(AgentStatusMetadata)
 			.nullable()
 			.describe('The runtime status of the agent'),
 
@@ -106,7 +107,7 @@ const sqliteDateSchema = z.string().transform((date) => {
 });
 
 export const DbDtoToAgentState = z.object({
-	url: z.string().nullable(),
+	url: z.url().nullable(),
 	pull_interval: z.number().nullable(),
 	push_interval: z.number().nullable(),
 	min_backoff_interval: z.number().nullable(),
@@ -125,7 +126,7 @@ export const DbDtoToAgentState = z.object({
 	});
 
 export const DbDtoToAgentStatus = z.object({
-	url: z.string().nullable(),
+	url: z.url().nullable(),
 	detail: z.string().nullable(),
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
@@ -163,15 +164,15 @@ export const DbDtoToAgentBase = z.object({
 		};
 	});
 export const DbDtoToAgent = z.object({
-	tenant_id: z.string().uuid(),
-	device_id: z.string().uuid(),
-	agent_id: z.string().uuid(),
+	tenant_id: z.uuid(),
+	device_id: z.uuid(),
+	agent_id: z.uuid(),
 	name: z.string(),
 	tags: z.string(),
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
 	is_deleted: z.number().default(0),
-	desired_state_url: z.string().nullable().optional(),
+	desired_state_url: z.url().nullable().optional(),
 	desired_state_pull_interval: z.number().nullable().optional(),
 	desired_state_push_interval: z.number().nullable().optional(),
 	desired_state_min_backoff_interval: z.number().nullable().optional(),
@@ -180,7 +181,7 @@ export const DbDtoToAgent = z.object({
 	desired_state_create_timestamp: sqliteDateSchema.optional(),
 	desired_state_modify_timestamp: sqliteDateSchema.optional(),
 	desired_state_is_deleted: z.number().default(0),
-	runtime_state_url: z.string().nullable().optional(),
+	runtime_state_url: z.url().nullable().optional(),
 	runtime_state_pull_interval: z.number().nullable().optional(),
 	runtime_state_push_interval: z.number().nullable().optional(),
 	runtime_state_min_backoff_interval: z.number().nullable().optional(),
@@ -189,7 +190,7 @@ export const DbDtoToAgent = z.object({
 	runtime_state_create_timestamp: sqliteDateSchema.optional(),
 	runtime_state_modify_timestamp: sqliteDateSchema.optional(),
 	runtime_state_is_deleted: z.number().default(0),
-	runtime_status_url: z.string().nullable().optional(),
+	runtime_status_url: z.url().nullable().optional(),
 	runtime_status_detail: z.string().nullable().optional(),
 	runtime_status_create_timestamp: sqliteDateSchema.optional(),
 	runtime_status_modify_timestamp: sqliteDateSchema.optional(),

@@ -3,14 +3,15 @@
 import { z } from 'zod';
 import { CoolReport } from './cool.schema.js';
 import { ScreenDetails } from './screen-details.schema.js';
+import { sqliteDateSchema } from './sqlite-date.schema.js';
 
 export const DeviceRegistration = z.object({
 	tenant_id: z.string()
 		.describe('The tenant ID of the device'),
-	device_id: z.string().uuid()
+	device_id: z.uuid()
 		.describe('The UUID of the device'),
-	create_timestamp: z.string().datetime()  // ISO 8601
-		.describe('The timestamp of the device creation'),
+	create_timestamp: z.iso.datetime()  // ISO 8601
+		.describe('The ISO datetime of the device creation'),
 })
 	.describe('The registration of the device');
 export type DeviceRegistration = z.infer<typeof DeviceRegistration>;
@@ -27,12 +28,12 @@ export type DeviceBase = z.infer<typeof DeviceBase>;
 export const DeviceMetadata = z.object({
 	tenant_id: z.string()
 		.describe('The tenant ID of the device'),
-	device_id: z.string().uuid()
+	device_id: z.uuid()
 		.describe('The UUID of the device'),
-	create_timestamp: z.string().datetime()  // ISO 8601
-		.describe('The timestamp of the device creation'),
-	modify_timestamp: z.string().datetime()
-		.describe('The timestamp of the device modification'),
+	create_timestamp: z.iso.datetime()  // ISO 8601
+		.describe('The ISO datetime of the device creation'),
+	modify_timestamp: z.iso.datetime()
+		.describe('The ISO datetime of the device modification'),
 	is_deleted: z.boolean().default(false)
 		.describe('The flag of the device deletion'),
 })
@@ -40,10 +41,10 @@ export const DeviceMetadata = z.object({
 export type DeviceMetadata = z.infer<typeof DeviceMetadata>;
 
 export const DeviceStateMetadata = z.object({
-	create_timestamp: z.string().datetime()  // ISO 8601
-		.describe('The timestamp of the device state creation'),
-	modify_timestamp: z.string().datetime()
-		.describe('The timestamp of the device state modification'),
+	create_timestamp: z.iso.datetime()  // ISO 8601
+		.describe('The ISO datetime of the device state creation'),
+	modify_timestamp: z.iso.datetime()
+		.describe('The ISO datetime of the device state modification'),
 	is_deleted: z.boolean().default(false)
 		.describe('The flag of the device state deletion'),
 })
@@ -54,7 +55,7 @@ export const DeviceStatusMetadata = DeviceStateMetadata;
 export type DeviceStatusMetadata = z.infer<typeof DeviceStatusMetadata>;
 
 export const DeviceStateBase = z.object({
-	url: z.string().url().nullable()
+	url: z.url().nullable()
 		.describe('The URL of the device'),
 	pull_interval: z.number().nullable()
 		.describe('The pull interval of the device'),
@@ -69,11 +70,11 @@ export const DeviceStateBase = z.object({
 })
 	.describe('The state of the device');
 export type DeviceStateBase = z.infer<typeof DeviceStateBase>;
-export const DeviceState = DeviceStateBase.merge(DeviceStateMetadata);
+export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata);
 export type DeviceState = z.infer<typeof DeviceState>;
 
 export const DeviceStatusBase = z.object({
-	url: z.string().url().nullable()
+	url: z.url().nullable()
 		.describe('The URL of the device'),
 	user_agent: z.string().nullable()
 		.describe('The user agent of the device'),
@@ -94,31 +95,25 @@ export const DeviceStatusBase = z.object({
 })
 	.describe('The runtime status of the device');
 export type DeviceStatusBase = z.infer<typeof DeviceStatusBase>;
-export const DeviceStatus = DeviceStatusBase.merge(DeviceStatusMetadata);
+export const DeviceStatus = DeviceStatusBase.extend(DeviceStatusMetadata);
 export type DeviceStatus = z.infer<typeof DeviceStatus>;
 
-export const Device = DeviceBase.merge(DeviceMetadata)
-	.merge(z.object({
-		desired_state: DeviceStateBase.merge(DeviceStateMetadata)
+export const Device = DeviceBase.extend(DeviceMetadata)
+	.extend(z.object({
+		desired_state: DeviceStateBase.extend(DeviceStateMetadata)
 			.nullable()
 			.describe('The desired state of the device'),
-		runtime_state: DeviceStateBase.merge(DeviceStateMetadata)
+		runtime_state: DeviceStateBase.extend(DeviceStateMetadata)
 			.nullable()
 			.describe('The runtime state of the device'),
-		runtime_status: DeviceStatusBase.merge(DeviceStatusMetadata)
+		runtime_status: DeviceStatusBase.extend(DeviceStatusMetadata)
 			.nullable()
 			.describe('The runtime status of the device'),
 	}));
 export type Device = z.infer<typeof Device>;
 
-// SQL date string to ISO 8601,
-// e.g. "2023-10-15 15:09:50" to "2023-10-15T15:09:50.000Z"
-const sqliteDateSchema = z.string().transform((date) => {
-	return `${date.replace(' ', 'T')}.000Z`;
-});
-
 export const DbDtoToDeviceState = z.object({
-	url: z.string().nullable(),
+	url: z.url().nullable(),
 	pull_interval: z.number().nullable(),
 	push_interval: z.number().nullable(),
 	min_backoff_interval: z.number().nullable(),
@@ -137,7 +132,7 @@ export const DbDtoToDeviceState = z.object({
 	});
 
 export const DbDtoToDeviceStatus = z.object({
-	url: z.string().nullable(),
+	url: z.url().nullable(),
 	user_agent: z.string().nullable(),
 	device_memory: z.number().nullable(),
 	hardware_concurrency: z.number().nullable(),
@@ -185,14 +180,14 @@ export const DbDtoToDeviceBase = z.object({
 		};
 	});
 export const DbDtoToDevice = z.object({
-	tenant_id: z.string().uuid(),
-	device_id: z.string().uuid(),
+	tenant_id: z.uuid(),
+	device_id: z.uuid(),
 	name: z.string(),
 	tags: z.string(),
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
 	is_deleted: z.number().default(0),
-	desired_state_url: z.string().nullable().optional(),
+	desired_state_url: z.url().nullable().optional(),
 	desired_state_pull_interval: z.number().nullable().optional(),
 	desired_state_push_interval: z.number().nullable().optional(),
 	desired_state_min_backoff_interval: z.number().nullable().optional(),
@@ -201,7 +196,7 @@ export const DbDtoToDevice = z.object({
 	desired_state_create_timestamp: sqliteDateSchema.optional(),
 	desired_state_modify_timestamp: sqliteDateSchema.optional(),
 	desired_state_is_deleted: z.number().default(0),
-	runtime_state_url: z.string().nullable().optional(),
+	runtime_state_url: z.url().nullable().optional(),
 	runtime_state_pull_interval: z.number().nullable().optional(),
 	runtime_state_push_interval: z.number().nullable().optional(),
 	runtime_state_min_backoff_interval: z.number().nullable().optional(),
@@ -210,7 +205,7 @@ export const DbDtoToDevice = z.object({
 	runtime_state_create_timestamp: sqliteDateSchema.optional(),
 	runtime_state_modify_timestamp: sqliteDateSchema.optional(),
 	runtime_state_is_deleted: z.number().default(0),
-	runtime_status_url: z.string().nullable().optional(),
+	runtime_status_url: z.url().nullable().optional(),
 	runtime_status_user_agent: z.string().nullable().optional(),
 	runtime_status_device_memory: z.number().nullable().optional(),
 	runtime_status_hardware_concurrency: z.number().nullable().optional(),
