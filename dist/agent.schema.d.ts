@@ -4,12 +4,12 @@ export declare const AgentRegistration: z.ZodObject<{
     device_id: z.ZodUUID;
     agent_id: z.ZodUUID;
     create_timestamp: z.iso.ZodISODateTime;
-}, {}>;
+}, {}, {}>;
 export type AgentRegistration = z.infer<typeof AgentRegistration>;
 export declare const AgentBase: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
-}, {}>;
+}, {}, {}>;
 export type AgentBase = z.infer<typeof AgentBase>;
 export declare const AgentMetadata: z.ZodObject<{
     tenant_id: z.ZodString;
@@ -18,19 +18,19 @@ export declare const AgentMetadata: z.ZodObject<{
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}, {}>;
+}, {}, {}>;
 export type AgentMetadata = z.infer<typeof AgentMetadata>;
 export declare const AgentStateMetadata: z.ZodObject<{
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}, {}>;
+}, {}, {}>;
 export type AgentStateMetadata = z.infer<typeof AgentStateMetadata>;
 export declare const AgentStatusMetadata: z.ZodObject<{
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}, {}>;
+}, {}, {}>;
 export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadata>;
 export declare const AgentStateBase: z.ZodObject<{
     url: z.ZodNullable<z.ZodURL>;
@@ -39,7 +39,7 @@ export declare const AgentStateBase: z.ZodObject<{
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     detail: z.ZodNullable<z.ZodAny>;
-}, {}>;
+}, {}, {}>;
 export type AgentStateBase = z.infer<typeof AgentStateBase>;
 export declare const AgentState: z.ZodObject<{
     url: z.ZodNullable<z.ZodURL>;
@@ -51,12 +51,12 @@ export declare const AgentState: z.ZodObject<{
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}, {}>;
+}, {}, {}>;
 export type AgentState = z.infer<typeof AgentState>;
 export declare const AgentStatusBase: z.ZodObject<{
     url: z.ZodNullable<z.ZodURL>;
     detail: z.ZodNullable<z.ZodAny>;
-}, {}>;
+}, {}, {}>;
 export type AgentStatusBase = z.infer<typeof AgentStatusBase>;
 export declare const AgentStatus: z.ZodObject<{
     url: z.ZodNullable<z.ZodURL>;
@@ -64,7 +64,7 @@ export declare const AgentStatus: z.ZodObject<{
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-}, {}>;
+}, {}, {}>;
 export type AgentStatus = z.infer<typeof AgentStatus>;
 export declare const Agent: z.ZodObject<{
     name: z.ZodString;
@@ -85,7 +85,7 @@ export declare const Agent: z.ZodObject<{
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }, {}>>;
+    }, {}, {}>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
         url: z.ZodNullable<z.ZodURL>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -96,15 +96,15 @@ export declare const Agent: z.ZodObject<{
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }, {}>>;
+    }, {}, {}>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         url: z.ZodNullable<z.ZodURL>;
         detail: z.ZodNullable<z.ZodAny>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }, {}>>;
-}, {}>;
+    }, {}, {}>>;
+}, {}, {}>;
 export type Agent = z.infer<typeof Agent>;
 export declare const DbDtoToAgentState: z.ZodPipe<z.ZodObject<{
     url: z.ZodNullable<z.ZodURL>;
@@ -116,7 +116,7 @@ export declare const DbDtoToAgentState: z.ZodPipe<z.ZodObject<{
     create_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
-}, {}>, z.ZodTransform<{
+}, {}, {}>, z.ZodTransform<{
     url: string | null;
     pull_interval: number | null;
     push_interval: number | null;
@@ -143,7 +143,7 @@ export declare const DbDtoToAgentStatus: z.ZodPipe<z.ZodObject<{
     create_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
-}, {}>, z.ZodTransform<{
+}, {}, {}>, z.ZodTransform<{
     url: string | null;
     detail: any;
     create_timestamp: string;
@@ -159,7 +159,7 @@ export declare const DbDtoToAgentStatus: z.ZodPipe<z.ZodObject<{
 export declare const DbDtoFromAgentBase: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
-}, {}>, z.ZodTransform<{
+}, {}, {}>, z.ZodTransform<{
     tags: string;
     name: string;
 }, {
@@ -185,7 +185,7 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }, {}>>;
+    }, {}, {}>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
         url: z.ZodNullable<z.ZodURL>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -196,15 +196,15 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }, {}>>;
+    }, {}, {}>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         url: z.ZodNullable<z.ZodURL>;
         detail: z.ZodNullable<z.ZodAny>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-    }, {}>>;
-}, {}>, z.ZodTransform<{
+    }, {}, {}>>;
+}, {}, {}>, z.ZodTransform<{
     tags: string;
     name: string;
     tenant_id: string;
@@ -284,7 +284,7 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
 export declare const DbDtoToAgentBase: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodString;
-}, {}>, z.ZodTransform<{
+}, {}, {}>, z.ZodTransform<{
     name: string;
     tags: string[];
 }, {
@@ -323,7 +323,7 @@ export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
     runtime_status_create_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_status_modify_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_status_is_deleted: z.ZodDefault<z.ZodNumber>;
-}, {}>, z.ZodTransform<{
+}, {}, {}>, z.ZodTransform<{
     name: string;
     tags: string[];
     tenant_id: string;
@@ -362,6 +362,17 @@ export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
 }, {
+    tenant_id: string;
+    device_id: string;
+    agent_id: string;
+    name: string;
+    tags: string;
+    create_timestamp: string;
+    modify_timestamp: string;
+    is_deleted: number;
+    desired_state_is_deleted: number;
+    runtime_state_is_deleted: number;
+    runtime_status_is_deleted: number;
     desired_state_url?: string | null | undefined;
     desired_state_pull_interval?: number | null | undefined;
     desired_state_push_interval?: number | null | undefined;
@@ -382,15 +393,4 @@ export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
     runtime_status_detail?: string | null | undefined;
     runtime_status_create_timestamp?: string | undefined;
     runtime_status_modify_timestamp?: string | undefined;
-    tenant_id: string;
-    device_id: string;
-    agent_id: string;
-    name: string;
-    tags: string;
-    create_timestamp: string;
-    modify_timestamp: string;
-    is_deleted: number;
-    desired_state_is_deleted: number;
-    runtime_state_is_deleted: number;
-    runtime_status_is_deleted: number;
 }>>;

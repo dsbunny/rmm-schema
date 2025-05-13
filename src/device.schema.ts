@@ -70,7 +70,7 @@ export const DeviceStateBase = z.object({
 })
 	.describe('The state of the device');
 export type DeviceStateBase = z.infer<typeof DeviceStateBase>;
-export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata);
+export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata.shape);
 export type DeviceState = z.infer<typeof DeviceState>;
 
 export const DeviceStatusBase = z.object({
@@ -95,21 +95,25 @@ export const DeviceStatusBase = z.object({
 })
 	.describe('The runtime status of the device');
 export type DeviceStatusBase = z.infer<typeof DeviceStatusBase>;
-export const DeviceStatus = DeviceStatusBase.extend(DeviceStatusMetadata);
+export const DeviceStatus = DeviceStatusBase.extend(DeviceStatusMetadata.shape);
 export type DeviceStatus = z.infer<typeof DeviceStatus>;
 
-export const Device = DeviceBase.extend(DeviceMetadata)
-	.extend(z.object({
-		desired_state: DeviceStateBase.extend(DeviceStateMetadata)
-			.nullable()
-			.describe('The desired state of the device'),
-		runtime_state: DeviceStateBase.extend(DeviceStateMetadata)
-			.nullable()
-			.describe('The runtime state of the device'),
-		runtime_status: DeviceStatusBase.extend(DeviceStatusMetadata)
-			.nullable()
-			.describe('The runtime status of the device'),
-	}));
+const DeviceBaseWithMetadata = DeviceBase.extend(DeviceMetadata.shape);
+const DeviceDesiredState = DeviceStateBase.extend(DeviceStateMetadata.shape);
+const DeviceRuntimeState = DeviceStateBase.extend(DeviceStateMetadata.shape);
+const DeviceRuntimeStatus = DeviceStatusBase.extend(DeviceStatusMetadata.shape);
+
+export const Device = DeviceBaseWithMetadata.extend({
+	desired_state: DeviceDesiredState
+		.nullable()
+		.describe('The desired state of the device'),
+	runtime_state: DeviceRuntimeState
+		.nullable()
+		.describe('The runtime state of the device'),
+	runtime_status: DeviceRuntimeStatus
+		.nullable()
+		.describe('The runtime status of the device'),
+});
 export type Device = z.infer<typeof Device>;
 
 export const DbDtoToDeviceState = z.object({

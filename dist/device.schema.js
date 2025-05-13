@@ -57,7 +57,7 @@ export const DeviceStateBase = z.object({
         .describe('The agent IDs of the device'),
 })
     .describe('The state of the device');
-export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata);
+export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata.shape);
 export const DeviceStatusBase = z.object({
     url: z.url().nullable()
         .describe('The URL of the device'),
@@ -79,19 +79,22 @@ export const DeviceStatusBase = z.object({
         .describe('The stack of the device error'),
 })
     .describe('The runtime status of the device');
-export const DeviceStatus = DeviceStatusBase.extend(DeviceStatusMetadata);
-export const Device = DeviceBase.extend(DeviceMetadata)
-    .extend(z.object({
-    desired_state: DeviceStateBase.extend(DeviceStateMetadata)
+export const DeviceStatus = DeviceStatusBase.extend(DeviceStatusMetadata.shape);
+const DeviceBaseWithMetadata = DeviceBase.extend(DeviceMetadata.shape);
+const DeviceDesiredState = DeviceStateBase.extend(DeviceStateMetadata.shape);
+const DeviceRuntimeState = DeviceStateBase.extend(DeviceStateMetadata.shape);
+const DeviceRuntimeStatus = DeviceStatusBase.extend(DeviceStatusMetadata.shape);
+export const Device = DeviceBaseWithMetadata.extend({
+    desired_state: DeviceDesiredState
         .nullable()
         .describe('The desired state of the device'),
-    runtime_state: DeviceStateBase.extend(DeviceStateMetadata)
+    runtime_state: DeviceRuntimeState
         .nullable()
         .describe('The runtime state of the device'),
-    runtime_status: DeviceStatusBase.extend(DeviceStatusMetadata)
+    runtime_status: DeviceRuntimeStatus
         .nullable()
         .describe('The runtime status of the device'),
-}));
+});
 export const DbDtoToDeviceState = z.object({
     url: z.url().nullable(),
     pull_interval: z.number().nullable(),

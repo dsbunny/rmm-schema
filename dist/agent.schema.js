@@ -58,7 +58,7 @@ export const AgentStateBase = z.object({
         .describe('The detail of the agent state'),
 })
     .describe('The state of the agent');
-export const AgentState = AgentStateBase.extend(AgentStateMetadata);
+export const AgentState = AgentStateBase.extend(AgentStateMetadata.shape);
 export const AgentStatusBase = z.object({
     url: z.url().nullable()
         .describe('The URL of the agent'),
@@ -66,19 +66,19 @@ export const AgentStatusBase = z.object({
         .describe('The detail of the agent status'),
 })
     .describe('The status of the agent');
-export const AgentStatus = AgentStatusBase.extend(AgentStatusMetadata);
-export const Agent = AgentBase.extend(AgentMetadata)
-    .extend(z.object({
-    desired_state: AgentStateBase.extend(AgentStateMetadata)
-        .nullable()
+export const AgentStatus = AgentStatusBase.extend(AgentStatusMetadata.shape);
+const AgentBaseWithMetadata = AgentBase.extend(AgentMetadata.shape);
+const AgentDesiredState = AgentStateBase.extend(AgentStateMetadata.shape);
+const AgentRuntimeState = AgentStateBase.extend(AgentStateMetadata.shape);
+const AgentRuntimeStatus = AgentStatusBase.extend(AgentStatusMetadata.shape);
+export const Agent = AgentBaseWithMetadata.extend({
+    desired_state: AgentDesiredState.nullable()
         .describe('The desired state of the agent'),
-    runtime_state: AgentStateBase.extend(AgentStateMetadata)
-        .nullable()
+    runtime_state: AgentRuntimeState.nullable()
         .describe('The runtime state of the agent'),
-    runtime_status: AgentStatusBase.extend(AgentStatusMetadata)
-        .nullable()
+    runtime_status: AgentRuntimeStatus.nullable()
         .describe('The runtime status of the agent'),
-}));
+});
 // SQL date string to ISO 8601,
 // e.g. "2023-10-15 15:09:50" to "2023-10-15T15:09:50.000Z"
 const sqliteDateSchema = z.string().transform((date) => {

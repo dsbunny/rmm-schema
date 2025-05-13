@@ -71,7 +71,7 @@ export const AgentStateBase = z.object({
 })
 	.describe('The state of the agent');
 export type AgentStateBase = z.infer<typeof AgentStateBase>;
-export const AgentState = AgentStateBase.extend(AgentStateMetadata);
+export const AgentState = AgentStateBase.extend(AgentStateMetadata.shape);
 export type AgentState = z.infer<typeof AgentState>;
 
 export const AgentStatusBase = z.object({
@@ -82,22 +82,22 @@ export const AgentStatusBase = z.object({
 })
 	.describe('The status of the agent');
 export type AgentStatusBase = z.infer<typeof AgentStatusBase>;
-export const AgentStatus = AgentStatusBase.extend(AgentStatusMetadata);
+export const AgentStatus = AgentStatusBase.extend(AgentStatusMetadata.shape);
 export type AgentStatus = z.infer<typeof AgentStatus>;
 
-export const Agent = AgentBase.extend(AgentMetadata)
-	.extend(z.object({
-		desired_state: AgentStateBase.extend(AgentStateMetadata)
-			.nullable()
-			.describe('The desired state of the agent'),
-		runtime_state: AgentStateBase.extend(AgentStateMetadata)
-			.nullable()
-			.describe('The runtime state of the agent'),
-		runtime_status: AgentStatusBase.extend(AgentStatusMetadata)
-			.nullable()
-			.describe('The runtime status of the agent'),
+const AgentBaseWithMetadata = AgentBase.extend(AgentMetadata.shape);
+const AgentDesiredState = AgentStateBase.extend(AgentStateMetadata.shape);
+const AgentRuntimeState = AgentStateBase.extend(AgentStateMetadata.shape);
+const AgentRuntimeStatus = AgentStatusBase.extend(AgentStatusMetadata.shape);
 
-	}));
+export const Agent = AgentBaseWithMetadata.extend({
+	desired_state: AgentDesiredState.nullable()
+		.describe('The desired state of the agent'),
+	runtime_state: AgentRuntimeState.nullable()
+		.describe('The runtime state of the agent'),
+	runtime_status: AgentRuntimeStatus.nullable()
+		.describe('The runtime status of the agent'),
+});
 export type Agent = z.infer<typeof Agent>;
 
 // SQL date string to ISO 8601,
