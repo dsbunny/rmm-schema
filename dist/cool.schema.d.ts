@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 export declare const HistoryEntry: z.ZodObject<{
     index: z.ZodNumber;
     status: z.ZodEnum<{
