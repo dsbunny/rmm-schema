@@ -3,6 +3,7 @@ import { z } from 'zod/v4';
 import { CoolReport } from './cool.schema.js';
 import { ScreenDetails } from './screen-details.schema.js';
 import { sqliteDateSchema } from './sqlite-date.schema.js';
+import { URI } from './uri.schema.js';
 export const DeviceRegistration = z.object({
     tenant_id: z.string()
         .describe('The tenant ID of the device'),
@@ -43,8 +44,8 @@ export const DeviceStateMetadata = z.object({
     .describe('The metadata of the device state');
 export const DeviceStatusMetadata = DeviceStateMetadata;
 export const DeviceStateBase = z.object({
-    url: z.url().nullable()
-        .describe('The URL of the device'),
+    uri: URI.nullable()
+        .describe('The URI of the device'),
     pull_interval: z.number().nullable()
         .describe('The pull interval of the device'),
     push_interval: z.number().nullable()
@@ -59,7 +60,7 @@ export const DeviceStateBase = z.object({
     .describe('The state of the device');
 export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata.shape);
 export const DeviceStatusBase = z.object({
-    url: z.url().nullable()
+    uri: URI.nullable()
         .describe('The URL of the device'),
     user_agent: z.string().nullable()
         .describe('The user agent of the device'),
@@ -96,7 +97,7 @@ export const Device = DeviceBaseWithMetadata.extend({
         .describe('The runtime status of the device'),
 });
 export const DbDtoToDeviceState = z.object({
-    url: z.url().nullable(),
+    uri: URI.nullable(),
     pull_interval: z.number().nullable(),
     push_interval: z.number().nullable(),
     min_backoff_interval: z.number().nullable(),
@@ -114,7 +115,7 @@ export const DbDtoToDeviceState = z.object({
     };
 });
 export const DbDtoToDeviceStatus = z.object({
-    url: z.url().nullable(),
+    uri: URI.nullable(),
     user_agent: z.string().nullable(),
     device_memory: z.number().nullable(),
     hardware_concurrency: z.number().nullable(),
@@ -167,7 +168,7 @@ export const DbDtoToDevice = z.object({
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
     is_deleted: z.number().default(0),
-    desired_state_url: z.url().nullable().optional(),
+    desired_state_uri: URI.nullable().optional(),
     desired_state_pull_interval: z.number().nullable().optional(),
     desired_state_push_interval: z.number().nullable().optional(),
     desired_state_min_backoff_interval: z.number().nullable().optional(),
@@ -176,7 +177,7 @@ export const DbDtoToDevice = z.object({
     desired_state_create_timestamp: sqliteDateSchema.optional(),
     desired_state_modify_timestamp: sqliteDateSchema.optional(),
     desired_state_is_deleted: z.number().default(0),
-    runtime_state_url: z.url().nullable().optional(),
+    runtime_state_uri: URI.nullable().optional(),
     runtime_state_pull_interval: z.number().nullable().optional(),
     runtime_state_push_interval: z.number().nullable().optional(),
     runtime_state_min_backoff_interval: z.number().nullable().optional(),
@@ -185,7 +186,7 @@ export const DbDtoToDevice = z.object({
     runtime_state_create_timestamp: sqliteDateSchema.optional(),
     runtime_state_modify_timestamp: sqliteDateSchema.optional(),
     runtime_state_is_deleted: z.number().default(0),
-    runtime_status_url: z.url().nullable().optional(),
+    runtime_status_uri: URI.nullable().optional(),
     runtime_status_user_agent: z.string().nullable().optional(),
     runtime_status_device_memory: z.number().nullable().optional(),
     runtime_status_hardware_concurrency: z.number().nullable().optional(),
@@ -200,7 +201,7 @@ export const DbDtoToDevice = z.object({
     runtime_status_is_deleted: z.number().default(0),
 })
     .transform((dto) => {
-    const desired_state = (typeof dto.desired_state_url === "undefined"
+    const desired_state = (typeof dto.desired_state_uri === "undefined"
         && typeof dto.desired_state_pull_interval === "undefined"
         && typeof dto.desired_state_push_interval === "undefined"
         && typeof dto.desired_state_min_backoff_interval === "undefined"
@@ -208,7 +209,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.desired_state_agent_ids === "undefined"
         && typeof dto.desired_state_create_timestamp === "undefined"
         && typeof dto.desired_state_modify_timestamp === "undefined") ? null : {
-        url: dto.desired_state_url ?? null,
+        uri: dto.desired_state_uri ?? null,
         pull_interval: dto.desired_state_pull_interval ?? null,
         push_interval: dto.desired_state_push_interval ?? null,
         min_backoff_interval: dto.desired_state_min_backoff_interval ?? null,
@@ -220,7 +221,7 @@ export const DbDtoToDevice = z.object({
         modify_timestamp: z.string().parse(dto.desired_state_modify_timestamp),
         is_deleted: Boolean(dto.desired_state_is_deleted),
     };
-    const runtime_state = (typeof dto.runtime_state_url === "undefined"
+    const runtime_state = (typeof dto.runtime_state_uri === "undefined"
         && typeof dto.runtime_state_pull_interval === "undefined"
         && typeof dto.runtime_state_push_interval === "undefined"
         && typeof dto.runtime_state_min_backoff_interval === "undefined"
@@ -228,7 +229,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_state_agent_ids === "undefined"
         && typeof dto.runtime_state_create_timestamp === "undefined"
         && typeof dto.runtime_state_modify_timestamp === "undefined") ? null : {
-        url: dto.runtime_state_url ?? null,
+        uri: dto.runtime_state_uri ?? null,
         pull_interval: dto.runtime_state_pull_interval ?? null,
         push_interval: dto.runtime_state_push_interval ?? null,
         min_backoff_interval: dto.runtime_state_min_backoff_interval ?? null,
@@ -240,7 +241,7 @@ export const DbDtoToDevice = z.object({
         modify_timestamp: z.string().parse(dto.runtime_state_modify_timestamp),
         is_deleted: Boolean(dto.runtime_status_is_deleted),
     };
-    const runtime_status = (typeof dto.runtime_state_url === "undefined"
+    const runtime_status = (typeof dto.runtime_state_uri === "undefined"
         && typeof dto.runtime_status_user_agent === "undefined"
         && typeof dto.runtime_status_device_memory === "undefined"
         && typeof dto.runtime_status_hardware_concurrency === "undefined"
@@ -252,7 +253,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_status_error_stack === "undefined"
         && typeof dto.runtime_status_create_timestamp === "undefined"
         && typeof dto.runtime_status_modify_timestamp === "undefined") ? null : {
-        url: dto.runtime_state_url ?? null,
+        uri: dto.runtime_state_uri ?? null,
         user_agent: dto.runtime_status_user_agent ?? null,
         device_memory: dto.runtime_status_device_memory ?? null,
         hardware_concurrency: dto.runtime_status_hardware_concurrency ?? null,

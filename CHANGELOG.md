@@ -1,4 +1,7 @@
 # Changelog
+## v6.0.5
+- Promote `url` field to `uri` to enable use of URNs.
+
 ## v5.0.4
 - Bump to `zod@next` with `zod/v4` imports.
 

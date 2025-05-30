@@ -31,7 +31,7 @@ export declare const DeviceStatusMetadata: z.ZodObject<{
 }, {}, {}>;
 export type DeviceStatusMetadata = z.infer<typeof DeviceStatusMetadata>;
 export declare const DeviceStateBase: z.ZodObject<{
-    url: z.ZodNullable<z.ZodURL>;
+    uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -40,7 +40,7 @@ export declare const DeviceStateBase: z.ZodObject<{
 }, {}, {}>;
 export type DeviceStateBase = z.infer<typeof DeviceStateBase>;
 export declare const DeviceState: z.ZodObject<{
-    url: z.ZodNullable<z.ZodURL>;
+    uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -52,7 +52,7 @@ export declare const DeviceState: z.ZodObject<{
 }, {}, {}>;
 export type DeviceState = z.infer<typeof DeviceState>;
 export declare const DeviceStatusBase: z.ZodObject<{
-    url: z.ZodNullable<z.ZodURL>;
+    uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
     hardware_concurrency: z.ZodNullable<z.ZodNumber>;
@@ -101,7 +101,7 @@ export declare const DeviceStatusBase: z.ZodObject<{
 }, {}, {}>;
 export type DeviceStatusBase = z.infer<typeof DeviceStatusBase>;
 export declare const DeviceStatus: z.ZodObject<{
-    url: z.ZodNullable<z.ZodURL>;
+    uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
     hardware_concurrency: z.ZodNullable<z.ZodNumber>;
@@ -161,7 +161,7 @@ export declare const Device: z.ZodObject<{
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     desired_state: z.ZodNullable<z.ZodObject<{
-        url: z.ZodNullable<z.ZodURL>;
+        uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -172,7 +172,7 @@ export declare const Device: z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, {}, {}>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
-        url: z.ZodNullable<z.ZodURL>;
+        uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -183,7 +183,7 @@ export declare const Device: z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, {}, {}>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
-        url: z.ZodNullable<z.ZodURL>;
+        uri: z.ZodNullable<z.ZodString>;
         user_agent: z.ZodNullable<z.ZodString>;
         device_memory: z.ZodNullable<z.ZodNumber>;
         hardware_concurrency: z.ZodNullable<z.ZodNumber>;
@@ -236,7 +236,7 @@ export declare const Device: z.ZodObject<{
 }, {}, {}>;
 export type Device = z.infer<typeof Device>;
 export declare const DbDtoToDeviceState: z.ZodPipe<z.ZodObject<{
-    url: z.ZodNullable<z.ZodURL>;
+    uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -246,7 +246,7 @@ export declare const DbDtoToDeviceState: z.ZodPipe<z.ZodObject<{
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
 }, {}, {}>, z.ZodTransform<{
-    url: string | null;
+    uri: string | null;
     pull_interval: number | null;
     push_interval: number | null;
     min_backoff_interval: number | null;
@@ -256,7 +256,7 @@ export declare const DbDtoToDeviceState: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
 }, {
-    url: string | null;
+    uri: string | null;
     pull_interval: number | null;
     push_interval: number | null;
     min_backoff_interval: number | null;
@@ -267,7 +267,7 @@ export declare const DbDtoToDeviceState: z.ZodPipe<z.ZodObject<{
     is_deleted: number;
 }>>;
 export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
-    url: z.ZodNullable<z.ZodURL>;
+    uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
     hardware_concurrency: z.ZodNullable<z.ZodNumber>;
@@ -281,7 +281,7 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
 }, {}, {}>, z.ZodTransform<{
-    url: string | null;
+    uri: string | null;
     user_agent: string | null;
     device_memory: number | null;
     hardware_concurrency: number | null;
@@ -325,7 +325,7 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
 }, {
-    url: string | null;
+    uri: string | null;
     user_agent: string | null;
     device_memory: number | null;
     hardware_concurrency: number | null;
@@ -358,7 +358,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     desired_state: z.ZodNullable<z.ZodObject<{
-        url: z.ZodNullable<z.ZodURL>;
+        uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -369,7 +369,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, {}, {}>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
-        url: z.ZodNullable<z.ZodURL>;
+        uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
@@ -380,7 +380,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, {}, {}>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
-        url: z.ZodNullable<z.ZodURL>;
+        uri: z.ZodNullable<z.ZodString>;
         user_agent: z.ZodNullable<z.ZodString>;
         device_memory: z.ZodNullable<z.ZodNumber>;
         hardware_concurrency: z.ZodNullable<z.ZodNumber>;
@@ -439,7 +439,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
     desired_state: {
-        url: string | null;
+        uri: string | null;
         pull_interval: number | null;
         push_interval: number | null;
         min_backoff_interval: number | null;
@@ -450,7 +450,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
     runtime_state: {
-        url: string | null;
+        uri: string | null;
         pull_interval: number | null;
         push_interval: number | null;
         min_backoff_interval: number | null;
@@ -461,7 +461,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
     runtime_status: {
-        url: string | null;
+        uri: string | null;
         user_agent: string | null;
         device_memory: number | null;
         hardware_concurrency: number | null;
@@ -514,7 +514,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
     desired_state: {
-        url: string | null;
+        uri: string | null;
         pull_interval: number | null;
         push_interval: number | null;
         min_backoff_interval: number | null;
@@ -525,7 +525,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
     runtime_state: {
-        url: string | null;
+        uri: string | null;
         pull_interval: number | null;
         push_interval: number | null;
         min_backoff_interval: number | null;
@@ -536,7 +536,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
     runtime_status: {
-        url: string | null;
+        uri: string | null;
         user_agent: string | null;
         device_memory: number | null;
         hardware_concurrency: number | null;
@@ -599,7 +599,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     create_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
-    desired_state_url: z.ZodOptional<z.ZodNullable<z.ZodURL>>;
+    desired_state_uri: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     desired_state_pull_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     desired_state_push_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     desired_state_min_backoff_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
@@ -608,7 +608,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     desired_state_create_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     desired_state_modify_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     desired_state_is_deleted: z.ZodDefault<z.ZodNumber>;
-    runtime_state_url: z.ZodOptional<z.ZodNullable<z.ZodURL>>;
+    runtime_state_uri: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_state_pull_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     runtime_state_push_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     runtime_state_min_backoff_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
@@ -617,7 +617,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     runtime_state_create_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_state_modify_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_state_is_deleted: z.ZodDefault<z.ZodNumber>;
-    runtime_status_url: z.ZodOptional<z.ZodNullable<z.ZodURL>>;
+    runtime_status_uri: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_user_agent: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_device_memory: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     runtime_status_hardware_concurrency: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
@@ -639,7 +639,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
     desired_state: {
-        url: string | null;
+        uri: string | null;
         pull_interval: number | null;
         push_interval: number | null;
         min_backoff_interval: number | null;
@@ -650,7 +650,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
     runtime_state: {
-        url: string | null;
+        uri: string | null;
         pull_interval: number | null;
         push_interval: number | null;
         min_backoff_interval: number | null;
@@ -661,7 +661,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
     runtime_status: {
-        url: string | null;
+        uri: string | null;
         user_agent: string | null;
         device_memory: number | null;
         hardware_concurrency: number | null;
@@ -716,7 +716,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     desired_state_is_deleted: number;
     runtime_state_is_deleted: number;
     runtime_status_is_deleted: number;
-    desired_state_url?: string | null | undefined;
+    desired_state_uri?: string | null | undefined;
     desired_state_pull_interval?: number | null | undefined;
     desired_state_push_interval?: number | null | undefined;
     desired_state_min_backoff_interval?: number | null | undefined;
@@ -724,7 +724,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     desired_state_agent_ids?: string | null | undefined;
     desired_state_create_timestamp?: string | undefined;
     desired_state_modify_timestamp?: string | undefined;
-    runtime_state_url?: string | null | undefined;
+    runtime_state_uri?: string | null | undefined;
     runtime_state_pull_interval?: number | null | undefined;
     runtime_state_push_interval?: number | null | undefined;
     runtime_state_min_backoff_interval?: number | null | undefined;
@@ -732,7 +732,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     runtime_state_agent_ids?: string | null | undefined;
     runtime_state_create_timestamp?: string | undefined;
     runtime_state_modify_timestamp?: string | undefined;
-    runtime_status_url?: string | null | undefined;
+    runtime_status_uri?: string | null | undefined;
     runtime_status_user_agent?: string | null | undefined;
     runtime_status_device_memory?: number | null | undefined;
     runtime_status_hardware_concurrency?: number | null | undefined;

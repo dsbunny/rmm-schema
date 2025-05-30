@@ -1,6 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 
 import { z } from 'zod/v4';
+import { URI } from './uri.schema.js';
 
 export const AgentRegistration = z.object({
 	tenant_id: z.string()
@@ -56,8 +57,8 @@ export const AgentStatusMetadata = AgentStateMetadata;
 export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadata>;
 
 export const AgentStateBase = z.object({
-	url: z.url().nullable()
-		.describe('The URL of the agent'),
+	uri: URI.nullable()
+		.describe('The URI of the agent'),
 	pull_interval: z.number().nullable()
 		.describe('The pull interval of the agent'),
 	push_interval: z.number().nullable()
@@ -75,8 +76,8 @@ export const AgentState = AgentStateBase.extend(AgentStateMetadata.shape);
 export type AgentState = z.infer<typeof AgentState>;
 
 export const AgentStatusBase = z.object({
-	url: z.url().nullable()
-		.describe('The URL of the agent'),
+	uri: URI.nullable()
+		.describe('The URI of the agent'),
 	detail: z.any().nullable()
 		.describe('The detail of the agent status'),
 })
@@ -107,7 +108,7 @@ const sqliteDateSchema = z.string().transform((date) => {
 });
 
 export const DbDtoToAgentState = z.object({
-	url: z.url().nullable(),
+	uri: URI.nullable(),
 	pull_interval: z.number().nullable(),
 	push_interval: z.number().nullable(),
 	min_backoff_interval: z.number().nullable(),
@@ -126,7 +127,7 @@ export const DbDtoToAgentState = z.object({
 	});
 
 export const DbDtoToAgentStatus = z.object({
-	url: z.url().nullable(),
+	uri: URI.nullable(),
 	detail: z.string().nullable(),
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
@@ -172,7 +173,7 @@ export const DbDtoToAgent = z.object({
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
 	is_deleted: z.number().default(0),
-	desired_state_url: z.url().nullable().optional(),
+	desired_state_uri: URI.nullable().optional(),
 	desired_state_pull_interval: z.number().nullable().optional(),
 	desired_state_push_interval: z.number().nullable().optional(),
 	desired_state_min_backoff_interval: z.number().nullable().optional(),
@@ -181,7 +182,7 @@ export const DbDtoToAgent = z.object({
 	desired_state_create_timestamp: sqliteDateSchema.optional(),
 	desired_state_modify_timestamp: sqliteDateSchema.optional(),
 	desired_state_is_deleted: z.number().default(0),
-	runtime_state_url: z.url().nullable().optional(),
+	runtime_state_uri: URI.nullable().optional(),
 	runtime_state_pull_interval: z.number().nullable().optional(),
 	runtime_state_push_interval: z.number().nullable().optional(),
 	runtime_state_min_backoff_interval: z.number().nullable().optional(),
@@ -190,7 +191,7 @@ export const DbDtoToAgent = z.object({
 	runtime_state_create_timestamp: sqliteDateSchema.optional(),
 	runtime_state_modify_timestamp: sqliteDateSchema.optional(),
 	runtime_state_is_deleted: z.number().default(0),
-	runtime_status_url: z.url().nullable().optional(),
+	runtime_status_uri: URI.nullable().optional(),
 	runtime_status_detail: z.string().nullable().optional(),
 	runtime_status_create_timestamp: sqliteDateSchema.optional(),
 	runtime_status_modify_timestamp: sqliteDateSchema.optional(),
@@ -198,7 +199,7 @@ export const DbDtoToAgent = z.object({
 })
 	.transform((dto): Agent => {
 		const desired_state: AgentState | null = (
-			   typeof dto.desired_state_url === "undefined"
+			   typeof dto.desired_state_uri === "undefined"
 			&& typeof dto.desired_state_pull_interval === "undefined"
 			&& typeof dto.desired_state_push_interval === "undefined"
 			&& typeof dto.desired_state_min_backoff_interval === "undefined"
@@ -207,7 +208,7 @@ export const DbDtoToAgent = z.object({
 			&& typeof dto.desired_state_create_timestamp === "undefined"
 			&& typeof dto.desired_state_modify_timestamp === "undefined"
 		) ? null : {
-			url: dto.desired_state_url ?? null,
+			uri: dto.desired_state_uri ?? null,
 			pull_interval: dto.desired_state_pull_interval ?? null,
 			push_interval: dto.desired_state_push_interval ?? null,
 			min_backoff_interval: dto.desired_state_min_backoff_interval ?? null,
@@ -220,7 +221,7 @@ export const DbDtoToAgent = z.object({
 			is_deleted: Boolean(dto.desired_state_is_deleted),
 		};
 		const runtime_state: AgentState | null = (
-			   typeof dto.runtime_state_url === "undefined"
+			   typeof dto.runtime_state_uri === "undefined"
 			&& typeof dto.runtime_state_pull_interval === "undefined"
 			&& typeof dto.runtime_state_push_interval === "undefined"
 			&& typeof dto.runtime_state_min_backoff_interval === "undefined"
@@ -229,7 +230,7 @@ export const DbDtoToAgent = z.object({
 			&& typeof dto.runtime_state_create_timestamp === "undefined"
 			&& typeof dto.runtime_state_modify_timestamp === "undefined"
 		) ? null : {
-			url: dto.runtime_state_url ?? null,
+			uri: dto.runtime_state_uri ?? null,
 			pull_interval: dto.runtime_state_pull_interval ?? null,
 			push_interval: dto.runtime_state_push_interval ?? null,
 			min_backoff_interval: dto.runtime_state_min_backoff_interval ?? null,
@@ -242,12 +243,12 @@ export const DbDtoToAgent = z.object({
 			is_deleted: Boolean(dto.runtime_state_is_deleted),
 		};
 		const runtime_status: AgentStatus | null = (
-			   typeof dto.runtime_state_url === "undefined"
+			   typeof dto.runtime_state_uri === "undefined"
 			&& typeof dto.runtime_status_detail === "undefined"
 			&& typeof dto.runtime_status_create_timestamp === "undefined"
 			&& typeof dto.runtime_status_modify_timestamp === "undefined"
 		) ? null : {
-			url: dto.runtime_state_url ?? null,
+			uri: dto.runtime_state_uri ?? null,
 			detail: dto.runtime_status_detail
 				? JSON.parse(dto.runtime_status_detail)
 				: null,
