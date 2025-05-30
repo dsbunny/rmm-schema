@@ -241,7 +241,7 @@ export const DbDtoToDevice = z.object({
         modify_timestamp: z.string().parse(dto.runtime_state_modify_timestamp),
         is_deleted: Boolean(dto.runtime_status_is_deleted),
     };
-    const runtime_status = (typeof dto.runtime_state_uri === "undefined"
+    const runtime_status = (typeof dto.runtime_status_uri === "undefined"
         && typeof dto.runtime_status_user_agent === "undefined"
         && typeof dto.runtime_status_device_memory === "undefined"
         && typeof dto.runtime_status_hardware_concurrency === "undefined"
@@ -253,7 +253,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_status_error_stack === "undefined"
         && typeof dto.runtime_status_create_timestamp === "undefined"
         && typeof dto.runtime_status_modify_timestamp === "undefined") ? null : {
-        uri: dto.runtime_state_uri ?? null,
+        uri: dto.runtime_status_uri ?? null,
         user_agent: dto.runtime_status_user_agent ?? null,
         device_memory: dto.runtime_status_device_memory ?? null,
         hardware_concurrency: dto.runtime_status_hardware_concurrency ?? null,

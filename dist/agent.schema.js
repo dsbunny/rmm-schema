@@ -213,11 +213,11 @@ export const DbDtoToAgent = z.object({
         modify_timestamp: z.string().parse(dto.runtime_state_modify_timestamp),
         is_deleted: Boolean(dto.runtime_state_is_deleted),
     };
-    const runtime_status = (typeof dto.runtime_state_uri === "undefined"
+    const runtime_status = (typeof dto.runtime_status_uri === "undefined"
         && typeof dto.runtime_status_detail === "undefined"
         && typeof dto.runtime_status_create_timestamp === "undefined"
         && typeof dto.runtime_status_modify_timestamp === "undefined") ? null : {
-        uri: dto.runtime_state_uri ?? null,
+        uri: dto.runtime_status_uri ?? null,
         detail: dto.runtime_status_detail
             ? JSON.parse(dto.runtime_status_detail)
             : null,
