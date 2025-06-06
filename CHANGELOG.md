@@ -1,4 +1,7 @@
 # Changelog
+## v6.1.6
+- Add API endpoint schema.
+
 ## v6.0.5
 - Promote `url` field to `uri` to enable use of URNs.
 
