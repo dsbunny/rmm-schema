@@ -31,6 +31,7 @@ export declare const ListDevicesResponse: z.ZodObject<{
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
             agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+            is_maintenance: z.ZodDefault<z.ZodBoolean>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -42,6 +43,7 @@ export declare const ListDevicesResponse: z.ZodObject<{
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
             agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+            is_maintenance: z.ZodDefault<z.ZodBoolean>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -67,6 +69,7 @@ export declare const ListDevicesResponse: z.ZodObject<{
                     }, {}, {}>;
                 }, {}, {}>>;
             }, {}, {}>>;
+            start_timestamp: z.iso.ZodISODateTime;
             cool: z.ZodNullable<z.ZodObject<{
                 eventHistory: z.ZodObject<{
                     history_size: z.ZodNumber;
@@ -158,6 +161,7 @@ export declare const GetDeviceResponse: z.ZodObject<{
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
             agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+            is_maintenance: z.ZodDefault<z.ZodBoolean>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -169,6 +173,7 @@ export declare const GetDeviceResponse: z.ZodObject<{
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
             agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+            is_maintenance: z.ZodDefault<z.ZodBoolean>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -194,6 +199,7 @@ export declare const GetDeviceResponse: z.ZodObject<{
                     }, {}, {}>;
                 }, {}, {}>>;
             }, {}, {}>>;
+            start_timestamp: z.iso.ZodISODateTime;
             cool: z.ZodNullable<z.ZodObject<{
                 eventHistory: z.ZodObject<{
                     history_size: z.ZodNumber;
@@ -290,10 +296,7 @@ export declare const UpdateDeviceRequest: z.ZodArray<z.ZodDiscriminatedUnion<[z.
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>>;
 export type UpdateDeviceRequest = z.infer<typeof UpdateDeviceRequest>;
 export declare const UpdateDeviceResponse: z.ZodObject<{
@@ -311,6 +314,7 @@ export declare const UpdateDeviceResponse: z.ZodObject<{
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
         agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+        is_maintenance: z.ZodDefault<z.ZodBoolean>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -322,6 +326,7 @@ export declare const UpdateDeviceResponse: z.ZodObject<{
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
         agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+        is_maintenance: z.ZodDefault<z.ZodBoolean>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -347,6 +352,7 @@ export declare const UpdateDeviceResponse: z.ZodObject<{
                 }, {}, {}>;
             }, {}, {}>>;
         }, {}, {}>>;
+        start_timestamp: z.iso.ZodISODateTime;
         cool: z.ZodNullable<z.ZodObject<{
             eventHistory: z.ZodObject<{
                 history_size: z.ZodNumber;
@@ -388,6 +394,7 @@ export declare const GetDeviceStateResponse: z.ZodObject<{
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+    is_maintenance: z.ZodDefault<z.ZodBoolean>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -400,6 +407,7 @@ export declare const UpdateDeviceStateRequest: z.ZodObject<{
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+    is_maintenance: z.ZodDefault<z.ZodBoolean>;
 }, {}, {}>;
 export type UpdateDeviceStateRequest = z.infer<typeof UpdateDeviceStateRequest>;
 export declare const UpdateDeviceStateResponse: z.ZodObject<{
@@ -409,6 +417,7 @@ export declare const UpdateDeviceStateResponse: z.ZodObject<{
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+    is_maintenance: z.ZodDefault<z.ZodBoolean>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -437,10 +446,7 @@ export declare const PatchDeviceStateRequest: z.ZodArray<z.ZodDiscriminatedUnion
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>>;
 export type PatchDeviceStateRequest = z.infer<typeof PatchDeviceStateRequest>;
 export declare const PatchDeviceStateResponse: z.ZodObject<{
@@ -450,6 +456,7 @@ export declare const PatchDeviceStateResponse: z.ZodObject<{
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
+    is_maintenance: z.ZodDefault<z.ZodBoolean>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -478,6 +485,7 @@ export declare const GetDeviceStatusResponse: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
+    start_timestamp: z.iso.ZodISODateTime;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -530,6 +538,7 @@ export declare const UpdateDeviceStatusRequest: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
+    start_timestamp: z.iso.ZodISODateTime;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -579,6 +588,7 @@ export declare const UpdateDeviceStatusResponse: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
+    start_timestamp: z.iso.ZodISODateTime;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -633,10 +643,7 @@ export declare const PatchDeviceStatusRequest: z.ZodArray<z.ZodDiscriminatedUnio
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>>;
 export type PatchDeviceStatusRequest = z.infer<typeof PatchDeviceStatusRequest>;
 export declare const PatchDeviceStatusResponse: z.ZodObject<{
@@ -660,6 +667,7 @@ export declare const PatchDeviceStatusResponse: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
+    start_timestamp: z.iso.ZodISODateTime;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -827,10 +835,7 @@ export declare const PatchAgentRequest: z.ZodArray<z.ZodDiscriminatedUnion<[z.Zo
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>>;
 export type PatchAgentRequest = z.infer<typeof PatchAgentRequest>;
 export declare const PatchAgentResponse: z.ZodObject<{
@@ -917,10 +922,7 @@ export declare const PatchAgentStateRequest: z.ZodArray<z.ZodDiscriminatedUnion<
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>>;
 export type PatchAgentStateRequest = z.infer<typeof PatchAgentStateRequest>;
 export declare const PatchAgentStateResponse: z.ZodObject<{
@@ -995,10 +997,7 @@ export declare const PatchAgentStatusRequest: z.ZodArray<z.ZodDiscriminatedUnion
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>>;
 export type PatchAgentStatusRequest = z.infer<typeof PatchAgentStatusRequest>;
 export declare const PatchAgentStatusResponse: z.ZodObject<{

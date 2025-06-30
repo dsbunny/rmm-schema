@@ -22,9 +22,6 @@ export declare const JsonPatchOperation: z.ZodDiscriminatedUnion<[z.ZodObject<{
     path: z.ZodString;
     op: z.ZodLiteral<"test">;
     value: z.ZodAny;
-}, {}, {}>, z.ZodObject<{
-    path: z.ZodString;
-    op: z.ZodLiteral<"_get">;
-    value: z.ZodAny;
+    not: z.ZodOptional<z.ZodBoolean>;
 }, {}, {}>]>;
 export type JsonPatchOperation = z.infer<typeof JsonPatchOperation>;

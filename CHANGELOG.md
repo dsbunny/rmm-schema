@@ -1,4 +1,8 @@
 # Changelog
+## v6.2.7
+- Add `start_timestamp` to track device uptime.
+- Add `is_maintenance` to track a manual initiated _maintenance mode_.
+
 ## v6.1.6
 - Add API endpoint schema.
 

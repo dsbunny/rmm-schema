@@ -56,6 +56,8 @@ export const DeviceStateBase = z.object({
         .describe('The maximum backoff interval of the device'),
     agent_ids: z.array(z.string()).nullable()
         .describe('The agent IDs of the device'),
+    is_maintenance: z.boolean().default(false)
+        .describe('The flag of the device maintenance'),
 })
     .describe('The state of the device');
 export const DeviceState = DeviceStateBase.extend(DeviceStateMetadata.shape);
@@ -73,6 +75,8 @@ export const DeviceStatusBase = z.object({
     renderer_webgl: z.string().nullable()
         .describe('The renderer of the WebGL of the device'),
     screen_details: ScreenDetails.nullable(),
+    start_timestamp: z.iso.datetime()
+        .describe('The ISO datetime of the device start'),
     cool: CoolReport.nullable(),
     has_error: z.boolean().default(false)
         .describe('The flag of the device error'),
@@ -103,6 +107,7 @@ export const DbDtoToDeviceState = z.object({
     min_backoff_interval: z.number().nullable(),
     max_backoff_interval: z.number().nullable(),
     agent_ids: z.string().nullable(),
+    is_maintenance: z.number().default(0),
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
     is_deleted: z.number().default(0),
@@ -111,6 +116,7 @@ export const DbDtoToDeviceState = z.object({
     return {
         ...dto,
         agent_ids: dto.agent_ids ? JSON.parse(dto.agent_ids) : null,
+        is_maintenance: Boolean(dto.is_maintenance),
         is_deleted: Boolean(dto.is_deleted),
     };
 });
@@ -122,6 +128,7 @@ export const DbDtoToDeviceStatus = z.object({
     vendor_webgl: z.string().nullable(),
     renderer_webgl: z.string().nullable(),
     screen_details: z.string().nullable(),
+    start_timestamp: sqliteDateSchema,
     cool: z.string().nullable(),
     has_error: z.number().default(0),
     error_stack: z.string().nullable(),
@@ -174,6 +181,7 @@ export const DbDtoToDevice = z.object({
     desired_state_min_backoff_interval: z.number().nullable().optional(),
     desired_state_max_backoff_interval: z.number().nullable().optional(),
     desired_state_agent_ids: z.string().nullable().optional(),
+    desired_state_is_maintenance: z.number().default(0),
     desired_state_create_timestamp: sqliteDateSchema.optional(),
     desired_state_modify_timestamp: sqliteDateSchema.optional(),
     desired_state_is_deleted: z.number().default(0),
@@ -183,6 +191,7 @@ export const DbDtoToDevice = z.object({
     runtime_state_min_backoff_interval: z.number().nullable().optional(),
     runtime_state_max_backoff_interval: z.number().nullable().optional(),
     runtime_state_agent_ids: z.string().nullable().optional(),
+    runtime_state_is_maintenance: z.number().default(0),
     runtime_state_create_timestamp: sqliteDateSchema.optional(),
     runtime_state_modify_timestamp: sqliteDateSchema.optional(),
     runtime_state_is_deleted: z.number().default(0),
@@ -193,6 +202,7 @@ export const DbDtoToDevice = z.object({
     runtime_status_vendor_webgl: z.string().nullable().optional(),
     runtime_status_renderer_webgl: z.string().nullable().optional(),
     runtime_status_screen_details: z.string().nullable().optional(),
+    runtime_status_start_timestamp: sqliteDateSchema.optional(),
     runtime_status_cool: z.string().nullable().optional(),
     runtime_status_has_error: z.number().default(0).optional(),
     runtime_status_error_stack: z.string().nullable().optional(),
@@ -207,6 +217,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.desired_state_min_backoff_interval === "undefined"
         && typeof dto.desired_state_max_backoff_interval === "undefined"
         && typeof dto.desired_state_agent_ids === "undefined"
+        && typeof dto.desired_state_is_maintenance === "undefined"
         && typeof dto.desired_state_create_timestamp === "undefined"
         && typeof dto.desired_state_modify_timestamp === "undefined") ? null : {
         uri: dto.desired_state_uri ?? null,
@@ -217,6 +228,7 @@ export const DbDtoToDevice = z.object({
         agent_ids: dto.desired_state_agent_ids
             ? JSON.parse(dto.desired_state_agent_ids)
             : null,
+        is_maintenance: Boolean(dto.desired_state_is_maintenance),
         create_timestamp: z.string().parse(dto.desired_state_create_timestamp),
         modify_timestamp: z.string().parse(dto.desired_state_modify_timestamp),
         is_deleted: Boolean(dto.desired_state_is_deleted),
@@ -227,6 +239,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_state_min_backoff_interval === "undefined"
         && typeof dto.runtime_state_max_backoff_interval === "undefined"
         && typeof dto.runtime_state_agent_ids === "undefined"
+        && typeof dto.runtime_state_is_maintenance === "undefined"
         && typeof dto.runtime_state_create_timestamp === "undefined"
         && typeof dto.runtime_state_modify_timestamp === "undefined") ? null : {
         uri: dto.runtime_state_uri ?? null,
@@ -237,6 +250,7 @@ export const DbDtoToDevice = z.object({
         agent_ids: dto.runtime_state_agent_ids
             ? JSON.parse(dto.runtime_state_agent_ids)
             : null,
+        is_maintenance: Boolean(dto.runtime_state_is_maintenance),
         create_timestamp: z.string().parse(dto.runtime_state_create_timestamp),
         modify_timestamp: z.string().parse(dto.runtime_state_modify_timestamp),
         is_deleted: Boolean(dto.runtime_status_is_deleted),
@@ -248,6 +262,7 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_status_vendor_webgl === "undefined"
         && typeof dto.runtime_status_renderer_webgl === "undefined"
         && typeof dto.runtime_status_screen_details === "undefined"
+        && typeof dto.runtime_status_start_timestamp === "undefined"
         && typeof dto.runtime_status_cool === "undefined"
         && typeof dto.runtime_status_has_error === "undefined"
         && typeof dto.runtime_status_error_stack === "undefined"
@@ -262,6 +277,7 @@ export const DbDtoToDevice = z.object({
         screen_details: dto.runtime_status_screen_details
             ? JSON.parse(dto.runtime_status_screen_details)
             : null,
+        start_timestamp: z.string().parse(dto.runtime_status_start_timestamp),
         cool: dto.runtime_status_cool
             ? JSON.parse(dto.runtime_status_cool)
             : null,
