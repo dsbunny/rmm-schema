@@ -74,7 +74,6 @@ export declare const DeviceStatusBase: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
-    start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -124,7 +123,6 @@ export declare const DeviceStatus: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
-    start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -209,7 +207,6 @@ export declare const Device: z.ZodObject<{
                 }, {}, {}>;
             }, {}, {}>>;
         }, {}, {}>>;
-        start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
         cool: z.ZodNullable<z.ZodObject<{
             eventHistory: z.ZodObject<{
                 history_size: z.ZodNumber;
@@ -284,7 +281,6 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
     vendor_webgl: z.ZodNullable<z.ZodString>;
     renderer_webgl: z.ZodNullable<z.ZodString>;
     screen_details: z.ZodNullable<z.ZodString>;
-    start_timestamp: z.ZodNullable<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     cool: z.ZodNullable<z.ZodString>;
     has_error: z.ZodDefault<z.ZodNumber>;
     error_stack: z.ZodNullable<z.ZodString>;
@@ -312,7 +308,6 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
             };
         }[];
     } | null;
-    start_timestamp: string | null;
     cool: {
         eventHistory: {
             history_size: number;
@@ -344,7 +339,6 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
     vendor_webgl: string | null;
     renderer_webgl: string | null;
     screen_details: string | null;
-    start_timestamp: string | null;
     cool: string | null;
     has_error: number;
     error_stack: string | null;
@@ -415,7 +409,6 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
                 }, {}, {}>;
             }, {}, {}>>;
         }, {}, {}>>;
-        start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
         cool: z.ZodNullable<z.ZodObject<{
             eventHistory: z.ZodObject<{
                 history_size: z.ZodNumber;
@@ -499,7 +492,6 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
                 };
             }[];
         } | null;
-        start_timestamp: string | null;
         cool: {
             eventHistory: {
                 history_size: number;
@@ -577,7 +569,6 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
                 };
             }[];
         } | null;
-        start_timestamp: string | null;
         cool: {
             eventHistory: {
                 history_size: number;
@@ -648,7 +639,6 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     runtime_status_vendor_webgl: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_renderer_webgl: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_screen_details: z.ZodOptional<z.ZodNullable<z.ZodString>>;
-    runtime_status_start_timestamp: z.ZodOptional<z.ZodNullable<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>>;
     runtime_status_cool: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_has_error: z.ZodOptional<z.ZodDefault<z.ZodNumber>>;
     runtime_status_error_stack: z.ZodOptional<z.ZodNullable<z.ZodString>>;
@@ -708,7 +698,6 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
                 };
             }[];
         } | null;
-        start_timestamp: string | null;
         cool: {
             eventHistory: {
                 history_size: number;
@@ -769,7 +758,6 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     runtime_status_vendor_webgl?: string | null | undefined;
     runtime_status_renderer_webgl?: string | null | undefined;
     runtime_status_screen_details?: string | null | undefined;
-    runtime_status_start_timestamp?: string | null | undefined;
     runtime_status_cool?: string | null | undefined;
     runtime_status_has_error?: number | undefined;
     runtime_status_error_stack?: string | null | undefined;
