@@ -75,7 +75,7 @@ export const DeviceStatusBase = z.object({
     renderer_webgl: z.string().nullable()
         .describe('The renderer of the WebGL of the device'),
     screen_details: ScreenDetails.nullable(),
-    start_timestamp: z.iso.datetime()
+    start_timestamp: z.iso.datetime().nullable()
         .describe('The ISO datetime of the device start'),
     cool: CoolReport.nullable(),
     has_error: z.boolean().default(false)
@@ -128,7 +128,7 @@ export const DbDtoToDeviceStatus = z.object({
     vendor_webgl: z.string().nullable(),
     renderer_webgl: z.string().nullable(),
     screen_details: z.string().nullable(),
-    start_timestamp: sqliteDateSchema,
+    start_timestamp: sqliteDateSchema.nullable(),
     cool: z.string().nullable(),
     has_error: z.number().default(0),
     error_stack: z.string().nullable(),
@@ -202,7 +202,7 @@ export const DbDtoToDevice = z.object({
     runtime_status_vendor_webgl: z.string().nullable().optional(),
     runtime_status_renderer_webgl: z.string().nullable().optional(),
     runtime_status_screen_details: z.string().nullable().optional(),
-    runtime_status_start_timestamp: sqliteDateSchema.optional(),
+    runtime_status_start_timestamp: sqliteDateSchema.nullable().optional(),
     runtime_status_cool: z.string().nullable().optional(),
     runtime_status_has_error: z.number().default(0).optional(),
     runtime_status_error_stack: z.string().nullable().optional(),
@@ -277,7 +277,9 @@ export const DbDtoToDevice = z.object({
         screen_details: dto.runtime_status_screen_details
             ? JSON.parse(dto.runtime_status_screen_details)
             : null,
-        start_timestamp: z.string().parse(dto.runtime_status_start_timestamp),
+        start_timestamp: dto.runtime_status_start_timestamp
+            ? z.string().parse(dto.runtime_status_start_timestamp)
+            : null,
         cool: dto.runtime_status_cool
             ? JSON.parse(dto.runtime_status_cool)
             : null,

@@ -69,7 +69,7 @@ export declare const ListDevicesResponse: z.ZodObject<{
                     }, {}, {}>;
                 }, {}, {}>>;
             }, {}, {}>>;
-            start_timestamp: z.iso.ZodISODateTime;
+            start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
             cool: z.ZodNullable<z.ZodObject<{
                 eventHistory: z.ZodObject<{
                     history_size: z.ZodNumber;
@@ -199,7 +199,7 @@ export declare const GetDeviceResponse: z.ZodObject<{
                     }, {}, {}>;
                 }, {}, {}>>;
             }, {}, {}>>;
-            start_timestamp: z.iso.ZodISODateTime;
+            start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
             cool: z.ZodNullable<z.ZodObject<{
                 eventHistory: z.ZodObject<{
                     history_size: z.ZodNumber;
@@ -352,7 +352,7 @@ export declare const UpdateDeviceResponse: z.ZodObject<{
                 }, {}, {}>;
             }, {}, {}>>;
         }, {}, {}>>;
-        start_timestamp: z.iso.ZodISODateTime;
+        start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
         cool: z.ZodNullable<z.ZodObject<{
             eventHistory: z.ZodObject<{
                 history_size: z.ZodNumber;
@@ -485,7 +485,7 @@ export declare const GetDeviceStatusResponse: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
-    start_timestamp: z.iso.ZodISODateTime;
+    start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -538,7 +538,7 @@ export declare const UpdateDeviceStatusRequest: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
-    start_timestamp: z.iso.ZodISODateTime;
+    start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -588,7 +588,7 @@ export declare const UpdateDeviceStatusResponse: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
-    start_timestamp: z.iso.ZodISODateTime;
+    start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
@@ -667,7 +667,7 @@ export declare const PatchDeviceStatusResponse: z.ZodObject<{
             }, {}, {}>;
         }, {}, {}>>;
     }, {}, {}>>;
-    start_timestamp: z.iso.ZodISODateTime;
+    start_timestamp: z.ZodNullable<z.iso.ZodISODateTime>;
     cool: z.ZodNullable<z.ZodObject<{
         eventHistory: z.ZodObject<{
             history_size: z.ZodNumber;
