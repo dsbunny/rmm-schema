@@ -56,11 +56,15 @@ export type AgentState = z.infer<typeof AgentState>;
 export declare const AgentStatusBase: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodAny>;
+    has_error: z.ZodDefault<z.ZodBoolean>;
+    error_stack: z.ZodNullable<z.ZodString>;
 }, {}, {}>;
 export type AgentStatusBase = z.infer<typeof AgentStatusBase>;
 export declare const AgentStatus: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodAny>;
+    has_error: z.ZodDefault<z.ZodBoolean>;
+    error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -100,6 +104,8 @@ export declare const Agent: z.ZodObject<{
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         detail: z.ZodNullable<z.ZodAny>;
+        has_error: z.ZodDefault<z.ZodBoolean>;
+        error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -140,18 +146,24 @@ export declare const DbDtoToAgentState: z.ZodPipe<z.ZodObject<{
 export declare const DbDtoToAgentStatus: z.ZodPipe<z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodString>;
+    has_error: z.ZodDefault<z.ZodNumber>;
+    error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
 }, {}, {}>, z.ZodTransform<{
     uri: string | null;
     detail: any;
+    has_error: boolean;
+    error_stack: string | null;
     create_timestamp: string;
     modify_timestamp: string;
     is_deleted: boolean;
 }, {
     uri: string | null;
     detail: string | null;
+    has_error: number;
+    error_stack: string | null;
     create_timestamp: string;
     modify_timestamp: string;
     is_deleted: number;
@@ -200,6 +212,8 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         detail: z.ZodNullable<z.ZodAny>;
+        has_error: z.ZodDefault<z.ZodBoolean>;
+        error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -238,6 +252,8 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
     runtime_status: {
         uri: string | null;
         detail: any;
+        has_error: boolean;
+        error_stack: string | null;
         create_timestamp: string;
         modify_timestamp: string;
         is_deleted: boolean;
@@ -276,6 +292,8 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
     runtime_status: {
         uri: string | null;
         detail: any;
+        has_error: boolean;
+        error_stack: string | null;
         create_timestamp: string;
         modify_timestamp: string;
         is_deleted: boolean;
@@ -320,6 +338,8 @@ export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
     runtime_state_is_deleted: z.ZodDefault<z.ZodNumber>;
     runtime_status_uri: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_detail: z.ZodOptional<z.ZodNullable<z.ZodString>>;
+    runtime_status_has_error: z.ZodOptional<z.ZodDefault<z.ZodNumber>>;
+    runtime_status_error_stack: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     runtime_status_create_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_status_modify_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_status_is_deleted: z.ZodDefault<z.ZodNumber>;
@@ -357,6 +377,8 @@ export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
     runtime_status: {
         uri: string | null;
         detail: any;
+        has_error: boolean;
+        error_stack: string | null;
         create_timestamp: string;
         modify_timestamp: string;
         is_deleted: boolean;
@@ -391,6 +413,8 @@ export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
     runtime_state_modify_timestamp?: string | undefined;
     runtime_status_uri?: string | null | undefined;
     runtime_status_detail?: string | null | undefined;
+    runtime_status_has_error?: number | undefined;
+    runtime_status_error_stack?: string | null | undefined;
     runtime_status_create_timestamp?: string | undefined;
     runtime_status_modify_timestamp?: string | undefined;
 }>>;

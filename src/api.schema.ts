@@ -162,6 +162,13 @@ export const PatchAgentResponse = Agent
 	.describe('Agent patch response schema');
 export type PatchAgentResponse = z.infer<typeof PatchAgentResponse>;
 
+export const GetAgentRequest = z.object({})
+	  .describe('Agent retrieval request schema');
+export type GetAgentRequest = z.infer<typeof GetAgentRequest>;
+export const GetAgentResponse = Agent
+	  .describe('Agent retrieval response schema');
+export type GetAgentResponse = z.infer<typeof GetAgentResponse>;
+
 export const UpdateAgentStateRequest = AgentStateBase
 	  .describe('Agent state request schema');
 export type UpdateAgentStateRequest = z.infer<typeof UpdateAgentStateRequest>;

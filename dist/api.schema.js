@@ -95,6 +95,10 @@ export const PatchAgentRequest = z.array(JsonPatchOperation)
     .describe('Agent patch request schema');
 export const PatchAgentResponse = Agent
     .describe('Agent patch response schema');
+export const GetAgentRequest = z.object({})
+    .describe('Agent retrieval request schema');
+export const GetAgentResponse = Agent
+    .describe('Agent retrieval response schema');
 export const UpdateAgentStateRequest = AgentStateBase
     .describe('Agent state request schema');
 export const UpdateAgentStateResponse = AgentState

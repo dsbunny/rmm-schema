@@ -134,6 +134,8 @@ export declare const ListDevicesResponse: z.ZodObject<{
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             detail: z.ZodNullable<z.ZodAny>;
+            has_error: z.ZodDefault<z.ZodBoolean>;
+            error_stack: z.ZodNullable<z.ZodString>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -263,6 +265,8 @@ export declare const GetDeviceResponse: z.ZodObject<{
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             detail: z.ZodNullable<z.ZodAny>;
+            has_error: z.ZodDefault<z.ZodBoolean>;
+            error_stack: z.ZodNullable<z.ZodString>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -752,6 +756,8 @@ export declare const ListAgentsResponse: z.ZodObject<{
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             detail: z.ZodNullable<z.ZodAny>;
+            has_error: z.ZodDefault<z.ZodBoolean>;
+            error_stack: z.ZodNullable<z.ZodString>;
             create_timestamp: z.iso.ZodISODateTime;
             modify_timestamp: z.iso.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -799,6 +805,8 @@ export declare const UpdateAgentResponse: z.ZodObject<{
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         detail: z.ZodNullable<z.ZodAny>;
+        has_error: z.ZodDefault<z.ZodBoolean>;
+        error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -865,12 +873,58 @@ export declare const PatchAgentResponse: z.ZodObject<{
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         detail: z.ZodNullable<z.ZodAny>;
+        has_error: z.ZodDefault<z.ZodBoolean>;
+        error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.iso.ZodISODateTime;
         modify_timestamp: z.iso.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, {}, {}>>;
 }, {}, {}>;
 export type PatchAgentResponse = z.infer<typeof PatchAgentResponse>;
+export declare const GetAgentRequest: z.ZodObject<{}, {}, {}>;
+export type GetAgentRequest = z.infer<typeof GetAgentRequest>;
+export declare const GetAgentResponse: z.ZodObject<{
+    name: z.ZodString;
+    tags: z.ZodArray<z.ZodString>;
+    tenant_id: z.ZodString;
+    device_id: z.ZodUUID;
+    agent_id: z.ZodUUID;
+    create_timestamp: z.iso.ZodISODateTime;
+    modify_timestamp: z.iso.ZodISODateTime;
+    is_deleted: z.ZodDefault<z.ZodBoolean>;
+    desired_state: z.ZodNullable<z.ZodObject<{
+        uri: z.ZodNullable<z.ZodString>;
+        pull_interval: z.ZodNullable<z.ZodNumber>;
+        push_interval: z.ZodNullable<z.ZodNumber>;
+        min_backoff_interval: z.ZodNullable<z.ZodNumber>;
+        max_backoff_interval: z.ZodNullable<z.ZodNumber>;
+        detail: z.ZodNullable<z.ZodAny>;
+        create_timestamp: z.iso.ZodISODateTime;
+        modify_timestamp: z.iso.ZodISODateTime;
+        is_deleted: z.ZodDefault<z.ZodBoolean>;
+    }, {}, {}>>;
+    runtime_state: z.ZodNullable<z.ZodObject<{
+        uri: z.ZodNullable<z.ZodString>;
+        pull_interval: z.ZodNullable<z.ZodNumber>;
+        push_interval: z.ZodNullable<z.ZodNumber>;
+        min_backoff_interval: z.ZodNullable<z.ZodNumber>;
+        max_backoff_interval: z.ZodNullable<z.ZodNumber>;
+        detail: z.ZodNullable<z.ZodAny>;
+        create_timestamp: z.iso.ZodISODateTime;
+        modify_timestamp: z.iso.ZodISODateTime;
+        is_deleted: z.ZodDefault<z.ZodBoolean>;
+    }, {}, {}>>;
+    runtime_status: z.ZodNullable<z.ZodObject<{
+        uri: z.ZodNullable<z.ZodString>;
+        detail: z.ZodNullable<z.ZodAny>;
+        has_error: z.ZodDefault<z.ZodBoolean>;
+        error_stack: z.ZodNullable<z.ZodString>;
+        create_timestamp: z.iso.ZodISODateTime;
+        modify_timestamp: z.iso.ZodISODateTime;
+        is_deleted: z.ZodDefault<z.ZodBoolean>;
+    }, {}, {}>>;
+}, {}, {}>;
+export type GetAgentResponse = z.infer<typeof GetAgentResponse>;
 export declare const UpdateAgentStateRequest: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -949,6 +1003,8 @@ export type GetAgentStatusRequest = z.infer<typeof GetAgentStatusRequest>;
 export declare const GetAgentStatusResponse: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodAny>;
+    has_error: z.ZodDefault<z.ZodBoolean>;
+    error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -957,11 +1013,15 @@ export type GetAgentStatusResponse = z.infer<typeof GetAgentStatusResponse>;
 export declare const UpdateAgentStatusRequest: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodAny>;
+    has_error: z.ZodDefault<z.ZodBoolean>;
+    error_stack: z.ZodNullable<z.ZodString>;
 }, {}, {}>;
 export type UpdateAgentStatusRequest = z.infer<typeof UpdateAgentStatusRequest>;
 export declare const UpdateAgentStatusResponse: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodAny>;
+    has_error: z.ZodDefault<z.ZodBoolean>;
+    error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -996,6 +1056,8 @@ export type PatchAgentStatusRequest = z.infer<typeof PatchAgentStatusRequest>;
 export declare const PatchAgentStatusResponse: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodNullable<z.ZodAny>;
+    has_error: z.ZodDefault<z.ZodBoolean>;
+    error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.iso.ZodISODateTime;
     modify_timestamp: z.iso.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;

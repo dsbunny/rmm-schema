@@ -1,7 +1,8 @@
 # Changelog
 ## v6.2.7
-- Add `start_timestamp` to track device uptime.
 - Add `is_maintenance` to track a manual initiated _maintenance mode_.
+- Add missing `GetAgentRequest` and `GetAgentResponse` API schema.
+- Add `has_error` and `error_stack` to `agent.runtime_status` for UI feedback.
 
 ## v6.1.6
 - Add API endpoint schema.

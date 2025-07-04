@@ -80,6 +80,10 @@ export const AgentStatusBase = z.object({
 		.describe('The URI of the agent'),
 	detail: z.any().nullable()
 		.describe('The detail of the agent status'),
+	has_error: z.boolean().default(false)
+		.describe('The flag of the device error'),
+	error_stack: z.string().nullable()
+		.describe('The stack of the device error'),
 })
 	.describe('The status of the agent');
 export type AgentStatusBase = z.infer<typeof AgentStatusBase>;
@@ -129,6 +133,8 @@ export const DbDtoToAgentState = z.object({
 export const DbDtoToAgentStatus = z.object({
 	uri: URI.nullable(),
 	detail: z.string().nullable(),
+	has_error: z.number().default(0),
+	error_stack: z.string().nullable(),
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
 	is_deleted: z.number().default(0),
@@ -137,6 +143,7 @@ export const DbDtoToAgentStatus = z.object({
 		return {
 			...dto,
 			detail: dto.detail ? JSON.parse(dto.detail) : null,
+			has_error: Boolean(dto.has_error),
 			is_deleted: Boolean(dto.is_deleted),
 		};
 	});
@@ -193,6 +200,8 @@ export const DbDtoToAgent = z.object({
 	runtime_state_is_deleted: z.number().default(0),
 	runtime_status_uri: URI.nullable().optional(),
 	runtime_status_detail: z.string().nullable().optional(),
+	runtime_status_has_error: z.number().default(0).optional(),
+	runtime_status_error_stack: z.string().nullable().optional(),
 	runtime_status_create_timestamp: sqliteDateSchema.optional(),
 	runtime_status_modify_timestamp: sqliteDateSchema.optional(),
 	runtime_status_is_deleted: z.number().default(0),
@@ -245,6 +254,8 @@ export const DbDtoToAgent = z.object({
 		const runtime_status: AgentStatus | null = (
 			   typeof dto.runtime_status_uri === "undefined"
 			&& typeof dto.runtime_status_detail === "undefined"
+			&& typeof dto.runtime_status_has_error === "undefined"
+			&& typeof dto.runtime_status_error_stack === "undefined"
 			&& typeof dto.runtime_status_create_timestamp === "undefined"
 			&& typeof dto.runtime_status_modify_timestamp === "undefined"
 		) ? null : {
@@ -252,6 +263,8 @@ export const DbDtoToAgent = z.object({
 			detail: dto.runtime_status_detail
 				? JSON.parse(dto.runtime_status_detail)
 				: null,
+			has_error: Boolean(dto.runtime_status_has_error),
+			error_stack: dto.runtime_status_error_stack ?? null,
 			create_timestamp: z.string().parse(dto.runtime_status_create_timestamp),
 			modify_timestamp: z.string().parse(dto.runtime_status_modify_timestamp),
 			is_deleted: Boolean(dto.runtime_status_is_deleted),
