@@ -1,4 +1,7 @@
 # Changelog
+## v6.2.8
+- Expose `JsonPatchOperation` schema.
+
 ## v6.2.7
 - Add `is_maintenance` to track a manual initiated _maintenance mode_.
 - Add missing `GetAgentRequest` and `GetAgentResponse` API schema.

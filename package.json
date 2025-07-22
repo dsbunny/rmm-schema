@@ -1,6 +1,6 @@
 {
 	"name": "@dsbunny/rmm-schema",
-	"version": "6.2.7",
+	"version": "6.2.8",
 	"description": "Schema for the RMM",
 	"type": "module",
 	"main": "dist/index.js",
