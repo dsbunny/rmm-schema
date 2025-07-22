@@ -1,6 +1,7 @@
 # Changelog
 ## v6.2.8
 - Expose `JsonPatchOperation` schema.
+- Correct fall through on `ZodError` discovery.
 
 ## v6.2.7
 - Add `is_maintenance` to track a manual initiated _maintenance mode_.

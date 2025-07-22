@@ -213,7 +213,6 @@ export const DbDtoToDevice = z.object({
         && typeof dto.desired_state_min_backoff_interval === "undefined"
         && typeof dto.desired_state_max_backoff_interval === "undefined"
         && typeof dto.desired_state_agent_ids === "undefined"
-        && typeof dto.desired_state_is_maintenance === "undefined"
         && typeof dto.desired_state_create_timestamp === "undefined"
         && typeof dto.desired_state_modify_timestamp === "undefined") ? null : {
         uri: dto.desired_state_uri ?? null,
@@ -221,7 +220,7 @@ export const DbDtoToDevice = z.object({
         push_interval: dto.desired_state_push_interval ?? null,
         min_backoff_interval: dto.desired_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.desired_state_max_backoff_interval ?? null,
-        agent_ids: dto.desired_state_agent_ids
+        agent_ids: (typeof dto.desired_state_agent_ids === "string")
             ? JSON.parse(dto.desired_state_agent_ids)
             : null,
         is_maintenance: Boolean(dto.desired_state_is_maintenance),
@@ -235,7 +234,6 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_state_min_backoff_interval === "undefined"
         && typeof dto.runtime_state_max_backoff_interval === "undefined"
         && typeof dto.runtime_state_agent_ids === "undefined"
-        && typeof dto.runtime_state_is_maintenance === "undefined"
         && typeof dto.runtime_state_create_timestamp === "undefined"
         && typeof dto.runtime_state_modify_timestamp === "undefined") ? null : {
         uri: dto.runtime_state_uri ?? null,
@@ -259,7 +257,6 @@ export const DbDtoToDevice = z.object({
         && typeof dto.runtime_status_renderer_webgl === "undefined"
         && typeof dto.runtime_status_screen_details === "undefined"
         && typeof dto.runtime_status_cool === "undefined"
-        && typeof dto.runtime_status_has_error === "undefined"
         && typeof dto.runtime_status_error_stack === "undefined"
         && typeof dto.runtime_status_create_timestamp === "undefined"
         && typeof dto.runtime_status_modify_timestamp === "undefined") ? null : {
