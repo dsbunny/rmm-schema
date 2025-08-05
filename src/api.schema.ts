@@ -62,6 +62,18 @@ export const ListDevicesResponse = z.object({
 	  .describe('Device enumeration response schema');
 export type ListDevicesResponse = z.infer<typeof ListDevicesResponse>;
 
+export const GetDeviceSuggestionsRequest = z.object({})
+	.describe('Get device suggestions request schema');
+export type GetDeviceSuggestionsRequest = z.infer<typeof GetDeviceSuggestionsRequest>;
+export const GetDeviceSuggestionsResponse = z.object({
+	c: z.string()
+		.describe('Device name auto-complete for given prefix'),
+	s: z.array(z.string())
+		.describe('Device name suggestions for given input'),
+})
+	.describe('Get device suggestions response schema');
+export type GetDeviceSuggestionsResponse = z.infer<typeof GetDeviceSuggestionsResponse>;
+
 export const GetDeviceRequest = z.object({})
 	  .describe('Device retrieval request schema');
 export type GetDeviceRequest = z.infer<typeof GetDeviceRequest>;

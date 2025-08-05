@@ -1,4 +1,7 @@
 # Changelog
+## v6.3.9
+- Add `GetDeviceSuggestionsRequest`/`GetDeviceSuggestionsResponse` for auto-complete and auto-suggest support.
+
 ## v6.2.8
 - Expose `JsonPatchOperation` schema.
 - Correct fall through on `ZodError` discovery.

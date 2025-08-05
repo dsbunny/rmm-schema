@@ -144,6 +144,13 @@ export declare const ListDevicesResponse: z.ZodObject<{
     next_token: z.ZodNullable<z.ZodString>;
 }, {}, {}>;
 export type ListDevicesResponse = z.infer<typeof ListDevicesResponse>;
+export declare const GetDeviceSuggestionsRequest: z.ZodObject<{}, {}, {}>;
+export type GetDeviceSuggestionsRequest = z.infer<typeof GetDeviceSuggestionsRequest>;
+export declare const GetDeviceSuggestionsResponse: z.ZodObject<{
+    c: z.ZodString;
+    s: z.ZodArray<z.ZodString>;
+}, {}, {}>;
+export type GetDeviceSuggestionsResponse = z.infer<typeof GetDeviceSuggestionsResponse>;
 export declare const GetDeviceRequest: z.ZodObject<{}, {}, {}>;
 export type GetDeviceRequest = z.infer<typeof GetDeviceRequest>;
 export declare const GetDeviceResponse: z.ZodObject<{
