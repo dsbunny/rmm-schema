@@ -1,4 +1,10 @@
 # Changelog
+## v6.5.11
+- Omit `user_tags` and `system_tags` from `CreateDeviceRequest` to enable simplified `tags`.
+
+## v6.4.10
+- Add explicit `user_tags` and `system_tags` fields.
+
 ## v6.3.9
 - Add `GetDeviceSuggestionsRequest`/`GetDeviceSuggestionsResponse` for auto-complete and auto-suggest support.
 

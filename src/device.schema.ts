@@ -5,7 +5,6 @@ import { CoolReport } from './cool.schema.js';
 import { ScreenDetails } from './screen-details.schema.js';
 import { sqliteDateSchema } from './sqlite-date.schema.js';
 import { URI } from './uri.schema.js';
-import { fa } from 'zod/v4/locales';
 
 export const DeviceRegistration = z.object({
 	tenant_id: z.string()
@@ -23,6 +22,10 @@ export const DeviceBase = z.object({
 		.describe('The name of the device'),
 	tags: z.array(z.string())
 		.describe('The tags of the device'),
+	user_tags: z.array(z.string())
+		.describe('The user tags of the device'),
+	system_tags: z.array(z.string())
+		.describe('The system tags of the device'),
 })
 	.describe('Base information of the device, which is used to create a device');
 export type DeviceBase = z.infer<typeof DeviceBase>;
@@ -182,11 +185,15 @@ export const DbDtoFromDevice = Device.transform((device: Device) => {
 export const DbDtoToDeviceBase = z.object({
 	name: z.string(),
 	tags: z.string(),
+	user_tags: z.string(),
+	system_tags: z.string(),
 })
 	.transform((dto): DeviceBase => {
 		return {
 			...dto,
 			tags: JSON.parse(dto.tags),
+			user_tags: JSON.parse(dto.user_tags),
+			system_tags: JSON.parse(dto.system_tags),
 		};
 	});
 export const DbDtoToDevice = z.object({
@@ -194,6 +201,8 @@ export const DbDtoToDevice = z.object({
 	device_id: z.uuid(),
 	name: z.string(),
 	tags: z.string(),
+	user_tags: z.string(),
+	system_tags: z.string(),
 	create_timestamp: sqliteDateSchema,
 	modify_timestamp: sqliteDateSchema,
 	is_deleted: z.number().default(0),
@@ -313,6 +322,8 @@ export const DbDtoToDevice = z.object({
 			// DeviceBase
 			name: dto.name,
 			tags: JSON.parse(dto.tags),
+			user_tags: JSON.parse(dto.user_tags),
+			system_tags: JSON.parse(dto.system_tags),
 			// DeviceMetadata
 			tenant_id: dto.tenant_id,
 			device_id: dto.device_id,

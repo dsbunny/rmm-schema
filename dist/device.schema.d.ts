@@ -8,6 +8,8 @@ export type DeviceRegistration = z.infer<typeof DeviceRegistration>;
 export declare const DeviceBase: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
+    user_tags: z.ZodArray<z.ZodString>;
+    system_tags: z.ZodArray<z.ZodString>;
 }, {}, {}>;
 export type DeviceBase = z.infer<typeof DeviceBase>;
 export declare const DeviceMetadata: z.ZodObject<{
@@ -157,6 +159,8 @@ export type DeviceStatus = z.infer<typeof DeviceStatus>;
 export declare const Device: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
+    user_tags: z.ZodArray<z.ZodString>;
+    system_tags: z.ZodArray<z.ZodString>;
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.iso.ZodISODateTime;
@@ -349,16 +353,24 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
 export declare const DbDtoFromDeviceBase: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
+    user_tags: z.ZodArray<z.ZodString>;
+    system_tags: z.ZodArray<z.ZodString>;
 }, {}, {}>, z.ZodTransform<{
     tags: string;
     name: string;
+    user_tags: string[];
+    system_tags: string[];
 }, {
     name: string;
     tags: string[];
+    user_tags: string[];
+    system_tags: string[];
 }>>;
 export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
+    user_tags: z.ZodArray<z.ZodString>;
+    system_tags: z.ZodArray<z.ZodString>;
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.iso.ZodISODateTime;
@@ -442,6 +454,8 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
 }, {}, {}>, z.ZodTransform<{
     tags: string;
     name: string;
+    user_tags: string[];
+    system_tags: string[];
     tenant_id: string;
     device_id: string;
     create_timestamp: string;
@@ -519,6 +533,8 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
 }, {
     name: string;
     tags: string[];
+    user_tags: string[];
+    system_tags: string[];
     tenant_id: string;
     device_id: string;
     create_timestamp: string;
@@ -597,18 +613,26 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
 export declare const DbDtoToDeviceBase: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodString;
+    user_tags: z.ZodString;
+    system_tags: z.ZodString;
 }, {}, {}>, z.ZodTransform<{
     name: string;
     tags: string[];
+    user_tags: string[];
+    system_tags: string[];
 }, {
     name: string;
     tags: string;
+    user_tags: string;
+    system_tags: string;
 }>>;
 export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     tenant_id: z.ZodUUID;
     device_id: z.ZodUUID;
     name: z.ZodString;
     tags: z.ZodString;
+    user_tags: z.ZodString;
+    system_tags: z.ZodString;
     create_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     modify_timestamp: z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>;
     is_deleted: z.ZodDefault<z.ZodNumber>;
@@ -648,6 +672,8 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
 }, {}, {}>, z.ZodTransform<{
     name: string;
     tags: string[];
+    user_tags: string[];
+    system_tags: string[];
     tenant_id: string;
     device_id: string;
     create_timestamp: string;
@@ -727,6 +753,8 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     device_id: string;
     name: string;
     tags: string;
+    user_tags: string;
+    system_tags: string;
     create_timestamp: string;
     modify_timestamp: string;
     is_deleted: number;

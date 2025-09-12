@@ -79,7 +79,7 @@ export const PatchDeviceStatusRequest = z.array(JsonPatchOperation)
     .describe('Device status patch request schema');
 export const PatchDeviceStatusResponse = DeviceStatus
     .describe('Device status patch response schema');
-export const CreateDeviceRequest = DeviceBase
+export const CreateDeviceRequest = DeviceBase.omit({ user_tags: true, system_tags: true })
     .describe('Create device request schema');
 export const CreateDeviceResponse = DeviceRegistration
     .describe('Create device response schema');

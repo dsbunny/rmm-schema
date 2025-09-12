@@ -19,6 +19,8 @@ export declare const ListDevicesResponse: z.ZodObject<{
     devices: z.ZodArray<z.ZodObject<{
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
+        user_tags: z.ZodArray<z.ZodString>;
+        system_tags: z.ZodArray<z.ZodString>;
         tenant_id: z.ZodString;
         device_id: z.ZodUUID;
         create_timestamp: z.iso.ZodISODateTime;
@@ -157,6 +159,8 @@ export declare const GetDeviceResponse: z.ZodObject<{
     device: z.ZodObject<{
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
+        user_tags: z.ZodArray<z.ZodString>;
+        system_tags: z.ZodArray<z.ZodString>;
         tenant_id: z.ZodString;
         device_id: z.ZodUUID;
         create_timestamp: z.iso.ZodISODateTime;
@@ -311,6 +315,8 @@ export type UpdateDeviceRequest = z.infer<typeof UpdateDeviceRequest>;
 export declare const UpdateDeviceResponse: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
+    user_tags: z.ZodArray<z.ZodString>;
+    system_tags: z.ZodArray<z.ZodString>;
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.iso.ZodISODateTime;
