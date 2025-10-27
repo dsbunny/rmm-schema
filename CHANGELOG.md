@@ -1,4 +1,12 @@
 # Changelog
+## v6.6.12
+- Bump to `zod@4.1.11`.
+- Set limit on number of tags (64).
+- Set limit on number of agents per device (64).
+- Add new _device_ and _agent_ generated field `is_in_desired_state`.
+- Migrate to Zod 4.1 codecs to improve definition of SQLite booleans, dates, and JSON values.
+- Add support for agent auto-complete and auto-suggest.
+
 ## v6.5.11
 - Omit `user_tags` and `system_tags` from `CreateDeviceRequest` to enable simplified `tags`.
 

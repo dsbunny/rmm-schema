@@ -7,7 +7,7 @@ export declare const HistoryEntry: z.ZodObject<{
     }>;
     time: z.ZodString;
     interval: z.ZodNumber;
-}, {}, {}>;
+}, z.core.$strip>;
 export type HistoryEntry = z.infer<typeof HistoryEntry>;
 export declare const EventHistory: z.ZodObject<{
     history_size: z.ZodNumber;
@@ -20,8 +20,8 @@ export declare const EventHistory: z.ZodObject<{
         }>;
         time: z.ZodString;
         interval: z.ZodNumber;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, z.core.$strip>>;
+}, z.core.$strip>;
 export type EventHistory = z.infer<typeof EventHistory>;
 export declare const ObjectOutage: z.ZodObject<{
     status: z.ZodEnum<{
@@ -31,7 +31,7 @@ export declare const ObjectOutage: z.ZodObject<{
     time: z.ZodString;
     aot: z.ZodNumber;
     naf: z.ZodNumber;
-}, {}, {}>;
+}, z.core.$strip>;
 export type ObjectOutage = z.infer<typeof ObjectOutage>;
 export declare const CoolReport: z.ZodObject<{
     eventHistory: z.ZodObject<{
@@ -45,8 +45,8 @@ export declare const CoolReport: z.ZodObject<{
             }>;
             time: z.ZodString;
             interval: z.ZodNumber;
-        }, {}, {}>>;
-    }, {}, {}>;
+        }, z.core.$strip>>;
+    }, z.core.$strip>;
     objectOutage: z.ZodObject<{
         status: z.ZodEnum<{
             UP: "UP";
@@ -55,6 +55,6 @@ export declare const CoolReport: z.ZodObject<{
         time: z.ZodString;
         aot: z.ZodNumber;
         naf: z.ZodNumber;
-    }, {}, {}>;
-}, {}, {}>;
+    }, z.core.$strip>;
+}, z.core.$strip>;
 export type CoolReport = z.infer<typeof CoolReport>;

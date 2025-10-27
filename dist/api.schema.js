@@ -96,6 +96,15 @@ export const ListAgentsResponse = z.object({
     next_token: z.string().nullable(),
 })
     .describe('Agent enumeration response schema');
+export const GetAgentSuggestionsRequest = z.object({})
+    .describe('Get agent suggestions request schema');
+export const GetAgentSuggestionsResponse = z.object({
+    c: z.string()
+        .describe('Agent name auto-complete for given prefix'),
+    s: z.array(z.string())
+        .describe('Agent name suggestions for given input'),
+})
+    .describe('Get agent suggestions response schema');
 export const UpdateAgentRequest = AgentBase
     .describe('Agent update request schema');
 export const UpdateAgentResponse = Agent

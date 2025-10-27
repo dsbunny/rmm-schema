@@ -2,7 +2,7 @@
 
 import { z } from 'zod/v4';
 
-export const JsonPatchOperation = z.discriminatedUnion([
+export const JsonPatchOperation = z.discriminatedUnion("op", [
 	z.object({ path: z.string(), op: z.literal('add'), value: z.any() }),
 	z.object({ path: z.string(), op: z.literal('remove') }),
 	z.object({ path: z.string(), op: z.literal('replace'), value: z.any() }),

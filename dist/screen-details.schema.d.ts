@@ -2,7 +2,7 @@ import { z } from 'zod/v4';
 export declare const ScreenOrientation: z.ZodObject<{
     angle: z.ZodNumber;
     type: z.ZodString;
-}, {}, {}>;
+}, z.core.$strip>;
 export type ScreenOrientation = z.infer<typeof ScreenOrientation>;
 export declare const ScreenDetailed: z.ZodObject<{
     label: z.ZodString;
@@ -14,8 +14,8 @@ export declare const ScreenDetailed: z.ZodObject<{
     orientation: z.ZodObject<{
         angle: z.ZodNumber;
         type: z.ZodString;
-    }, {}, {}>;
-}, {}, {}>;
+    }, z.core.$strip>;
+}, z.core.$strip>;
 export type ScreenDetailed = z.infer<typeof ScreenDetailed>;
 export declare const ScreenDetails: z.ZodObject<{
     screens: z.ZodArray<z.ZodObject<{
@@ -28,7 +28,7 @@ export declare const ScreenDetails: z.ZodObject<{
         orientation: z.ZodObject<{
             angle: z.ZodNumber;
             type: z.ZodString;
-        }, {}, {}>;
-    }, {}, {}>>;
-}, {}, {}>;
+        }, z.core.$strip>;
+    }, z.core.$strip>>;
+}, z.core.$strip>;
 export type ScreenDetails = z.infer<typeof ScreenDetails>;

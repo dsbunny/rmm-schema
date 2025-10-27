@@ -160,6 +160,18 @@ export const ListAgentsResponse = z.object({
 	.describe('Agent enumeration response schema');
 export type ListAgentsResponse = z.infer<typeof ListAgentsResponse>;
 
+export const GetAgentSuggestionsRequest = z.object({})
+	.describe('Get agent suggestions request schema');
+export type GetAgentSuggestionsRequest = z.infer<typeof GetAgentSuggestionsRequest>;
+export const GetAgentSuggestionsResponse = z.object({
+	c: z.string()
+		.describe('Agent name auto-complete for given prefix'),
+	s: z.array(z.string())
+		.describe('Agent name suggestions for given input'),
+})
+	.describe('Get agent suggestions response schema');
+export type GetAgentSuggestionsResponse = z.infer<typeof GetAgentSuggestionsResponse>;
+
 export const UpdateAgentRequest = AgentBase
 	.describe('Agent update request schema');
 export type UpdateAgentRequest = z.infer<typeof UpdateAgentRequest>;

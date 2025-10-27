@@ -1,6 +1,9 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import { z } from 'zod/v4';
 import { URI } from './uri.schema.js';
+import { jsonCodec, jsonSchema, nullableJsonSchema } from './json.codec.js';
+import { sqliteBoolSchema } from './sqlite-bool.codec.js';
+import { sqliteDateSchema } from './sqlite-date.codec.js';
 export const AgentRegistration = z.object({
     tenant_id: z.string()
         .describe('The tenant ID of the agent'),
@@ -15,7 +18,7 @@ export const AgentRegistration = z.object({
 export const AgentBase = z.object({
     name: z.string()
         .describe('The name of the agent'),
-    tags: z.array(z.string())
+    tags: z.array(z.string()).max(64)
         .describe('The tags of the agent'),
 })
     .describe('Base information of the agent');
@@ -32,6 +35,8 @@ export const AgentMetadata = z.object({
         .describe('The ISO datetime of the agent modification'),
     is_deleted: z.boolean().default(false)
         .describe('The flag of the agent deletion'),
+    is_in_desired_state: z.boolean().default(false)
+        .describe('The flag indicating if the agent is in the desired state'),
 })
     .describe('The metadata of the agent');
 export const AgentStateMetadata = z.object({
@@ -55,7 +60,7 @@ export const AgentStateBase = z.object({
         .describe('The minimum backoff interval of the agent'),
     max_backoff_interval: z.number().nullable()
         .describe('The maximum backoff interval of the agent'),
-    detail: z.any().nullable()
+    detail: jsonCodec(z.json())
         .describe('The detail of the agent state'),
 })
     .describe('The state of the agent');
@@ -63,7 +68,7 @@ export const AgentState = AgentStateBase.extend(AgentStateMetadata.shape);
 export const AgentStatusBase = z.object({
     uri: URI.nullable()
         .describe('The URI of the agent'),
-    detail: z.any().nullable()
+    detail: jsonCodec(z.json())
         .describe('The detail of the agent status'),
     has_error: z.boolean().default(false)
         .describe('The flag of the device error'),
@@ -84,46 +89,28 @@ export const Agent = AgentBaseWithMetadata.extend({
     runtime_status: AgentRuntimeStatus.nullable()
         .describe('The runtime status of the agent'),
 });
-// SQL date string to ISO 8601,
-// e.g. "2023-10-15 15:09:50" to "2023-10-15T15:09:50.000Z"
-const sqliteDateSchema = z.string().transform((date) => {
-    return `${date.replace(' ', 'T')}.000Z`;
-});
 export const DbDtoToAgentState = z.object({
     uri: URI.nullable(),
     pull_interval: z.number().nullable(),
     push_interval: z.number().nullable(),
     min_backoff_interval: z.number().nullable(),
     max_backoff_interval: z.number().nullable(),
-    detail: z.string().nullable(),
+    detail: nullableJsonSchema(z.json()),
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
-    is_deleted: z.number().default(0),
+    is_deleted: sqliteBoolSchema,
 })
-    .transform((dto) => {
-    return {
-        ...dto,
-        detail: dto.detail ? JSON.parse(dto.detail) : null,
-        is_deleted: Boolean(dto.is_deleted),
-    };
-});
+    .transform((dto) => (dto));
 export const DbDtoToAgentStatus = z.object({
     uri: URI.nullable(),
     detail: z.string().nullable(),
-    has_error: z.number().default(0),
+    has_error: sqliteBoolSchema,
     error_stack: z.string().nullable(),
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
-    is_deleted: z.number().default(0),
+    is_deleted: sqliteBoolSchema,
 })
-    .transform((dto) => {
-    return {
-        ...dto,
-        detail: dto.detail ? JSON.parse(dto.detail) : null,
-        has_error: Boolean(dto.has_error),
-        is_deleted: Boolean(dto.is_deleted),
-    };
-});
+    .transform((dto) => (dto));
 export const DbDtoFromAgentBase = AgentBase.transform((agent) => {
     return {
         ...agent,
@@ -138,121 +125,88 @@ export const DbDtoFromAgent = Agent.transform((agent) => {
 });
 export const DbDtoToAgentBase = z.object({
     name: z.string(),
-    tags: z.string(),
+    tags: jsonSchema(z.array(z.string().max(64))),
 })
-    .transform((dto) => {
-    return {
-        ...dto,
-        tags: JSON.parse(dto.tags),
-    };
-});
+    .transform((dto) => (dto));
 export const DbDtoToAgent = z.object({
     tenant_id: z.uuid(),
     device_id: z.uuid(),
     agent_id: z.uuid(),
     name: z.string(),
-    tags: z.string(),
+    tags: jsonSchema(z.array(z.string().max(64))),
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
-    is_deleted: z.number().default(0),
+    is_deleted: sqliteBoolSchema,
+    is_in_desired_state: sqliteBoolSchema,
     desired_state_uri: URI.nullable().optional(),
     desired_state_pull_interval: z.number().nullable().optional(),
     desired_state_push_interval: z.number().nullable().optional(),
     desired_state_min_backoff_interval: z.number().nullable().optional(),
     desired_state_max_backoff_interval: z.number().nullable().optional(),
-    desired_state_detail: z.string().nullable().optional(),
+    desired_state_detail: nullableJsonSchema(z.json()).optional(),
     desired_state_create_timestamp: sqliteDateSchema.optional(),
     desired_state_modify_timestamp: sqliteDateSchema.optional(),
-    desired_state_is_deleted: z.number().default(0),
+    desired_state_is_deleted: sqliteBoolSchema.optional(),
     runtime_state_uri: URI.nullable().optional(),
     runtime_state_pull_interval: z.number().nullable().optional(),
     runtime_state_push_interval: z.number().nullable().optional(),
     runtime_state_min_backoff_interval: z.number().nullable().optional(),
     runtime_state_max_backoff_interval: z.number().nullable().optional(),
-    runtime_state_detail: z.string().nullable().optional(),
+    runtime_state_detail: nullableJsonSchema(z.json()).optional(),
     runtime_state_create_timestamp: sqliteDateSchema.optional(),
     runtime_state_modify_timestamp: sqliteDateSchema.optional(),
-    runtime_state_is_deleted: z.number().default(0),
+    runtime_state_is_deleted: sqliteBoolSchema.optional(),
     runtime_status_uri: URI.nullable().optional(),
-    runtime_status_detail: z.string().nullable().optional(),
-    runtime_status_has_error: z.number().default(0).optional(),
+    runtime_status_detail: nullableJsonSchema(z.json()).optional(),
+    runtime_status_has_error: sqliteBoolSchema.optional(),
     runtime_status_error_stack: z.string().nullable().optional(),
     runtime_status_create_timestamp: sqliteDateSchema.optional(),
     runtime_status_modify_timestamp: sqliteDateSchema.optional(),
-    runtime_status_is_deleted: z.number().default(0),
+    runtime_status_is_deleted: sqliteBoolSchema.optional(),
 })
-    .transform((dto) => {
-    const desired_state = (typeof dto.desired_state_uri === "undefined"
-        && typeof dto.desired_state_pull_interval === "undefined"
-        && typeof dto.desired_state_push_interval === "undefined"
-        && typeof dto.desired_state_min_backoff_interval === "undefined"
-        && typeof dto.desired_state_max_backoff_interval === "undefined"
-        && typeof dto.desired_state_detail === "undefined"
-        && typeof dto.desired_state_create_timestamp === "undefined"
-        && typeof dto.desired_state_modify_timestamp === "undefined") ? null : {
+    .transform((dto) => ({
+    // AgentBase
+    name: dto.name,
+    tags: dto.tags,
+    // AgentMetadata
+    tenant_id: dto.tenant_id,
+    device_id: dto.device_id,
+    agent_id: dto.agent_id,
+    create_timestamp: dto.create_timestamp,
+    modify_timestamp: dto.modify_timestamp,
+    is_deleted: dto.is_deleted,
+    is_in_desired_state: dto.is_in_desired_state,
+    // Agent
+    desired_state: (typeof dto.desired_state_create_timestamp === 'undefined') ? null : {
         uri: dto.desired_state_uri ?? null,
         pull_interval: dto.desired_state_pull_interval ?? null,
         push_interval: dto.desired_state_push_interval ?? null,
         min_backoff_interval: dto.desired_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.desired_state_max_backoff_interval ?? null,
-        detail: dto.desired_state_detail
-            ? JSON.parse(dto.desired_state_detail)
-            : null,
-        create_timestamp: z.string().parse(dto.desired_state_create_timestamp),
-        modify_timestamp: z.string().parse(dto.desired_state_modify_timestamp),
-        is_deleted: Boolean(dto.desired_state_is_deleted),
-    };
-    const runtime_state = (typeof dto.runtime_state_uri === "undefined"
-        && typeof dto.runtime_state_pull_interval === "undefined"
-        && typeof dto.runtime_state_push_interval === "undefined"
-        && typeof dto.runtime_state_min_backoff_interval === "undefined"
-        && typeof dto.runtime_state_max_backoff_interval === "undefined"
-        && typeof dto.runtime_state_detail === "undefined"
-        && typeof dto.runtime_state_create_timestamp === "undefined"
-        && typeof dto.runtime_state_modify_timestamp === "undefined") ? null : {
+        detail: dto.desired_state_detail,
+        create_timestamp: dto.desired_state_create_timestamp,
+        modify_timestamp: dto.desired_state_modify_timestamp,
+        is_deleted: dto.desired_state_is_deleted,
+    },
+    runtime_state: (typeof dto.runtime_state_create_timestamp === 'undefined') ? null : {
         uri: dto.runtime_state_uri ?? null,
         pull_interval: dto.runtime_state_pull_interval ?? null,
         push_interval: dto.runtime_state_push_interval ?? null,
         min_backoff_interval: dto.runtime_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.runtime_state_max_backoff_interval ?? null,
-        detail: dto.runtime_state_detail
-            ? JSON.parse(dto.runtime_state_detail)
-            : null,
-        create_timestamp: z.string().parse(dto.runtime_state_create_timestamp),
-        modify_timestamp: z.string().parse(dto.runtime_state_modify_timestamp),
-        is_deleted: Boolean(dto.runtime_state_is_deleted),
-    };
-    const runtime_status = (typeof dto.runtime_status_uri === "undefined"
-        && typeof dto.runtime_status_detail === "undefined"
-        && typeof dto.runtime_status_has_error === "undefined"
-        && typeof dto.runtime_status_error_stack === "undefined"
-        && typeof dto.runtime_status_create_timestamp === "undefined"
-        && typeof dto.runtime_status_modify_timestamp === "undefined") ? null : {
+        detail: dto.runtime_state_detail,
+        create_timestamp: dto.runtime_state_create_timestamp,
+        modify_timestamp: dto.runtime_state_modify_timestamp,
+        is_deleted: dto.runtime_state_is_deleted,
+    },
+    runtime_status: (typeof dto.runtime_status_create_timestamp === 'undefined') ? null : {
         uri: dto.runtime_status_uri ?? null,
-        detail: dto.runtime_status_detail
-            ? JSON.parse(dto.runtime_status_detail)
-            : null,
-        has_error: Boolean(dto.runtime_status_has_error),
+        detail: dto.runtime_status_detail,
+        has_error: dto.runtime_status_has_error,
         error_stack: dto.runtime_status_error_stack ?? null,
-        create_timestamp: z.string().parse(dto.runtime_status_create_timestamp),
-        modify_timestamp: z.string().parse(dto.runtime_status_modify_timestamp),
-        is_deleted: Boolean(dto.runtime_status_is_deleted),
-    };
-    return {
-        // AgentBase
-        name: dto.name,
-        tags: JSON.parse(dto.tags),
-        // AgentMetadata
-        tenant_id: dto.tenant_id,
-        device_id: dto.device_id,
-        agent_id: dto.agent_id,
-        create_timestamp: dto.create_timestamp,
-        modify_timestamp: dto.modify_timestamp,
-        is_deleted: Boolean(dto.is_deleted),
-        // Agent
-        desired_state,
-        runtime_state,
-        runtime_status,
-    };
-});
+        create_timestamp: dto.runtime_status_create_timestamp,
+        modify_timestamp: dto.runtime_status_modify_timestamp,
+        is_deleted: dto.runtime_status_is_deleted,
+    },
+}));
 //# sourceMappingURL=agent.schema.js.map

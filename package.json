@@ -1,6 +1,6 @@
 {
 	"name": "@dsbunny/rmm-schema",
-	"version": "6.5.11",
+	"version": "6.6.12",
 	"description": "Schema for the RMM",
 	"type": "module",
 	"main": "dist/index.js",
@@ -13,7 +13,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
-		"zod": "3.25.0-beta.20250515T215617"
+		"zod": "4.1.11"
 	},
 	"devDependencies": {
 		"typescript": "^5.5.3"

@@ -2,8 +2,10 @@
 import { z } from 'zod/v4';
 import { CoolReport } from './cool.schema.js';
 import { ScreenDetails } from './screen-details.schema.js';
-import { sqliteDateSchema } from './sqlite-date.schema.js';
 import { URI } from './uri.schema.js';
+import { jsonSchema, nullableJsonSchema } from './json.codec.js';
+import { sqliteBoolSchema } from './sqlite-bool.codec.js';
+import { sqliteDateSchema } from './sqlite-date.codec.js';
 export const DeviceRegistration = z.object({
     tenant_id: z.string()
         .describe('The tenant ID of the device'),
@@ -16,11 +18,11 @@ export const DeviceRegistration = z.object({
 export const DeviceBase = z.object({
     name: z.string()
         .describe('The name of the device'),
-    tags: z.array(z.string())
+    tags: z.array(z.string()).max(64)
         .describe('The tags of the device'),
-    user_tags: z.array(z.string())
+    user_tags: z.array(z.string()).max(64)
         .describe('The user tags of the device'),
-    system_tags: z.array(z.string())
+    system_tags: z.array(z.string()).max(64)
         .describe('The system tags of the device'),
 })
     .describe('Base information of the device, which is used to create a device');
@@ -35,6 +37,8 @@ export const DeviceMetadata = z.object({
         .describe('The ISO datetime of the device modification'),
     is_deleted: z.boolean().default(false)
         .describe('The flag of the device deletion'),
+    is_in_desired_state: z.boolean().default(false)
+        .describe('The flag indicating if the device is in the desired state'),
 })
     .describe('The metadata of the device');
 export const DeviceStateMetadata = z.object({
@@ -58,7 +62,7 @@ export const DeviceStateBase = z.object({
         .describe('The minimum backoff interval of the device'),
     max_backoff_interval: z.number().nullable()
         .describe('The maximum backoff interval of the device'),
-    agent_ids: z.array(z.string()).nullable()
+    agent_ids: z.array(z.string()).max(64).nullable()
         .describe('The agent IDs of the device'),
     is_maintenance: z.boolean().default(false)
         .describe('The flag of the device maintenance'),
@@ -108,20 +112,13 @@ export const DbDtoToDeviceState = z.object({
     push_interval: z.number().nullable(),
     min_backoff_interval: z.number().nullable(),
     max_backoff_interval: z.number().nullable(),
-    agent_ids: z.string().nullable(),
-    is_maintenance: z.number().default(0),
+    agent_ids: nullableJsonSchema(z.array(z.string()).max(64)),
+    is_maintenance: sqliteBoolSchema,
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
-    is_deleted: z.number().default(0),
+    is_deleted: sqliteBoolSchema,
 })
-    .transform((dto) => {
-    return {
-        ...dto,
-        agent_ids: dto.agent_ids ? JSON.parse(dto.agent_ids) : null,
-        is_maintenance: Boolean(dto.is_maintenance),
-        is_deleted: Boolean(dto.is_deleted),
-    };
-});
+    .transform((dto) => (dto));
 export const DbDtoToDeviceStatus = z.object({
     uri: URI.nullable(),
     user_agent: z.string().nullable(),
@@ -129,181 +126,131 @@ export const DbDtoToDeviceStatus = z.object({
     hardware_concurrency: z.number().nullable(),
     vendor_webgl: z.string().nullable(),
     renderer_webgl: z.string().nullable(),
-    screen_details: z.string().nullable(),
-    cool: z.string().nullable(),
-    has_error: z.number().default(0),
+    screen_details: nullableJsonSchema(ScreenDetails),
+    cool: nullableJsonSchema(CoolReport),
+    has_error: sqliteBoolSchema,
     error_stack: z.string().nullable(),
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
-    is_deleted: z.number().default(0),
+    is_deleted: sqliteBoolSchema,
 })
-    .transform((dto) => {
-    return {
-        ...dto,
-        screen_details: dto.screen_details ? JSON.parse(dto.screen_details) : null,
-        cool: dto.cool ? JSON.parse(dto.cool) : null,
-        has_error: Boolean(dto.has_error),
-        is_deleted: Boolean(dto.is_deleted),
-    };
-});
+    .transform((dto) => (dto));
 export const DbDtoFromDeviceBase = DeviceBase.transform((device) => {
     return {
         ...device,
-        tags: JSON.stringify(device.tags),
+        tags: jsonSchema(z.array(z.string().max(64))),
     };
 });
 export const DbDtoFromDevice = Device.transform((device) => {
     return {
         ...device,
-        tags: JSON.stringify(device.tags),
+        tags: jsonSchema(z.array(z.string().max(64))),
     };
 });
 export const DbDtoToDeviceBase = z.object({
     name: z.string(),
-    tags: z.string(),
-    user_tags: z.string(),
-    system_tags: z.string(),
+    tags: jsonSchema(z.array(z.string().max(64))),
+    user_tags: jsonSchema(z.array(z.string().max(64))),
+    system_tags: jsonSchema(z.array(z.string().max(64))),
 })
-    .transform((dto) => {
-    return {
-        ...dto,
-        tags: JSON.parse(dto.tags),
-        user_tags: JSON.parse(dto.user_tags),
-        system_tags: JSON.parse(dto.system_tags),
-    };
-});
+    .transform((dto) => (dto));
 export const DbDtoToDevice = z.object({
     tenant_id: z.uuid(),
     device_id: z.uuid(),
     name: z.string(),
-    tags: z.string(),
-    user_tags: z.string(),
-    system_tags: z.string(),
+    tags: jsonSchema(z.array(z.string().max(64))),
+    user_tags: jsonSchema(z.array(z.string().max(64))),
+    system_tags: jsonSchema(z.array(z.string().max(64))),
     create_timestamp: sqliteDateSchema,
     modify_timestamp: sqliteDateSchema,
-    is_deleted: z.number().default(0),
+    is_deleted: sqliteBoolSchema,
+    is_in_desired_state: sqliteBoolSchema,
     desired_state_uri: URI.nullable().optional(),
     desired_state_pull_interval: z.number().nullable().optional(),
     desired_state_push_interval: z.number().nullable().optional(),
     desired_state_min_backoff_interval: z.number().nullable().optional(),
     desired_state_max_backoff_interval: z.number().nullable().optional(),
-    desired_state_agent_ids: z.string().nullable().optional(),
-    desired_state_is_maintenance: z.number().default(0),
+    desired_state_agent_ids: nullableJsonSchema(z.array(z.string()).max(64)),
+    desired_state_is_maintenance: sqliteBoolSchema.optional(),
     desired_state_create_timestamp: sqliteDateSchema.optional(),
     desired_state_modify_timestamp: sqliteDateSchema.optional(),
-    desired_state_is_deleted: z.number().default(0),
+    desired_state_is_deleted: sqliteBoolSchema.optional(),
     runtime_state_uri: URI.nullable().optional(),
     runtime_state_pull_interval: z.number().nullable().optional(),
     runtime_state_push_interval: z.number().nullable().optional(),
     runtime_state_min_backoff_interval: z.number().nullable().optional(),
     runtime_state_max_backoff_interval: z.number().nullable().optional(),
-    runtime_state_agent_ids: z.string().nullable().optional(),
-    runtime_state_is_maintenance: z.number().default(0),
+    runtime_state_agent_ids: nullableJsonSchema(z.array(z.string()).max(64)),
+    runtime_state_is_maintenance: sqliteBoolSchema.optional(),
     runtime_state_create_timestamp: sqliteDateSchema.optional(),
     runtime_state_modify_timestamp: sqliteDateSchema.optional(),
-    runtime_state_is_deleted: z.number().default(0),
+    runtime_state_is_deleted: sqliteBoolSchema.optional(),
     runtime_status_uri: URI.nullable().optional(),
     runtime_status_user_agent: z.string().nullable().optional(),
     runtime_status_device_memory: z.number().nullable().optional(),
     runtime_status_hardware_concurrency: z.number().nullable().optional(),
     runtime_status_vendor_webgl: z.string().nullable().optional(),
     runtime_status_renderer_webgl: z.string().nullable().optional(),
-    runtime_status_screen_details: z.string().nullable().optional(),
-    runtime_status_cool: z.string().nullable().optional(),
-    runtime_status_has_error: z.number().default(0).optional(),
+    runtime_status_screen_details: nullableJsonSchema(ScreenDetails).optional(),
+    runtime_status_cool: nullableJsonSchema(CoolReport).optional(),
+    runtime_status_has_error: sqliteBoolSchema.optional(),
     runtime_status_error_stack: z.string().nullable().optional(),
     runtime_status_create_timestamp: sqliteDateSchema.optional(),
     runtime_status_modify_timestamp: sqliteDateSchema.optional(),
-    runtime_status_is_deleted: z.number().default(0),
+    runtime_status_is_deleted: sqliteBoolSchema.optional(),
 })
-    .transform((dto) => {
-    const desired_state = (typeof dto.desired_state_uri === "undefined"
-        && typeof dto.desired_state_pull_interval === "undefined"
-        && typeof dto.desired_state_push_interval === "undefined"
-        && typeof dto.desired_state_min_backoff_interval === "undefined"
-        && typeof dto.desired_state_max_backoff_interval === "undefined"
-        && typeof dto.desired_state_agent_ids === "undefined"
-        && typeof dto.desired_state_create_timestamp === "undefined"
-        && typeof dto.desired_state_modify_timestamp === "undefined") ? null : {
+    .transform((dto) => ({
+    // DeviceBase
+    name: dto.name,
+    tags: dto.tags,
+    user_tags: dto.user_tags,
+    system_tags: dto.system_tags,
+    // DeviceMetadata
+    tenant_id: dto.tenant_id,
+    device_id: dto.device_id,
+    create_timestamp: dto.create_timestamp,
+    modify_timestamp: dto.modify_timestamp,
+    is_deleted: dto.is_deleted,
+    is_in_desired_state: dto.is_in_desired_state,
+    // Device
+    desired_state: (typeof dto.desired_state_create_timestamp === 'undefined') ? null : {
         uri: dto.desired_state_uri ?? null,
         pull_interval: dto.desired_state_pull_interval ?? null,
         push_interval: dto.desired_state_push_interval ?? null,
         min_backoff_interval: dto.desired_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.desired_state_max_backoff_interval ?? null,
-        agent_ids: (typeof dto.desired_state_agent_ids === "string")
-            ? JSON.parse(dto.desired_state_agent_ids)
-            : null,
-        is_maintenance: Boolean(dto.desired_state_is_maintenance),
-        create_timestamp: z.string().parse(dto.desired_state_create_timestamp),
-        modify_timestamp: z.string().parse(dto.desired_state_modify_timestamp),
-        is_deleted: Boolean(dto.desired_state_is_deleted),
-    };
-    const runtime_state = (typeof dto.runtime_state_uri === "undefined"
-        && typeof dto.runtime_state_pull_interval === "undefined"
-        && typeof dto.runtime_state_push_interval === "undefined"
-        && typeof dto.runtime_state_min_backoff_interval === "undefined"
-        && typeof dto.runtime_state_max_backoff_interval === "undefined"
-        && typeof dto.runtime_state_agent_ids === "undefined"
-        && typeof dto.runtime_state_create_timestamp === "undefined"
-        && typeof dto.runtime_state_modify_timestamp === "undefined") ? null : {
+        agent_ids: dto.desired_state_agent_ids,
+        is_maintenance: dto.desired_state_is_maintenance,
+        create_timestamp: dto.desired_state_create_timestamp,
+        modify_timestamp: dto.desired_state_modify_timestamp,
+        is_deleted: dto.desired_state_is_deleted,
+    },
+    runtime_state: (typeof dto.runtime_state_create_timestamp === 'undefined') ? null : {
         uri: dto.runtime_state_uri ?? null,
         pull_interval: dto.runtime_state_pull_interval ?? null,
         push_interval: dto.runtime_state_push_interval ?? null,
         min_backoff_interval: dto.runtime_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.runtime_state_max_backoff_interval ?? null,
-        agent_ids: dto.runtime_state_agent_ids
-            ? JSON.parse(dto.runtime_state_agent_ids)
-            : null,
-        is_maintenance: Boolean(dto.runtime_state_is_maintenance),
-        create_timestamp: z.string().parse(dto.runtime_state_create_timestamp),
-        modify_timestamp: z.string().parse(dto.runtime_state_modify_timestamp),
-        is_deleted: Boolean(dto.runtime_status_is_deleted),
-    };
-    const runtime_status = (typeof dto.runtime_status_uri === "undefined"
-        && typeof dto.runtime_status_user_agent === "undefined"
-        && typeof dto.runtime_status_device_memory === "undefined"
-        && typeof dto.runtime_status_hardware_concurrency === "undefined"
-        && typeof dto.runtime_status_vendor_webgl === "undefined"
-        && typeof dto.runtime_status_renderer_webgl === "undefined"
-        && typeof dto.runtime_status_screen_details === "undefined"
-        && typeof dto.runtime_status_cool === "undefined"
-        && typeof dto.runtime_status_error_stack === "undefined"
-        && typeof dto.runtime_status_create_timestamp === "undefined"
-        && typeof dto.runtime_status_modify_timestamp === "undefined") ? null : {
+        agent_ids: dto.runtime_state_agent_ids,
+        is_maintenance: dto.runtime_state_is_maintenance,
+        create_timestamp: dto.runtime_state_create_timestamp,
+        modify_timestamp: dto.runtime_state_modify_timestamp,
+        is_deleted: dto.runtime_state_is_deleted,
+    },
+    runtime_status: (typeof dto.runtime_status_create_timestamp === 'undefined') ? null : {
         uri: dto.runtime_status_uri ?? null,
         user_agent: dto.runtime_status_user_agent ?? null,
         device_memory: dto.runtime_status_device_memory ?? null,
         hardware_concurrency: dto.runtime_status_hardware_concurrency ?? null,
         vendor_webgl: dto.runtime_status_vendor_webgl ?? null,
         renderer_webgl: dto.runtime_status_renderer_webgl ?? null,
-        screen_details: dto.runtime_status_screen_details
-            ? JSON.parse(dto.runtime_status_screen_details)
-            : null,
-        cool: dto.runtime_status_cool
-            ? JSON.parse(dto.runtime_status_cool)
-            : null,
-        has_error: Boolean(dto.runtime_status_has_error),
+        screen_details: dto.runtime_status_screen_details,
+        cool: dto.runtime_status_cool,
+        has_error: dto.runtime_status_has_error,
         error_stack: dto.runtime_status_error_stack ?? null,
-        create_timestamp: z.string().parse(dto.runtime_status_create_timestamp),
-        modify_timestamp: z.string().parse(dto.runtime_status_modify_timestamp),
-        is_deleted: Boolean(dto.runtime_status_is_deleted),
-    };
-    return {
-        // DeviceBase
-        name: dto.name,
-        tags: JSON.parse(dto.tags),
-        user_tags: JSON.parse(dto.user_tags),
-        system_tags: JSON.parse(dto.system_tags),
-        // DeviceMetadata
-        tenant_id: dto.tenant_id,
-        device_id: dto.device_id,
-        create_timestamp: dto.create_timestamp,
-        modify_timestamp: dto.modify_timestamp,
-        is_deleted: Boolean(dto.is_deleted),
-        // Device
-        desired_state,
-        runtime_state,
-        runtime_status,
-    };
-});
+        create_timestamp: dto.runtime_status_create_timestamp,
+        modify_timestamp: dto.runtime_status_modify_timestamp,
+        is_deleted: dto.runtime_status_is_deleted,
+    },
+}));
 //# sourceMappingURL=device.schema.js.map
