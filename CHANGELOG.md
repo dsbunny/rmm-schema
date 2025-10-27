@@ -6,6 +6,7 @@
 - Add new _device_ and _agent_ generated field `is_in_desired_state`.
 - Migrate to Zod 4.1 codecs to improve definition of SQLite booleans, dates, and JSON values.
 - Add support for agent auto-complete and auto-suggest.
+- Move Zod to `peerDependencies` so users can bring their own Zod.
 
 ## v6.5.11
 - Omit `user_tags` and `system_tags` from `CreateDeviceRequest` to enable simplified `tags`.

@@ -1,5 +1,5 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
-import { z } from 'zod/v4';
+import * as z from "zod";
 import { JsonPatchOperation } from './patch-operation.schema.js';
 import { Device, DeviceBase, DeviceRegistration, DeviceState, DeviceStateBase, DeviceStatus, DeviceStatusBase, } from './device.schema.js';
 import { Agent, AgentBase, AgentRegistration, AgentState, AgentStateBase, AgentStatus, AgentStatusBase, } from './agent.schema.js';

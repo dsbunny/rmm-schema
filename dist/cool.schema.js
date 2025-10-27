@@ -1,6 +1,6 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 // REF: https://www.circitor.fr/Mibs/Mib/C/CISCO-OUTAGE-MONITOR-MIB.mib
-import { z } from 'zod/v4';
+import * as z from "zod";
 export const HistoryEntry = z.object({
     index: z.number()
         .describe('An arbitrary non-zero integer value that uniquely identifies an entry in the history array'),

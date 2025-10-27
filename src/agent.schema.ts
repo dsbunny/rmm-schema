@@ -1,6 +1,6 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 
-import { z } from 'zod/v4';
+import * as z from "zod";
 import { URI } from './uri.schema.js';
 import { jsonCodec, jsonSchema, nullableJsonSchema } from './json.codec.js';
 import { sqliteBoolSchema } from './sqlite-bool.codec.js';

@@ -1,6 +1,6 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 
-import { z } from 'zod/v4';
+import * as z from "zod";
 import { CoolReport } from './cool.schema.js';
 import { ScreenDetails } from './screen-details.schema.js';
 import { URI } from './uri.schema.js';
