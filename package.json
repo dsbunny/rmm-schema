@@ -13,8 +13,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"typescript": "^5.5.3",
-		"zod": "^4.1.11"
+		"typescript": "^5.9.3",
+		"zod": "^4.1.12"
 	},
 	"peerDependencies": {
 		"zod": "^4.1.0"
