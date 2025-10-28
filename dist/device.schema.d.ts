@@ -707,7 +707,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     desired_state_push_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     desired_state_min_backoff_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     desired_state_max_backoff_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
-    desired_state_agent_ids: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodTransform<string[] | null, string | null>>;
+    desired_state_agent_ids: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodTransform<string[] | null, string | null>>>;
     desired_state_is_maintenance: z.ZodOptional<z.ZodPipe<z.ZodNumber, z.ZodTransform<boolean, number>>>;
     desired_state_create_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     desired_state_modify_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
@@ -717,7 +717,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     runtime_state_push_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     runtime_state_min_backoff_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     runtime_state_max_backoff_interval: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
-    runtime_state_agent_ids: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodTransform<string[] | null, string | null>>;
+    runtime_state_agent_ids: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodTransform<string[] | null, string | null>>>;
     runtime_state_is_maintenance: z.ZodOptional<z.ZodPipe<z.ZodNumber, z.ZodTransform<boolean, number>>>;
     runtime_state_create_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
     runtime_state_modify_timestamp: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodTransform<string, string>>>;
@@ -856,13 +856,12 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
     is_in_desired_state: boolean;
-    desired_state_agent_ids: string[] | null;
-    runtime_state_agent_ids: string[] | null;
     desired_state_uri?: string | null | undefined;
     desired_state_pull_interval?: number | null | undefined;
     desired_state_push_interval?: number | null | undefined;
     desired_state_min_backoff_interval?: number | null | undefined;
     desired_state_max_backoff_interval?: number | null | undefined;
+    desired_state_agent_ids?: string[] | null | undefined;
     desired_state_is_maintenance?: boolean | undefined;
     desired_state_create_timestamp?: string | undefined;
     desired_state_modify_timestamp?: string | undefined;
@@ -872,6 +871,7 @@ export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
     runtime_state_push_interval?: number | null | undefined;
     runtime_state_min_backoff_interval?: number | null | undefined;
     runtime_state_max_backoff_interval?: number | null | undefined;
+    runtime_state_agent_ids?: string[] | null | undefined;
     runtime_state_is_maintenance?: boolean | undefined;
     runtime_state_create_timestamp?: string | undefined;
     runtime_state_modify_timestamp?: string | undefined;

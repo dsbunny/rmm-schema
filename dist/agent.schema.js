@@ -1,7 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import * as z from "zod";
 import { URI } from './uri.schema.js';
-import { jsonCodec, jsonSchema, nullableJsonSchema } from './json.codec.js';
+import { nullableJsonCodec, jsonSchema, nullableJsonSchema } from './json.codec.js';
 import { sqliteBoolSchema } from './sqlite-bool.codec.js';
 import { sqliteDateSchema } from './sqlite-date.codec.js';
 export const AgentRegistration = z.object({
@@ -60,7 +60,7 @@ export const AgentStateBase = z.object({
         .describe('The minimum backoff interval of the agent'),
     max_backoff_interval: z.number().nullable()
         .describe('The maximum backoff interval of the agent'),
-    detail: jsonCodec(z.json())
+    detail: nullableJsonCodec(z.json())
         .describe('The detail of the agent state'),
 })
     .describe('The state of the agent');
@@ -68,7 +68,7 @@ export const AgentState = AgentStateBase.extend(AgentStateMetadata.shape);
 export const AgentStatusBase = z.object({
     uri: URI.nullable()
         .describe('The URI of the agent'),
-    detail: jsonCodec(z.json())
+    detail: nullableJsonCodec(z.json())
         .describe('The detail of the agent status'),
     has_error: z.boolean().default(false)
         .describe('The flag of the device error'),
