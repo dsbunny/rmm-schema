@@ -1,7 +1,7 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import * as z from "zod";
 import { URI } from './uri.schema.js';
-import { nullableJsonCodec, jsonSchema, nullableJsonSchema } from './json.codec.js';
+import { jsonSchema, nullableJsonSchema } from './json.codec.js';
 import { sqliteBoolSchema } from './sqlite-bool.codec.js';
 import { sqliteDateSchema } from './sqlite-date.codec.js';
 export const AgentRegistration = z.object({
@@ -60,7 +60,7 @@ export const AgentStateBase = z.object({
         .describe('The minimum backoff interval of the agent'),
     max_backoff_interval: z.number().nullable()
         .describe('The maximum backoff interval of the agent'),
-    detail: nullableJsonCodec(z.json())
+    detail: z.json()
         .describe('The detail of the agent state'),
 })
     .describe('The state of the agent');
@@ -68,7 +68,7 @@ export const AgentState = AgentStateBase.extend(AgentStateMetadata.shape);
 export const AgentStatusBase = z.object({
     uri: URI.nullable()
         .describe('The URI of the agent'),
-    detail: nullableJsonCodec(z.json())
+    detail: z.json()
         .describe('The detail of the agent status'),
     has_error: z.boolean().default(false)
         .describe('The flag of the device error'),
@@ -103,7 +103,7 @@ export const DbDtoToAgentState = z.object({
     .transform((dto) => (dto));
 export const DbDtoToAgentStatus = z.object({
     uri: URI.nullable(),
-    detail: z.string().nullable(),
+    detail: nullableJsonSchema(z.json()),
     has_error: sqliteBoolSchema,
     error_stack: z.string().nullable(),
     create_timestamp: sqliteDateSchema,
@@ -114,13 +114,13 @@ export const DbDtoToAgentStatus = z.object({
 export const DbDtoFromAgentBase = AgentBase.transform((agent) => {
     return {
         ...agent,
-        tags: JSON.stringify(agent.tags),
+        tags: jsonSchema(z.array(z.string().max(64))),
     };
 });
 export const DbDtoFromAgent = Agent.transform((agent) => {
     return {
         ...agent,
-        tags: JSON.stringify(agent.tags),
+        tags: jsonSchema(z.array(z.string().max(64))),
     };
 });
 export const DbDtoToAgentBase = z.object({
@@ -183,7 +183,7 @@ export const DbDtoToAgent = z.object({
         push_interval: dto.desired_state_push_interval ?? null,
         min_backoff_interval: dto.desired_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.desired_state_max_backoff_interval ?? null,
-        detail: dto.desired_state_detail,
+        detail: dto.desired_state_detail ?? null,
         create_timestamp: dto.desired_state_create_timestamp,
         modify_timestamp: dto.desired_state_modify_timestamp,
         is_deleted: dto.desired_state_is_deleted,
@@ -194,14 +194,14 @@ export const DbDtoToAgent = z.object({
         push_interval: dto.runtime_state_push_interval ?? null,
         min_backoff_interval: dto.runtime_state_min_backoff_interval ?? null,
         max_backoff_interval: dto.runtime_state_max_backoff_interval ?? null,
-        detail: dto.runtime_state_detail,
+        detail: dto.runtime_state_detail ?? null,
         create_timestamp: dto.runtime_state_create_timestamp,
         modify_timestamp: dto.runtime_state_modify_timestamp,
         is_deleted: dto.runtime_state_is_deleted,
     },
     runtime_status: (typeof dto.runtime_status_create_timestamp === 'undefined') ? null : {
         uri: dto.runtime_status_uri ?? null,
-        detail: dto.runtime_status_detail,
+        detail: dto.runtime_status_detail ?? null,
         has_error: dto.runtime_status_has_error,
         error_stack: dto.runtime_status_error_stack ?? null,
         create_timestamp: dto.runtime_status_create_timestamp,

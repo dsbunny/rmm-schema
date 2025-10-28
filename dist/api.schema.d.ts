@@ -119,7 +119,7 @@ export declare const ListDevicesResponse: z.ZodObject<{
             push_interval: z.ZodNullable<z.ZodNumber>;
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -130,14 +130,14 @@ export declare const ListDevicesResponse: z.ZodObject<{
             push_interval: z.ZodNullable<z.ZodNumber>;
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             has_error: z.ZodDefault<z.ZodBoolean>;
             error_stack: z.ZodNullable<z.ZodString>;
             create_timestamp: z.ZodISODateTime;
@@ -261,7 +261,7 @@ export declare const GetDeviceResponse: z.ZodObject<{
             push_interval: z.ZodNullable<z.ZodNumber>;
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -272,14 +272,14 @@ export declare const GetDeviceResponse: z.ZodObject<{
             push_interval: z.ZodNullable<z.ZodNumber>;
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             has_error: z.ZodDefault<z.ZodBoolean>;
             error_stack: z.ZodNullable<z.ZodString>;
             create_timestamp: z.ZodISODateTime;
@@ -756,7 +756,7 @@ export declare const ListAgentsResponse: z.ZodObject<{
             push_interval: z.ZodNullable<z.ZodNumber>;
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -767,14 +767,14 @@ export declare const ListAgentsResponse: z.ZodObject<{
             push_interval: z.ZodNullable<z.ZodNumber>;
             min_backoff_interval: z.ZodNullable<z.ZodNumber>;
             max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
-            detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+            detail: z.ZodJSONSchema;
             has_error: z.ZodDefault<z.ZodBoolean>;
             error_stack: z.ZodNullable<z.ZodString>;
             create_timestamp: z.ZodISODateTime;
@@ -813,7 +813,7 @@ export declare const UpdateAgentResponse: z.ZodObject<{
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -824,14 +824,14 @@ export declare const UpdateAgentResponse: z.ZodObject<{
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         has_error: z.ZodDefault<z.ZodBoolean>;
         error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.ZodISODateTime;
@@ -882,7 +882,7 @@ export declare const PatchAgentResponse: z.ZodObject<{
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -893,14 +893,14 @@ export declare const PatchAgentResponse: z.ZodObject<{
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         has_error: z.ZodDefault<z.ZodBoolean>;
         error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.ZodISODateTime;
@@ -927,7 +927,7 @@ export declare const GetAgentResponse: z.ZodObject<{
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -938,14 +938,14 @@ export declare const GetAgentResponse: z.ZodObject<{
         push_interval: z.ZodNullable<z.ZodNumber>;
         min_backoff_interval: z.ZodNullable<z.ZodNumber>;
         max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
-        detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+        detail: z.ZodJSONSchema;
         has_error: z.ZodDefault<z.ZodBoolean>;
         error_stack: z.ZodNullable<z.ZodString>;
         create_timestamp: z.ZodISODateTime;
@@ -960,7 +960,7 @@ export declare const UpdateAgentStateRequest: z.ZodObject<{
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
 }, z.core.$strip>;
 export type UpdateAgentStateRequest = z.infer<typeof UpdateAgentStateRequest>;
 export declare const UpdateAgentStateResponse: z.ZodObject<{
@@ -969,7 +969,7 @@ export declare const UpdateAgentStateResponse: z.ZodObject<{
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -1007,7 +1007,7 @@ export declare const PatchAgentStateResponse: z.ZodObject<{
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -1021,7 +1021,7 @@ export declare const GetAgentStateResponse: z.ZodObject<{
     push_interval: z.ZodNullable<z.ZodNumber>;
     min_backoff_interval: z.ZodNullable<z.ZodNumber>;
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -1031,7 +1031,7 @@ export declare const GetAgentStatusRequest: z.ZodObject<{}, z.core.$strip>;
 export type GetAgentStatusRequest = z.infer<typeof GetAgentStatusRequest>;
 export declare const GetAgentStatusResponse: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.ZodISODateTime;
@@ -1041,14 +1041,14 @@ export declare const GetAgentStatusResponse: z.ZodObject<{
 export type GetAgentStatusResponse = z.infer<typeof GetAgentStatusResponse>;
 export declare const UpdateAgentStatusRequest: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
 }, z.core.$strip>;
 export type UpdateAgentStatusRequest = z.infer<typeof UpdateAgentStatusRequest>;
 export declare const UpdateAgentStatusResponse: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.ZodISODateTime;
@@ -1084,7 +1084,7 @@ export declare const PatchAgentStatusRequest: z.ZodArray<z.ZodDiscriminatedUnion
 export type PatchAgentStatusRequest = z.infer<typeof PatchAgentStatusRequest>;
 export declare const PatchAgentStatusResponse: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
-    detail: z.ZodCodec<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodUnion<readonly [z.ZodJSONSchema, z.ZodNull]>>;
+    detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
     create_timestamp: z.ZodISODateTime;
