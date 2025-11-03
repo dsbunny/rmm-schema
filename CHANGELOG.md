@@ -1,4 +1,7 @@
 # Changelog
+## v6.7.13
+- Add API for name availability.
+
 ## v6.6.12
 - Bump to `zod@4.1.11`.
 - Set limit on number of tags (64).

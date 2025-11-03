@@ -74,6 +74,16 @@ export const GetDeviceSuggestionsResponse = z.object({
 	.describe('Get device suggestions response schema');
 export type GetDeviceSuggestionsResponse = z.infer<typeof GetDeviceSuggestionsResponse>;
 
+export const GetDeviceAvailabilityRequest = z.object({})
+	.describe('Get device availability request schema');
+export type GetDeviceAvailabilityRequest = z.infer<typeof GetDeviceAvailabilityRequest>;
+export const GetDeviceAvailabilityResponse = z.object({
+	is_available: z.boolean()
+		.describe('Indicates if the device name is available'),
+})
+	.describe('Get device availability response schema');
+export type GetDeviceAvailabilityResponse = z.infer<typeof GetDeviceAvailabilityResponse>;
+
 export const GetDeviceRequest = z.object({})
 	.describe('Device retrieval request schema');
 export type GetDeviceRequest = z.infer<typeof GetDeviceRequest>;
@@ -171,6 +181,16 @@ export const GetAgentSuggestionsResponse = z.object({
 })
 	.describe('Get agent suggestions response schema');
 export type GetAgentSuggestionsResponse = z.infer<typeof GetAgentSuggestionsResponse>;
+
+export const GetAgentAvailabilityRequest = z.object({})
+	.describe('Get agent availability request schema');
+export type GetAgentAvailabilityRequest = z.infer<typeof GetAgentAvailabilityRequest>;
+export const GetAgentAvailabilityResponse = z.object({
+	is_available: z.boolean()
+		.describe('Indicates if the agent name is available'),
+})
+	.describe('Get agent availability response schema');
+export type GetAgentAvailabilityResponse = z.infer<typeof GetAgentAvailabilityResponse>;
 
 export const UpdateAgentRequest = AgentBase
 	.describe('Agent update request schema');

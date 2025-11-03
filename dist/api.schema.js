@@ -43,6 +43,13 @@ export const GetDeviceSuggestionsResponse = z.object({
         .describe('Device name suggestions for given input'),
 })
     .describe('Get device suggestions response schema');
+export const GetDeviceAvailabilityRequest = z.object({})
+    .describe('Get device availability request schema');
+export const GetDeviceAvailabilityResponse = z.object({
+    is_available: z.boolean()
+        .describe('Indicates if the device name is available'),
+})
+    .describe('Get device availability response schema');
 export const GetDeviceRequest = z.object({})
     .describe('Device retrieval request schema');
 export const GetDeviceResponse = z.object({
@@ -105,6 +112,13 @@ export const GetAgentSuggestionsResponse = z.object({
         .describe('Agent name suggestions for given input'),
 })
     .describe('Get agent suggestions response schema');
+export const GetAgentAvailabilityRequest = z.object({})
+    .describe('Get agent availability request schema');
+export const GetAgentAvailabilityResponse = z.object({
+    is_available: z.boolean()
+        .describe('Indicates if the agent name is available'),
+})
+    .describe('Get agent availability response schema');
 export const UpdateAgentRequest = AgentBase
     .describe('Agent update request schema');
 export const UpdateAgentResponse = Agent

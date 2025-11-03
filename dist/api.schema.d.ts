@@ -155,6 +155,12 @@ export declare const GetDeviceSuggestionsResponse: z.ZodObject<{
     s: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
 export type GetDeviceSuggestionsResponse = z.infer<typeof GetDeviceSuggestionsResponse>;
+export declare const GetDeviceAvailabilityRequest: z.ZodObject<{}, z.core.$strip>;
+export type GetDeviceAvailabilityRequest = z.infer<typeof GetDeviceAvailabilityRequest>;
+export declare const GetDeviceAvailabilityResponse: z.ZodObject<{
+    is_available: z.ZodBoolean;
+}, z.core.$strip>;
+export type GetDeviceAvailabilityResponse = z.infer<typeof GetDeviceAvailabilityResponse>;
 export declare const GetDeviceRequest: z.ZodObject<{}, z.core.$strip>;
 export type GetDeviceRequest = z.infer<typeof GetDeviceRequest>;
 export declare const GetDeviceResponse: z.ZodObject<{
@@ -792,6 +798,12 @@ export declare const GetAgentSuggestionsResponse: z.ZodObject<{
     s: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
 export type GetAgentSuggestionsResponse = z.infer<typeof GetAgentSuggestionsResponse>;
+export declare const GetAgentAvailabilityRequest: z.ZodObject<{}, z.core.$strip>;
+export type GetAgentAvailabilityRequest = z.infer<typeof GetAgentAvailabilityRequest>;
+export declare const GetAgentAvailabilityResponse: z.ZodObject<{
+    is_available: z.ZodBoolean;
+}, z.core.$strip>;
+export type GetAgentAvailabilityResponse = z.infer<typeof GetAgentAvailabilityResponse>;
 export declare const UpdateAgentRequest: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
