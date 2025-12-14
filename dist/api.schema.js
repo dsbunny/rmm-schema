@@ -58,10 +58,10 @@ export const GetDeviceResponse = z.object({
     next_token: z.string().nullable(),
 })
     .describe('Device retrieval response schema');
-export const UpdateDeviceRequest = z.array(JsonPatchOperation)
-    .describe('Device update request schema');
-export const UpdateDeviceResponse = Device
-    .describe('Device update response schema');
+export const PatchDeviceRequest = z.array(JsonPatchOperation).max(50)
+    .describe('Device patch request schema');
+export const PatchDeviceResponse = Device
+    .describe('Device patch response schema');
 export const GetDeviceStateRequest = z.object({})
     .describe('Device state retrieval request schema');
 export const GetDeviceStateResponse = DeviceState
@@ -70,7 +70,7 @@ export const UpdateDeviceStateRequest = DeviceStateBase
     .describe('Device state request schema');
 export const UpdateDeviceStateResponse = DeviceState
     .describe('Device state response schema');
-export const PatchDeviceStateRequest = z.array(JsonPatchOperation)
+export const PatchDeviceStateRequest = z.array(JsonPatchOperation).max(50)
     .describe('Device state patch request schema');
 export const PatchDeviceStateResponse = DeviceState
     .describe('Device state patch response schema');
@@ -82,7 +82,7 @@ export const UpdateDeviceStatusRequest = DeviceStatusBase
     .describe('Device status request schema');
 export const UpdateDeviceStatusResponse = DeviceStatus
     .describe('Device status response schema');
-export const PatchDeviceStatusRequest = z.array(JsonPatchOperation)
+export const PatchDeviceStatusRequest = z.array(JsonPatchOperation).max(50)
     .describe('Device status patch request schema');
 export const PatchDeviceStatusResponse = DeviceStatus
     .describe('Device status patch response schema');
@@ -123,7 +123,7 @@ export const UpdateAgentRequest = AgentBase
     .describe('Agent update request schema');
 export const UpdateAgentResponse = Agent
     .describe('Agent update response schema');
-export const PatchAgentRequest = z.array(JsonPatchOperation)
+export const PatchAgentRequest = z.array(JsonPatchOperation).max(50)
     .describe('Agent patch request schema');
 export const PatchAgentResponse = Agent
     .describe('Agent patch response schema');
@@ -135,7 +135,7 @@ export const UpdateAgentStateRequest = AgentStateBase
     .describe('Agent state request schema');
 export const UpdateAgentStateResponse = AgentState
     .describe('Agent state response schema');
-export const PatchAgentStateRequest = z.array(JsonPatchOperation)
+export const PatchAgentStateRequest = z.array(JsonPatchOperation).max(50)
     .describe('Agent state patch request schema');
 export const PatchAgentStateResponse = AgentState
     .describe('Agent state patch response schema');
@@ -151,7 +151,7 @@ export const UpdateAgentStatusRequest = AgentStatusBase
     .describe('Agent status request schema');
 export const UpdateAgentStatusResponse = AgentStatus
     .describe('Agent status response schema');
-export const PatchAgentStatusRequest = z.array(JsonPatchOperation)
+export const PatchAgentStatusRequest = z.array(JsonPatchOperation).max(50)
     .describe('Agent status patch request schema');
 export const PatchAgentStatusResponse = AgentStatus
     .describe('Agent status patch response schema');

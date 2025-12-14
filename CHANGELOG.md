@@ -1,4 +1,8 @@
 # Changelog
+## v7.0.14
+- Rename `UpdateDeviceRequest` to `PatchDeviceRequest` and set a limit of 50 operations.
+- Add limits to `PatchDeviceStateRequest`, `PatchDeviceStatusRequest`, `PatchAgentRequest`, `PatchAgentStateRequest`, and `PatchAgentStatusRequest`.
+
 ## v6.7.13
 - Add API for name availability.
 

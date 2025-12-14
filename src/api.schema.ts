@@ -95,12 +95,12 @@ export const GetDeviceResponse = z.object({
 	.describe('Device retrieval response schema');
 export type GetDeviceResponse = z.infer<typeof GetDeviceResponse>;
 
-export const UpdateDeviceRequest = z.array(JsonPatchOperation)
-	.describe('Device update request schema');
-export type UpdateDeviceRequest = z.infer<typeof UpdateDeviceRequest>;
-export const UpdateDeviceResponse = Device
-	.describe('Device update response schema');
-export type UpdateDeviceResponse = z.infer<typeof UpdateDeviceResponse>;
+export const PatchDeviceRequest = z.array(JsonPatchOperation).max(50)
+	.describe('Device patch request schema');
+export type PatchDeviceRequest = z.infer<typeof PatchDeviceRequest>;
+export const PatchDeviceResponse = Device
+	.describe('Device patch response schema');
+export type PatchDeviceResponse = z.infer<typeof PatchDeviceResponse>;
 
 export const GetDeviceStateRequest = z.object({})
 	.describe('Device state retrieval request schema');
@@ -116,7 +116,7 @@ export const UpdateDeviceStateResponse = DeviceState
 	.describe('Device state response schema');
 export type UpdateDeviceStateResponse = z.infer<typeof UpdateDeviceStateResponse>;
 
-export const PatchDeviceStateRequest = z.array(JsonPatchOperation)
+export const PatchDeviceStateRequest = z.array(JsonPatchOperation).max(50)
 	.describe('Device state patch request schema');
 export type PatchDeviceStateRequest = z.infer<typeof PatchDeviceStateRequest>;
 export const PatchDeviceStateResponse = DeviceState
@@ -137,7 +137,7 @@ export const UpdateDeviceStatusResponse = DeviceStatus
 	.describe('Device status response schema');
 export type UpdateDeviceStatusResponse = z.infer<typeof UpdateDeviceStatusResponse>;
 
-export const PatchDeviceStatusRequest = z.array(JsonPatchOperation)
+export const PatchDeviceStatusRequest = z.array(JsonPatchOperation).max(50)
 	.describe('Device status patch request schema');
 export type PatchDeviceStatusRequest = z.infer<typeof PatchDeviceStatusRequest>;
 export const PatchDeviceStatusResponse = DeviceStatus
@@ -199,7 +199,7 @@ export const UpdateAgentResponse = Agent
 	.describe('Agent update response schema');
 export type UpdateAgentResponse = z.infer<typeof UpdateAgentResponse>;
 
-export const PatchAgentRequest = z.array(JsonPatchOperation)
+export const PatchAgentRequest = z.array(JsonPatchOperation).max(50)
 	.describe('Agent patch request schema');
 export type PatchAgentRequest = z.infer<typeof PatchAgentRequest>;
 export const PatchAgentResponse = Agent
@@ -220,7 +220,7 @@ export const UpdateAgentStateResponse = AgentState
 	.describe('Agent state response schema');
 export type UpdateAgentStateResponse = z.infer<typeof UpdateAgentStateResponse>;
 
-export const PatchAgentStateRequest = z.array(JsonPatchOperation)
+export const PatchAgentStateRequest = z.array(JsonPatchOperation).max(50)
 	.describe('Agent state patch request schema');
 export type PatchAgentStateRequest = z.infer<typeof PatchAgentStateRequest>;
 export const PatchAgentStateResponse = AgentState
@@ -248,7 +248,7 @@ export const UpdateAgentStatusResponse = AgentStatus
 	.describe('Agent status response schema');
 export type UpdateAgentStatusResponse = z.infer<typeof UpdateAgentStatusResponse>;
 
-export const PatchAgentStatusRequest = z.array(JsonPatchOperation)
+export const PatchAgentStatusRequest = z.array(JsonPatchOperation).max(50)
 	.describe('Agent status patch request schema');
 export type PatchAgentStatusRequest = z.infer<typeof PatchAgentStatusRequest>;
 export const PatchAgentStatusResponse = AgentStatus

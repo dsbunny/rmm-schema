@@ -296,7 +296,7 @@ export declare const GetDeviceResponse: z.ZodObject<{
     next_token: z.ZodNullable<z.ZodString>;
 }, z.core.$strip>;
 export type GetDeviceResponse = z.infer<typeof GetDeviceResponse>;
-export declare const UpdateDeviceRequest: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
+export declare const PatchDeviceRequest: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
     path: z.ZodString;
     op: z.ZodLiteral<"add">;
     value: z.ZodAny;
@@ -321,8 +321,8 @@ export declare const UpdateDeviceRequest: z.ZodArray<z.ZodDiscriminatedUnion<[z.
     value: z.ZodAny;
     not: z.ZodOptional<z.ZodBoolean>;
 }, z.core.$strip>], "op">>;
-export type UpdateDeviceRequest = z.infer<typeof UpdateDeviceRequest>;
-export declare const UpdateDeviceResponse: z.ZodObject<{
+export type PatchDeviceRequest = z.infer<typeof PatchDeviceRequest>;
+export declare const PatchDeviceResponse: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
@@ -409,7 +409,7 @@ export declare const UpdateDeviceResponse: z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type UpdateDeviceResponse = z.infer<typeof UpdateDeviceResponse>;
+export type PatchDeviceResponse = z.infer<typeof PatchDeviceResponse>;
 export declare const GetDeviceStateRequest: z.ZodObject<{}, z.core.$strip>;
 export type GetDeviceStateRequest = z.infer<typeof GetDeviceStateRequest>;
 export declare const GetDeviceStateResponse: z.ZodObject<{
