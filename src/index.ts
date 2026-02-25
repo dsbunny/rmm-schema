@@ -10,3 +10,4 @@ export * from './screen-details.schema.js';
 export * from './sqlite-bool.codec.js';
 export * from './sqlite-date.codec.js';
 export * from './uri.schema.js';
+export * from './webhook.schema.js';

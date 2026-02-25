@@ -1,4 +1,14 @@
 # Changelog
+## v8.0.16
+- Move RMM tasks to internal package.
+- Bump to `zod@4.3.6`.
+- New public schema for RMM WebHooks.
+
+## v8.0.15
+- Add new composite `RmmRequest` and `RmmResponse` for public API.
+- Migrate to `@dsbunny/error-schema` and `@dsbunny/webhook-schema`.
+- New internal schema for WebHook tasks.
+
 ## v7.0.14
 - Rename `UpdateDeviceRequest` to `PatchDeviceRequest` and set a limit of 50 operations.
 - Add limits to `PatchDeviceStateRequest`, `PatchDeviceStatusRequest`, `PatchAgentRequest`, `PatchAgentStateRequest`, and `PatchAgentStatusRequest`.

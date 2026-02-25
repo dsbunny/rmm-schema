@@ -1,30 +1,9 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import * as z from "zod";
+import { ErrorResponse } from "@dsbunny/error-schema";
 import { JsonPatchOperation } from './patch-operation.schema.js';
 import { Device, DeviceBase, DeviceRegistration, DeviceState, DeviceStateBase, DeviceStatus, DeviceStatusBase, } from './device.schema.js';
 import { Agent, AgentBase, AgentRegistration, AgentState, AgentStateBase, AgentStatus, AgentStatusBase, } from './agent.schema.js';
-// #region Errors
-export const ErrorResponse = z.object({
-    code: z.string()
-        .describe('Error code representing the type of error.'),
-    message: z.string()
-        .describe('Error message describing the issue.'),
-    detail: z.string()
-        .describe('Additional details about the error, if available.'),
-    timestamp: z.iso.datetime()
-        .describe('Timestamp when the error occurred (ISO_8601 format).'),
-})
-    .describe('Error response schema');
-// #endregion
-// #region WebHook
-export const WebHookRequest = z.object({
-    ref_id: z.string(),
-    class: z.string(),
-})
-    .describe('WebHook request schema');
-export const WebHookResponse = z.object({})
-    .describe('WebHook response schema');
-// #endregion
 // #region Devices
 export const ListDevicesRequest = z.object({})
     .describe('Device enumeration request schema');
@@ -155,5 +134,64 @@ export const PatchAgentStatusRequest = z.array(JsonPatchOperation).max(50)
     .describe('Agent status patch request schema');
 export const PatchAgentStatusResponse = AgentStatus
     .describe('Agent status patch response schema');
+// #endregion
+// #region API
+export const RmmRequest = z.union([
+    ListDevicesRequest,
+    GetDeviceSuggestionsRequest,
+    GetDeviceAvailabilityRequest,
+    GetDeviceRequest,
+    PatchDeviceRequest,
+    GetDeviceStateRequest,
+    UpdateDeviceStateRequest,
+    PatchDeviceStateRequest,
+    GetDeviceStatusRequest,
+    UpdateDeviceStatusRequest,
+    PatchDeviceStatusRequest,
+    CreateDeviceRequest,
+    CreateDeviceAgentRequest,
+    ListAgentsRequest,
+    GetAgentSuggestionsRequest,
+    GetAgentAvailabilityRequest,
+    UpdateAgentRequest,
+    PatchAgentRequest,
+    GetAgentRequest,
+    UpdateAgentStateRequest,
+    PatchAgentStateRequest,
+    GetAgentStateRequest,
+    GetAgentStatusRequest,
+    UpdateAgentStatusRequest,
+    PatchAgentStatusRequest,
+])
+    .describe('RMM request schema');
+export const RmmResponse = z.union([
+    ListDevicesResponse,
+    GetDeviceSuggestionsResponse,
+    GetDeviceAvailabilityResponse,
+    GetDeviceResponse,
+    PatchDeviceResponse,
+    GetDeviceStateResponse,
+    UpdateDeviceStateResponse,
+    PatchDeviceStateResponse,
+    GetDeviceStatusResponse,
+    UpdateDeviceStatusResponse,
+    PatchDeviceStatusResponse,
+    CreateDeviceResponse,
+    CreateDeviceAgentResponse,
+    ListAgentsResponse,
+    GetAgentSuggestionsResponse,
+    GetAgentAvailabilityResponse,
+    UpdateAgentResponse,
+    PatchAgentResponse,
+    GetAgentResponse,
+    UpdateAgentStateResponse,
+    PatchAgentStateResponse,
+    GetAgentStateResponse,
+    GetAgentStatusResponse,
+    UpdateAgentStatusResponse,
+    PatchAgentStatusResponse,
+    ErrorResponse,
+])
+    .describe('RMM response schema');
 // #endregion
 //# sourceMappingURL=api.schema.js.map
