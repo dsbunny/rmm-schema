@@ -1,5 +1,5 @@
 import * as z from "zod";
-export declare const HistoryEntry: z.ZodObject<{
+export declare const HistoryEntrySchema: z.ZodObject<{
     index: z.ZodNumber;
     status: z.ZodEnum<{
         UP: "UP";
@@ -8,8 +8,8 @@ export declare const HistoryEntry: z.ZodObject<{
     time: z.ZodString;
     interval: z.ZodNumber;
 }, z.core.$strip>;
-export type HistoryEntry = z.infer<typeof HistoryEntry>;
-export declare const EventHistory: z.ZodObject<{
+export type HistoryEntry = z.infer<typeof HistoryEntrySchema>;
+export declare const EventHistorySchema: z.ZodObject<{
     history_size: z.ZodNumber;
     history_msgs_flushed: z.ZodNumber;
     history: z.ZodArray<z.ZodObject<{
@@ -22,8 +22,8 @@ export declare const EventHistory: z.ZodObject<{
         interval: z.ZodNumber;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type EventHistory = z.infer<typeof EventHistory>;
-export declare const ObjectOutage: z.ZodObject<{
+export type EventHistory = z.infer<typeof EventHistorySchema>;
+export declare const ObjectOutageSchema: z.ZodObject<{
     status: z.ZodEnum<{
         UP: "UP";
         DOWN: "DOWN";
@@ -32,8 +32,8 @@ export declare const ObjectOutage: z.ZodObject<{
     aot: z.ZodNumber;
     naf: z.ZodNumber;
 }, z.core.$strip>;
-export type ObjectOutage = z.infer<typeof ObjectOutage>;
-export declare const CoolReport: z.ZodObject<{
+export type ObjectOutage = z.infer<typeof ObjectOutageSchema>;
+export declare const CoolReportSchema: z.ZodObject<{
     eventHistory: z.ZodObject<{
         history_size: z.ZodNumber;
         history_msgs_flushed: z.ZodNumber;
@@ -57,4 +57,4 @@ export declare const CoolReport: z.ZodObject<{
         naf: z.ZodNumber;
     }, z.core.$strip>;
 }, z.core.$strip>;
-export type CoolReport = z.infer<typeof CoolReport>;
+export type CoolReport = z.infer<typeof CoolReportSchema>;

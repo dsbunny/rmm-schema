@@ -1,4 +1,7 @@
 # Changelog
+## v9.0.17
+- Split schema definitions to separate Schema suffix to resolve vsCode and tooling confusion.
+
 ## v8.0.16
 - Move RMM tasks to internal package.
 - Bump to `zod@4.3.6`.

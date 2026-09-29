@@ -1,10 +1,10 @@
 import * as z from "zod";
-export declare const RmmWebhookClass: z.ZodEnum<{
+export declare const RmmWebhookClassSchema: z.ZodEnum<{
     device: "device";
     agent: "agent";
 }>;
-export type RmmWebhookClass = z.infer<typeof RmmWebhookClass>;
-export declare const RmmWebhookType: z.ZodEnum<{
+export type RmmWebhookClass = z.infer<typeof RmmWebhookClassSchema>;
+export declare const RmmWebhookTypeSchema: z.ZodEnum<{
     new: "new";
     change: "change";
     delete: "delete";
@@ -12,8 +12,8 @@ export declare const RmmWebhookType: z.ZodEnum<{
     "runtime-state": "runtime-state";
     "runtime-status": "runtime-status";
 }>;
-export type RmmWebhookType = z.infer<typeof RmmWebhookType>;
-export declare const RmmWebhookRequest: z.ZodObject<{
+export type RmmWebhookType = z.infer<typeof RmmWebhookTypeSchema>;
+export declare const RmmWebhookRequestSchema: z.ZodObject<{
     tenant_id: z.ZodUUID;
     ref_id: z.ZodUUID;
     trace_id: z.ZodOptional<z.ZodString>;
@@ -30,8 +30,8 @@ export declare const RmmWebhookRequest: z.ZodObject<{
         "runtime-status": "runtime-status";
     }>;
 }, z.core.$strip>;
-export type RmmWebhookRequest = z.infer<typeof RmmWebhookRequest>;
-export declare const RmmWebhookProgress: z.ZodNull;
-export type RmmWebhookProgress = z.infer<typeof RmmWebhookProgress>;
-export declare const RmmWebhookResponse: z.ZodObject<{}, z.core.$strip>;
-export type RmmWebhookResponse = z.infer<typeof RmmWebhookResponse>;
+export type RmmWebhookRequest = z.infer<typeof RmmWebhookRequestSchema>;
+export declare const RmmWebhookProgressSchema: z.ZodNull;
+export type RmmWebhookProgress = z.infer<typeof RmmWebhookProgressSchema>;
+export declare const RmmWebhookResponseSchema: z.ZodObject<{}, z.core.$strip>;
+export type RmmWebhookResponse = z.infer<typeof RmmWebhookResponseSchema>;

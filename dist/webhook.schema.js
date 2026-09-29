@@ -1,15 +1,15 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import * as z from "zod";
-import { WebhookProgress, WebhookRequest, WebhookResponse, } from "@dsbunny/webhook-schema";
-export const RmmWebhookClass = z.enum(['agent', 'device'])
+import { WebhookProgressSchema, WebhookRequestSchema, WebhookResponseSchema, } from "@dsbunny/webhook-schema";
+export const RmmWebhookClassSchema = z.enum(['agent', 'device'])
     .describe('The class of the webhook event related to RMM operations');
-export const RmmWebhookType = z.enum(['new', 'change', 'delete', 'desired-state', 'runtime-state', 'runtime-status'])
+export const RmmWebhookTypeSchema = z.enum(['new', 'change', 'delete', 'desired-state', 'runtime-state', 'runtime-status'])
     .describe('The type of the webhook event related to RMM operations');
-export const RmmWebhookRequest = WebhookRequest.extend({
-    class: RmmWebhookClass,
-    type: RmmWebhookType,
+export const RmmWebhookRequestSchema = WebhookRequestSchema.extend({
+    class: RmmWebhookClassSchema,
+    type: RmmWebhookTypeSchema,
 })
     .describe('The schema for webhook requests sent by the RMM system');
-export const RmmWebhookProgress = WebhookProgress;
-export const RmmWebhookResponse = WebhookResponse;
+export const RmmWebhookProgressSchema = WebhookProgressSchema;
+export const RmmWebhookResponseSchema = WebhookResponseSchema;
 //# sourceMappingURL=webhook.schema.js.map

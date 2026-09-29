@@ -1,17 +1,17 @@
 import * as z from "zod";
-export declare const AgentRegistration: z.ZodObject<{
+export declare const AgentRegistrationSchema: z.ZodObject<{
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     agent_id: z.ZodUUID;
     create_timestamp: z.ZodISODateTime;
 }, z.core.$strip>;
-export type AgentRegistration = z.infer<typeof AgentRegistration>;
-export declare const AgentBase: z.ZodObject<{
+export type AgentRegistration = z.infer<typeof AgentRegistrationSchema>;
+export declare const AgentBaseSchema: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
-export type AgentBase = z.infer<typeof AgentBase>;
-export declare const AgentMetadata: z.ZodObject<{
+export type AgentBase = z.infer<typeof AgentBaseSchema>;
+export declare const AgentMetadataSchema: z.ZodObject<{
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     agent_id: z.ZodUUID;
@@ -20,20 +20,20 @@ export declare const AgentMetadata: z.ZodObject<{
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type AgentMetadata = z.infer<typeof AgentMetadata>;
-export declare const AgentStateMetadata: z.ZodObject<{
+export type AgentMetadata = z.infer<typeof AgentMetadataSchema>;
+export declare const AgentStateMetadataSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type AgentStateMetadata = z.infer<typeof AgentStateMetadata>;
-export declare const AgentStatusMetadata: z.ZodObject<{
+export type AgentStateMetadata = z.infer<typeof AgentStateMetadataSchema>;
+export declare const AgentStatusMetadataSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadata>;
-export declare const AgentStateBase: z.ZodObject<{
+export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadataSchema>;
+export declare const AgentStateBaseSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -41,8 +41,8 @@ export declare const AgentStateBase: z.ZodObject<{
     max_backoff_interval: z.ZodNullable<z.ZodNumber>;
     detail: z.ZodJSONSchema;
 }, z.core.$strip>;
-export type AgentStateBase = z.infer<typeof AgentStateBase>;
-export declare const AgentState: z.ZodObject<{
+export type AgentStateBase = z.infer<typeof AgentStateBaseSchema>;
+export declare const AgentStateSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -53,15 +53,15 @@ export declare const AgentState: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type AgentState = z.infer<typeof AgentState>;
-export declare const AgentStatusBase: z.ZodObject<{
+export type AgentState = z.infer<typeof AgentStateSchema>;
+export declare const AgentStatusBaseSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
 }, z.core.$strip>;
-export type AgentStatusBase = z.infer<typeof AgentStatusBase>;
-export declare const AgentStatus: z.ZodObject<{
+export type AgentStatusBase = z.infer<typeof AgentStatusBaseSchema>;
+export declare const AgentStatusSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
@@ -70,8 +70,8 @@ export declare const AgentStatus: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type AgentStatus = z.infer<typeof AgentStatus>;
-export declare const Agent: z.ZodObject<{
+export type AgentStatus = z.infer<typeof AgentStatusSchema>;
+export declare const AgentSchema: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     tenant_id: z.ZodString;
@@ -113,8 +113,8 @@ export declare const Agent: z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type Agent = z.infer<typeof Agent>;
-export declare const DbDtoToAgentState: z.ZodPipe<z.ZodObject<{
+export type Agent = z.infer<typeof AgentSchema>;
+export declare const DbDtoToAgentStateSchema: z.ZodPipe<z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -145,7 +145,7 @@ export declare const DbDtoToAgentState: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
 }>>;
-export declare const DbDtoToAgentStatus: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoToAgentStatusSchema: z.ZodPipe<z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodNull]>, z.ZodTransform<z.core.util.JSONType, string | null>>;
     has_error: z.ZodPipe<z.ZodNumber, z.ZodTransform<boolean, number>>;
@@ -170,7 +170,7 @@ export declare const DbDtoToAgentStatus: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
 }>>;
-export declare const DbDtoFromAgentBase: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoFromAgentBaseSchema: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
 }, z.core.$strip>, z.ZodTransform<{
@@ -180,7 +180,7 @@ export declare const DbDtoFromAgentBase: z.ZodPipe<z.ZodObject<{
     name: string;
     tags: string[];
 }>>;
-export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoFromAgentSchema: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     tenant_id: z.ZodString;
@@ -304,7 +304,7 @@ export declare const DbDtoFromAgent: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
 }>>;
-export declare const DbDtoToAgentBase: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoToAgentBaseSchema: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodPipe<z.ZodString, z.ZodTransform<string[], string>>;
 }, z.core.$strip>, z.ZodTransform<{
@@ -314,7 +314,7 @@ export declare const DbDtoToAgentBase: z.ZodPipe<z.ZodObject<{
     name: string;
     tags: string[];
 }>>;
-export declare const DbDtoToAgent: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoToAgentSchema: z.ZodPipe<z.ZodObject<{
     tenant_id: z.ZodUUID;
     device_id: z.ZodUUID;
     agent_id: z.ZodUUID;

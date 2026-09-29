@@ -2,7 +2,7 @@
 import * as z from "zod";
 // SQL date string to/from ISO 8601,
 // e.g. "2023-10-15 15:09:50" to "2023-10-15T15:09:50.000Z"
-export const sqliteDateCodec = z.codec(z.string(), z.string(), {
+export const SqliteDateCodec = z.codec(z.string(), z.string(), {
     decode: (date) => {
         return `${date.replace(' ', 'T')}.000Z`;
     },
@@ -10,7 +10,7 @@ export const sqliteDateCodec = z.codec(z.string(), z.string(), {
         return isoDate.replace('T', ' ').replace('.000Z', '');
     },
 });
-export const sqliteDateSchema = z.string().transform((date) => {
-    return sqliteDateCodec.decode(date);
+export const SqliteDateSchema = z.string().transform((date) => {
+    return SqliteDateCodec.decode(date);
 });
 //# sourceMappingURL=sqlite-date.codec.js.map

@@ -1,18 +1,18 @@
 import * as z from "zod";
-export declare const DeviceRegistration: z.ZodObject<{
+export declare const DeviceRegistrationSchema: z.ZodObject<{
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.ZodISODateTime;
 }, z.core.$strip>;
-export type DeviceRegistration = z.infer<typeof DeviceRegistration>;
-export declare const DeviceBase: z.ZodObject<{
+export type DeviceRegistration = z.infer<typeof DeviceRegistrationSchema>;
+export declare const DeviceBaseSchema: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
     system_tags: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
-export type DeviceBase = z.infer<typeof DeviceBase>;
-export declare const DeviceMetadata: z.ZodObject<{
+export type DeviceBase = z.infer<typeof DeviceBaseSchema>;
+export declare const DeviceMetadataSchema: z.ZodObject<{
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.ZodISODateTime;
@@ -20,20 +20,20 @@ export declare const DeviceMetadata: z.ZodObject<{
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type DeviceMetadata = z.infer<typeof DeviceMetadata>;
-export declare const DeviceStateMetadata: z.ZodObject<{
+export type DeviceMetadata = z.infer<typeof DeviceMetadataSchema>;
+export declare const DeviceStateMetadataSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type DeviceStateMetadata = z.infer<typeof DeviceStateMetadata>;
-export declare const DeviceStatusMetadata: z.ZodObject<{
+export type DeviceStateMetadata = z.infer<typeof DeviceStateMetadataSchema>;
+export declare const DeviceStatusMetadataSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type DeviceStatusMetadata = z.infer<typeof DeviceStatusMetadata>;
-export declare const DeviceStateBase: z.ZodObject<{
+export type DeviceStatusMetadata = z.infer<typeof DeviceStatusMetadataSchema>;
+export declare const DeviceStateBaseSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -42,8 +42,8 @@ export declare const DeviceStateBase: z.ZodObject<{
     agent_ids: z.ZodNullable<z.ZodArray<z.ZodString>>;
     is_maintenance: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type DeviceStateBase = z.infer<typeof DeviceStateBase>;
-export declare const DeviceState: z.ZodObject<{
+export type DeviceStateBase = z.infer<typeof DeviceStateBaseSchema>;
+export declare const DeviceStateSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -55,8 +55,8 @@ export declare const DeviceState: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type DeviceState = z.infer<typeof DeviceState>;
-export declare const DeviceStatusBase: z.ZodObject<{
+export type DeviceState = z.infer<typeof DeviceStateSchema>;
+export declare const DeviceStatusBaseSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
@@ -104,8 +104,8 @@ export declare const DeviceStatusBase: z.ZodObject<{
     has_error: z.ZodDefault<z.ZodBoolean>;
     error_stack: z.ZodNullable<z.ZodString>;
 }, z.core.$strip>;
-export type DeviceStatusBase = z.infer<typeof DeviceStatusBase>;
-export declare const DeviceStatus: z.ZodObject<{
+export type DeviceStatusBase = z.infer<typeof DeviceStatusBaseSchema>;
+export declare const DeviceStatusSchema: z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
@@ -156,8 +156,8 @@ export declare const DeviceStatus: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>;
-export type DeviceStatus = z.infer<typeof DeviceStatus>;
-export declare const Device: z.ZodObject<{
+export type DeviceStatus = z.infer<typeof DeviceStatusSchema>;
+export declare const DeviceSchema: z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
@@ -244,8 +244,8 @@ export declare const Device: z.ZodObject<{
         is_deleted: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type Device = z.infer<typeof Device>;
-export declare const DbDtoToDeviceState: z.ZodPipe<z.ZodObject<{
+export type Device = z.infer<typeof DeviceSchema>;
+export declare const DbDtoToDeviceStateSchema: z.ZodPipe<z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -279,7 +279,7 @@ export declare const DbDtoToDeviceState: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
 }>>;
-export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoToDeviceStatusSchema: z.ZodPipe<z.ZodObject<{
     uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
@@ -412,7 +412,7 @@ export declare const DbDtoToDeviceStatus: z.ZodPipe<z.ZodObject<{
     modify_timestamp: string;
     is_deleted: boolean;
 }>>;
-export declare const DbDtoFromDeviceBase: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoFromDeviceBaseSchema: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
@@ -428,7 +428,7 @@ export declare const DbDtoFromDeviceBase: z.ZodPipe<z.ZodObject<{
     user_tags: string[];
     system_tags: string[];
 }>>;
-export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoFromDeviceSchema: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
@@ -675,7 +675,7 @@ export declare const DbDtoFromDevice: z.ZodPipe<z.ZodObject<{
         is_deleted: boolean;
     } | null;
 }>>;
-export declare const DbDtoToDeviceBase: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoToDeviceBaseSchema: z.ZodPipe<z.ZodObject<{
     name: z.ZodString;
     tags: z.ZodPipe<z.ZodString, z.ZodTransform<string[], string>>;
     user_tags: z.ZodPipe<z.ZodString, z.ZodTransform<string[], string>>;
@@ -691,7 +691,7 @@ export declare const DbDtoToDeviceBase: z.ZodPipe<z.ZodObject<{
     user_tags: string[];
     system_tags: string[];
 }>>;
-export declare const DbDtoToDevice: z.ZodPipe<z.ZodObject<{
+export declare const DbDtoToDeviceSchema: z.ZodPipe<z.ZodObject<{
     tenant_id: z.ZodUUID;
     device_id: z.ZodUUID;
     name: z.ZodString;

@@ -2,28 +2,28 @@
 
 import * as z from "zod";
 import {
-        WebhookProgress,
-        WebhookRequest,
-        WebhookResponse,
+        WebhookProgressSchema,
+        WebhookRequestSchema,
+        WebhookResponseSchema,
 } from "@dsbunny/webhook-schema";
 
-export const RmmWebhookClass = z.enum(['agent', 'device'])
+export const RmmWebhookClassSchema = z.enum(['agent', 'device'])
         .describe('The class of the webhook event related to RMM operations');
-export type RmmWebhookClass = z.infer<typeof RmmWebhookClass>;
+export type RmmWebhookClass = z.infer<typeof RmmWebhookClassSchema>;
 
-export const RmmWebhookType = z.enum(['new', 'change', 'delete', 'desired-state', 'runtime-state', 'runtime-status'])
+export const RmmWebhookTypeSchema = z.enum(['new', 'change', 'delete', 'desired-state', 'runtime-state', 'runtime-status'])
         .describe('The type of the webhook event related to RMM operations');
-export type RmmWebhookType = z.infer<typeof RmmWebhookType>;
+export type RmmWebhookType = z.infer<typeof RmmWebhookTypeSchema>;
 
-export const RmmWebhookRequest = WebhookRequest.extend({
-        class: RmmWebhookClass,
-        type: RmmWebhookType,
+export const RmmWebhookRequestSchema = WebhookRequestSchema.extend({
+        class: RmmWebhookClassSchema,
+        type: RmmWebhookTypeSchema,
 })
         .describe('The schema for webhook requests sent by the RMM system');
-export type RmmWebhookRequest = z.infer<typeof RmmWebhookRequest>;
+export type RmmWebhookRequest = z.infer<typeof RmmWebhookRequestSchema>;
 
-export const RmmWebhookProgress = WebhookProgress;
-export type RmmWebhookProgress = z.infer<typeof RmmWebhookProgress>;
+export const RmmWebhookProgressSchema = WebhookProgressSchema;
+export type RmmWebhookProgress = z.infer<typeof RmmWebhookProgressSchema>;
 
-export const RmmWebhookResponse = WebhookResponse;
-export type RmmWebhookResponse = z.infer<typeof RmmWebhookResponse>;
+export const RmmWebhookResponseSchema = WebhookResponseSchema;
+export type RmmWebhookResponse = z.infer<typeof RmmWebhookResponseSchema>;

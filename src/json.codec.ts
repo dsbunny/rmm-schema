@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 
-export const jsonCodec = <T extends z.core.$ZodType>(schema: T) =>
+export const JsonCodec = <T extends z.core.$ZodType>(schema: T) =>
         z.codec(z.string(), schema, {
                 decode: (jsonString, ctx) => {
                         try {
@@ -20,7 +20,7 @@ export const jsonCodec = <T extends z.core.$ZodType>(schema: T) =>
                 encode: (value) => JSON.stringify(value),
 });
 
-export const nullableJsonCodec = <T extends z.core.$ZodType>(schema: T) =>
+export const NullableJsonCodec = <T extends z.core.$ZodType>(schema: T) =>
         z.codec(z.union([z.string(), z.null()]), z.union([schema, z.null()]), {
                 decode: (jsonString, ctx) => {
                         try {
@@ -38,12 +38,12 @@ export const nullableJsonCodec = <T extends z.core.$ZodType>(schema: T) =>
                 encode: (value) => value === null ? null : JSON.stringify(value),
 });
 
-export const jsonSchema = <T extends z.core.$ZodType>(schema: T) =>
+export const JsonSchema = <T extends z.core.$ZodType>(schema: T) =>
         z.string().transform((jsonString: string) => {
-                return jsonCodec(schema).decode(jsonString);
+                return JsonCodec(schema).decode(jsonString);
 });
 
-export const nullableJsonSchema = <T extends z.core.$ZodType>(schema: T) =>
+export const NullableJsonSchema = <T extends z.core.$ZodType>(schema: T) =>
         z.union([z.string(), z.null()]).transform((jsonString: string | null) => {
-                return nullableJsonCodec(schema).decode(jsonString);
+                return NullableJsonCodec(schema).decode(jsonString);
 });

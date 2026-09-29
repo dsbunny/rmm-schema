@@ -1,10 +1,10 @@
 import * as z from "zod";
-export declare const ScreenOrientation: z.ZodObject<{
+export declare const ScreenOrientationSchema: z.ZodObject<{
     angle: z.ZodNumber;
     type: z.ZodString;
 }, z.core.$strip>;
-export type ScreenOrientation = z.infer<typeof ScreenOrientation>;
-export declare const ScreenDetailed: z.ZodObject<{
+export type ScreenOrientation = z.infer<typeof ScreenOrientationSchema>;
+export declare const ScreenDetailedSchema: z.ZodObject<{
     label: z.ZodString;
     left: z.ZodNumber;
     top: z.ZodNumber;
@@ -16,8 +16,8 @@ export declare const ScreenDetailed: z.ZodObject<{
         type: z.ZodString;
     }, z.core.$strip>;
 }, z.core.$strip>;
-export type ScreenDetailed = z.infer<typeof ScreenDetailed>;
-export declare const ScreenDetails: z.ZodObject<{
+export type ScreenDetailed = z.infer<typeof ScreenDetailedSchema>;
+export declare const ScreenDetailsSchema: z.ZodObject<{
     screens: z.ZodArray<z.ZodObject<{
         label: z.ZodString;
         left: z.ZodNumber;
@@ -31,4 +31,4 @@ export declare const ScreenDetails: z.ZodObject<{
         }, z.core.$strip>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
-export type ScreenDetails = z.infer<typeof ScreenDetails>;
+export type ScreenDetails = z.infer<typeof ScreenDetailsSchema>;

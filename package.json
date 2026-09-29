@@ -1,6 +1,6 @@
 {
 	"name": "@dsbunny/rmm-schema",
-	"version": "8.0.16",
+	"version": "9.0.17",
 	"description": "Schema for the RMM",
 	"type": "module",
 	"main": "dist/index.js",
@@ -20,8 +20,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"@dsbunny/error-schema": "github:dsbunny/error-schema#be4645d",
-		"@dsbunny/webhook-schema": "github:dsbunny/webhook-schema#4178b06",
+		"@dsbunny/error-schema": "github:dsbunny/error-schema#86d038b",
+		"@dsbunny/webhook-schema": "github:dsbunny/webhook-schema#de1d05d",
 		"typescript": "^5.9.3",
 		"zod": "^4.3.6"
 	},
