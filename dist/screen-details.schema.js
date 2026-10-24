@@ -1,12 +1,15 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
 import * as z from "zod";
+import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const ScreenOrientationSchema = z.object({
     angle: z.number()
         .describe('The angle of the screen orientation'),
     type: z.string()
         .describe('The type of the screen orientation'),
-})
-    .describe('The screen orientation');
+}).register(dsbunnyRegistry, {
+    id: 'ScreenOrientationSchema',
+    description: 'The screen orientation'
+});
 export const ScreenDetailedSchema = z.object({
     label: z.string()
         .describe('The label of the screen details'),
@@ -22,10 +25,14 @@ export const ScreenDetailedSchema = z.object({
         .describe('The device pixel ratio of the screen details'),
     orientation: ScreenOrientationSchema
         .describe('The orientation of the screen details'),
-})
-    .describe('The screen details');
+}).register(dsbunnyRegistry, {
+    id: 'ScreenDetailedSchema',
+    description: 'The screen details'
+});
 export const ScreenDetailsSchema = z.object({
     screens: z.array(ScreenDetailedSchema),
-})
-    .describe('Details of all screens available to the device');
+}).register(dsbunnyRegistry, {
+    id: 'ScreenDetailsSchema',
+    description: 'Details of all screens available to the device'
+});
 //# sourceMappingURL=screen-details.schema.js.map

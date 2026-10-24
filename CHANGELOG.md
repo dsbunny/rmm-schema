@@ -1,4 +1,7 @@
 # Changelog
+## v9.1.18
+- Add `id` _ZOD_ metadata for schemas.
+
 ## v9.0.17
 - Split schema definitions to separate Schema suffix to resolve vsCode and tooling confusion.
 
