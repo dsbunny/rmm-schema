@@ -2,6 +2,8 @@
 import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const ScreenOrientationSchema = z.object({
+    '@type': z.literal('ScreenOrientation')
+        .describe('Type of the screen orientation object'),
     angle: z.number()
         .describe('The angle of the screen orientation'),
     type: z.string()
@@ -11,6 +13,8 @@ export const ScreenOrientationSchema = z.object({
     description: 'The screen orientation'
 });
 export const ScreenDetailedSchema = z.object({
+    '@type': z.literal('ScreenDetailed')
+        .describe('Type of the screen detailed object'),
     label: z.string()
         .describe('The label of the screen details'),
     left: z.number()
@@ -30,6 +34,8 @@ export const ScreenDetailedSchema = z.object({
     description: 'The screen details'
 });
 export const ScreenDetailsSchema = z.object({
+    '@type': z.literal('ScreenDetails')
+        .describe('Type of the screen details object'),
     screens: z.array(ScreenDetailedSchema),
 }).register(dsbunnyRegistry, {
     id: 'ScreenDetailsSchema',

@@ -1,11 +1,13 @@
 import * as z from "zod";
 export declare const DeviceRegistrationSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"DeviceRegistration">;
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.ZodISODateTime;
 }, z.core.$strip>;
 export type DeviceRegistration = z.infer<typeof DeviceRegistrationSchema>;
 export declare const DeviceBaseSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"DeviceBase">;
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
@@ -13,6 +15,7 @@ export declare const DeviceBaseSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type DeviceBase = z.infer<typeof DeviceBaseSchema>;
 export declare const DeviceMetadataSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"DeviceMetadata">;
     tenant_id: z.ZodString;
     device_id: z.ZodUUID;
     create_timestamp: z.ZodISODateTime;
@@ -22,6 +25,7 @@ export declare const DeviceMetadataSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type DeviceMetadata = z.infer<typeof DeviceMetadataSchema>;
 export declare const DeviceStateMetadataSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"DeviceStateMetadata">;
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
@@ -31,9 +35,11 @@ export declare const DeviceStatusMetadataSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
+    '@type': z.ZodLiteral<"DeviceStatusMetadata">;
 }, z.core.$strip>;
 export type DeviceStatusMetadata = z.infer<typeof DeviceStatusMetadataSchema>;
 export declare const DeviceStateBaseSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"DeviceStateBase">;
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -54,9 +60,11 @@ export declare const DeviceStateSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
+    '@type': z.ZodLiteral<"DeviceState">;
 }, z.core.$strip>;
 export type DeviceState = z.infer<typeof DeviceStateSchema>;
 export declare const DeviceStatusBaseSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"DeviceStatusBase">;
     uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
@@ -64,7 +72,9 @@ export declare const DeviceStatusBaseSchema: z.ZodObject<{
     vendor_webgl: z.ZodNullable<z.ZodString>;
     renderer_webgl: z.ZodNullable<z.ZodString>;
     screen_details: z.ZodNullable<z.ZodObject<{
+        '@type': z.ZodLiteral<"ScreenDetails">;
         screens: z.ZodArray<z.ZodObject<{
+            '@type': z.ZodLiteral<"ScreenDetailed">;
             label: z.ZodString;
             left: z.ZodNumber;
             top: z.ZodNumber;
@@ -72,16 +82,20 @@ export declare const DeviceStatusBaseSchema: z.ZodObject<{
             height: z.ZodNumber;
             devicePixelRatio: z.ZodNumber;
             orientation: z.ZodObject<{
+                '@type': z.ZodLiteral<"ScreenOrientation">;
                 angle: z.ZodNumber;
                 type: z.ZodString;
             }, z.core.$strip>;
         }, z.core.$strip>>;
     }, z.core.$strip>>;
     cool: z.ZodNullable<z.ZodObject<{
+        '@type': z.ZodLiteral<"CoolReport">;
         eventHistory: z.ZodObject<{
+            '@type': z.ZodLiteral<"EventHistory">;
             history_size: z.ZodNumber;
             history_msgs_flushed: z.ZodNumber;
             history: z.ZodArray<z.ZodObject<{
+                '@type': z.ZodLiteral<"HistoryEntry">;
                 index: z.ZodNumber;
                 status: z.ZodEnum<{
                     UP: "UP";
@@ -92,6 +106,7 @@ export declare const DeviceStatusBaseSchema: z.ZodObject<{
             }, z.core.$strip>>;
         }, z.core.$strip>;
         objectOutage: z.ZodObject<{
+            '@type': z.ZodLiteral<"ObjectOutage">;
             status: z.ZodEnum<{
                 UP: "UP";
                 DOWN: "DOWN";
@@ -113,7 +128,9 @@ export declare const DeviceStatusSchema: z.ZodObject<{
     vendor_webgl: z.ZodNullable<z.ZodString>;
     renderer_webgl: z.ZodNullable<z.ZodString>;
     screen_details: z.ZodNullable<z.ZodObject<{
+        '@type': z.ZodLiteral<"ScreenDetails">;
         screens: z.ZodArray<z.ZodObject<{
+            '@type': z.ZodLiteral<"ScreenDetailed">;
             label: z.ZodString;
             left: z.ZodNumber;
             top: z.ZodNumber;
@@ -121,16 +138,20 @@ export declare const DeviceStatusSchema: z.ZodObject<{
             height: z.ZodNumber;
             devicePixelRatio: z.ZodNumber;
             orientation: z.ZodObject<{
+                '@type': z.ZodLiteral<"ScreenOrientation">;
                 angle: z.ZodNumber;
                 type: z.ZodString;
             }, z.core.$strip>;
         }, z.core.$strip>>;
     }, z.core.$strip>>;
     cool: z.ZodNullable<z.ZodObject<{
+        '@type': z.ZodLiteral<"CoolReport">;
         eventHistory: z.ZodObject<{
+            '@type': z.ZodLiteral<"EventHistory">;
             history_size: z.ZodNumber;
             history_msgs_flushed: z.ZodNumber;
             history: z.ZodArray<z.ZodObject<{
+                '@type': z.ZodLiteral<"HistoryEntry">;
                 index: z.ZodNumber;
                 status: z.ZodEnum<{
                     UP: "UP";
@@ -141,6 +162,7 @@ export declare const DeviceStatusSchema: z.ZodObject<{
             }, z.core.$strip>>;
         }, z.core.$strip>;
         objectOutage: z.ZodObject<{
+            '@type': z.ZodLiteral<"ObjectOutage">;
             status: z.ZodEnum<{
                 UP: "UP";
                 DOWN: "DOWN";
@@ -155,6 +177,7 @@ export declare const DeviceStatusSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
+    '@type': z.ZodLiteral<"DeviceStatus">;
 }, z.core.$strip>;
 export type DeviceStatus = z.infer<typeof DeviceStatusSchema>;
 export declare const DeviceSchema: z.ZodObject<{
@@ -168,6 +191,7 @@ export declare const DeviceSchema: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
+    '@type': z.ZodLiteral<"Device">;
     desired_state: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -179,6 +203,7 @@ export declare const DeviceSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
+        '@type': z.ZodLiteral<"DeviceDesiredState">;
     }, z.core.$strip>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
@@ -191,6 +216,7 @@ export declare const DeviceSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
+        '@type': z.ZodLiteral<"DeviceRuntimeState">;
     }, z.core.$strip>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
@@ -200,7 +226,9 @@ export declare const DeviceSchema: z.ZodObject<{
         vendor_webgl: z.ZodNullable<z.ZodString>;
         renderer_webgl: z.ZodNullable<z.ZodString>;
         screen_details: z.ZodNullable<z.ZodObject<{
+            '@type': z.ZodLiteral<"ScreenDetails">;
             screens: z.ZodArray<z.ZodObject<{
+                '@type': z.ZodLiteral<"ScreenDetailed">;
                 label: z.ZodString;
                 left: z.ZodNumber;
                 top: z.ZodNumber;
@@ -208,16 +236,20 @@ export declare const DeviceSchema: z.ZodObject<{
                 height: z.ZodNumber;
                 devicePixelRatio: z.ZodNumber;
                 orientation: z.ZodObject<{
+                    '@type': z.ZodLiteral<"ScreenOrientation">;
                     angle: z.ZodNumber;
                     type: z.ZodString;
                 }, z.core.$strip>;
             }, z.core.$strip>>;
         }, z.core.$strip>>;
         cool: z.ZodNullable<z.ZodObject<{
+            '@type': z.ZodLiteral<"CoolReport">;
             eventHistory: z.ZodObject<{
+                '@type': z.ZodLiteral<"EventHistory">;
                 history_size: z.ZodNumber;
                 history_msgs_flushed: z.ZodNumber;
                 history: z.ZodArray<z.ZodObject<{
+                    '@type': z.ZodLiteral<"HistoryEntry">;
                     index: z.ZodNumber;
                     status: z.ZodEnum<{
                         UP: "UP";
@@ -228,6 +260,7 @@ export declare const DeviceSchema: z.ZodObject<{
                 }, z.core.$strip>>;
             }, z.core.$strip>;
             objectOutage: z.ZodObject<{
+                '@type': z.ZodLiteral<"ObjectOutage">;
                 status: z.ZodEnum<{
                     UP: "UP";
                     DOWN: "DOWN";
@@ -242,6 +275,7 @@ export declare const DeviceSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
+        '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
     }, z.core.$strip>>;
 }, z.core.$strip>;
 export type Device = z.infer<typeof DeviceSchema>;

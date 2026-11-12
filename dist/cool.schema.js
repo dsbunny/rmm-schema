@@ -3,6 +3,8 @@
 import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
 export const HistoryEntrySchema = z.object({
+    '@type': z.literal('HistoryEntry')
+        .describe('Type of the history entry object'),
     index: z.number()
         .describe('An arbitrary non-zero integer value that uniquely identifies an entry in the history array'),
     status: z.enum(["UP", "DOWN"])
@@ -19,6 +21,8 @@ export const HistoryEntrySchema = z.object({
     description: 'An entry in the event history table',
 });
 export const EventHistorySchema = z.object({
+    '@type': z.literal('EventHistory')
+        .describe('Type of the event history object'),
     history_size: z.number()
         .describe('The upper limit on the number of entries that the outage history array may contain'),
     history_msgs_flushed: z.number()
@@ -33,6 +37,8 @@ export const EventHistorySchema = z.object({
     description: 'The event history of the outage monitoring',
 });
 export const ObjectOutageSchema = z.object({
+    '@type': z.literal('ObjectOutage')
+        .describe('Type of the object outage object'),
     status: z.enum(["UP", "DOWN"])
         .describe('The current operational state of the monitored object'),
     time: z.string()
@@ -46,6 +52,8 @@ export const ObjectOutageSchema = z.object({
     description: 'The object outage information',
 });
 export const CoolReportSchema = z.object({
+    '@type': z.literal('CoolReport')
+        .describe('Type of the cool report object'),
     eventHistory: EventHistorySchema,
     objectOutage: ObjectOutageSchema,
 }).register(dsbunnyRegistry, {

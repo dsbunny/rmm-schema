@@ -17,6 +17,7 @@ export declare const RmmWebhookRequestSchema: z.ZodObject<{
     tenant_id: z.ZodUUID;
     ref_id: z.ZodUUID;
     trace_id: z.ZodOptional<z.ZodString>;
+    '@type': z.ZodLiteral<"RmmWebhookRequest">;
     class: z.ZodEnum<{
         device: "device";
         agent: "agent";
@@ -31,7 +32,11 @@ export declare const RmmWebhookRequestSchema: z.ZodObject<{
     }>;
 }, z.core.$strip>;
 export type RmmWebhookRequest = z.infer<typeof RmmWebhookRequestSchema>;
-export declare const RmmWebhookProgressSchema: z.ZodNull;
+export declare const RmmWebhookProgressSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"RmmWebhookProgress">;
+}, z.core.$strip>;
 export type RmmWebhookProgress = z.infer<typeof RmmWebhookProgressSchema>;
-export declare const RmmWebhookResponseSchema: z.ZodObject<{}, z.core.$strip>;
+export declare const RmmWebhookResponseSchema: z.ZodObject<{
+    '@type': z.ZodLiteral<"RmmWebhookResponse">;
+}, z.core.$strip>;
 export type RmmWebhookResponse = z.infer<typeof RmmWebhookResponseSchema>;

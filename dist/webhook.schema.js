@@ -11,17 +11,25 @@ export const RmmWebhookTypeSchema = z.enum(['new', 'change', 'delete', 'desired-
     description: 'The type of the webhook event related to RMM operations',
 });
 export const RmmWebhookRequestSchema = WebhookRequestSchema.extend({
+    '@type': z.literal('RmmWebhookRequest')
+        .describe('Type of the RMM webhook request object'),
     class: RmmWebhookClassSchema,
     type: RmmWebhookTypeSchema,
 }).register(dsbunnyRegistry, {
     id: 'RmmWebhookRequestSchema',
     description: 'The schema for webhook requests sent by the RMM system',
 });
-export const RmmWebhookProgressSchema = WebhookProgressSchema.register(dsbunnyRegistry, {
+export const RmmWebhookProgressSchema = WebhookProgressSchema.extend({
+    '@type': z.literal('RmmWebhookProgress')
+        .describe('Type of the RMM webhook progress object'),
+}).register(dsbunnyRegistry, {
     id: 'RmmWebhookProgressSchema',
     description: 'The schema for webhook progress events related to RMM operations',
 });
-export const RmmWebhookResponseSchema = WebhookResponseSchema.register(dsbunnyRegistry, {
+export const RmmWebhookResponseSchema = WebhookResponseSchema.extend({
+    '@type': z.literal('RmmWebhookResponse')
+        .describe('Type of the RMM webhook response object'),
+}).register(dsbunnyRegistry, {
     id: 'RmmWebhookResponseSchema',
     description: 'The schema for webhook responses related to RMM operations',
 });
