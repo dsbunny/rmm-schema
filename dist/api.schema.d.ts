@@ -162,9 +162,9 @@ export declare const GetDeviceSuggestionsResponseSchema: z.ZodObject<{
     s: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
 export type GetDeviceSuggestionsResponse = z.infer<typeof GetDeviceSuggestionsResponseSchema>;
-export declare const GetDeviceAvailabilityRequestSchema: z.ZodObject<{
+export declare const GetDeviceAvailabilityRequestSchema: z.ZodOptional<z.ZodObject<{
     '@type': z.ZodLiteral<"GetDeviceAvailabilityRequest">;
-}, z.core.$strip>;
+}, z.core.$strip>>;
 export type GetDeviceAvailabilityRequest = z.infer<typeof GetDeviceAvailabilityRequestSchema>;
 export declare const GetDeviceAvailabilityResponseSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"GetDeviceAvailabilityResponse">;
@@ -1279,7 +1279,7 @@ export declare const UpdateAgentStatusResponseSchema: z.ZodObject<{
 export type UpdateAgentStatusResponse = z.infer<typeof UpdateAgentStatusResponseSchema>;
 export declare const PatchAgentStatusRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"PatchAgentStatusRequest">;
-    patch: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
+    patch_operations: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
         path: z.ZodString;
         op: z.ZodLiteral<"add">;
         value: z.ZodAny;
@@ -1324,9 +1324,9 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
     '@type': z.ZodLiteral<"ListDevicesRequest">;
 }, z.core.$strip>>, z.ZodOptional<z.ZodObject<{
     '@type': z.ZodLiteral<"GetDeviceSuggestionsRequest">;
-}, z.core.$strip>>, z.ZodObject<{
+}, z.core.$strip>>, z.ZodOptional<z.ZodObject<{
     '@type': z.ZodLiteral<"GetDeviceAvailabilityRequest">;
-}, z.core.$strip>, z.ZodOptional<z.ZodObject<{
+}, z.core.$strip>>, z.ZodOptional<z.ZodObject<{
     '@type': z.ZodLiteral<"GetDeviceRequest">;
 }, z.core.$strip>>, z.ZodObject<{
     '@type': z.ZodLiteral<"PatchDeviceRequest">;
@@ -1592,7 +1592,7 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"PatchAgentStatusRequest">;
-    patch: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
+    patch_operations: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
         path: z.ZodString;
         op: z.ZodLiteral<"add">;
         value: z.ZodAny;

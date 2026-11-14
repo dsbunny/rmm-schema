@@ -1,4 +1,5 @@
 // vim: tabstop=8 softtabstop=0 noexpandtab shiftwidth=8 nosmarttab
+// `@type` field is optional for requests with no other required fields.
 
 import * as z from "zod";
 import { dsbunnyRegistry } from '@dsbunny/zod-registry';
@@ -69,7 +70,7 @@ export type GetDeviceSuggestionsResponse = z.infer<typeof GetDeviceSuggestionsRe
 export const GetDeviceAvailabilityRequestSchema = z.object({
 	'@type': z.literal('GetDeviceAvailabilityRequest')
 		.describe('Type of the get device availability request object'),
-}).register(dsbunnyRegistry, {
+}).optional().register(dsbunnyRegistry, {
 	id: 'GetDeviceAvailabilityRequestSchema',
 	description: 'Get device availability request schema',
 });
@@ -488,7 +489,7 @@ export type UpdateAgentStatusResponse = z.infer<typeof UpdateAgentStatusResponse
 export const PatchAgentStatusRequestSchema = z.object({
 	'@type': z.literal('PatchAgentStatusRequest')
 		.describe('Type of the patch agent status request object'),
-	patch: z.array(JsonPatchOperationSchema).max(50),
+	patch_operations: z.array(JsonPatchOperationSchema).max(50),
 }).register(dsbunnyRegistry, {
 	id: 'PatchAgentStatusRequestSchema',
 	description: 'Agent status patch request schema',
