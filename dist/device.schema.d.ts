@@ -7,7 +7,7 @@ export declare const DeviceRegistrationSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type DeviceRegistration = z.infer<typeof DeviceRegistrationSchema>;
 export declare const DeviceBaseSchema: z.ZodObject<{
-    '@type': z.ZodLiteral<"DeviceBase">;
+    '@type': z.ZodDefault<z.ZodString>;
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
     user_tags: z.ZodArray<z.ZodString>;
@@ -39,7 +39,7 @@ export declare const DeviceStatusMetadataSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type DeviceStatusMetadata = z.infer<typeof DeviceStatusMetadataSchema>;
 export declare const DeviceStateBaseSchema: z.ZodObject<{
-    '@type': z.ZodLiteral<"DeviceStateBase">;
+    '@type': z.ZodDefault<z.ZodString>;
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -60,11 +60,11 @@ export declare const DeviceStateSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-    '@type': z.ZodLiteral<"DeviceState">;
+    '@type': z.ZodDefault<z.ZodString>;
 }, z.core.$strip>;
 export type DeviceState = z.infer<typeof DeviceStateSchema>;
 export declare const DeviceStatusBaseSchema: z.ZodObject<{
-    '@type': z.ZodLiteral<"DeviceStatusBase">;
+    '@type': z.ZodDefault<z.ZodString>;
     uri: z.ZodNullable<z.ZodString>;
     user_agent: z.ZodNullable<z.ZodString>;
     device_memory: z.ZodNullable<z.ZodNumber>;
@@ -177,7 +177,7 @@ export declare const DeviceStatusSchema: z.ZodObject<{
     create_timestamp: z.ZodISODateTime;
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
-    '@type': z.ZodLiteral<"DeviceStatus">;
+    '@type': z.ZodDefault<z.ZodString>;
 }, z.core.$strip>;
 export type DeviceStatus = z.infer<typeof DeviceStatusSchema>;
 export declare const DeviceSchema: z.ZodObject<{
@@ -191,7 +191,7 @@ export declare const DeviceSchema: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-    '@type': z.ZodLiteral<"Device">;
+    '@type': z.ZodDefault<z.ZodString>;
     desired_state: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -203,7 +203,7 @@ export declare const DeviceSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceDesiredState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
@@ -216,7 +216,7 @@ export declare const DeviceSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceRuntimeState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
@@ -275,7 +275,8 @@ export declare const DeviceSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
 export type Device = z.infer<typeof DeviceSchema>;
+//# sourceMappingURL=device.schema.d.ts.map

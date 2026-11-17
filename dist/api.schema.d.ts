@@ -16,7 +16,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Device">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -28,7 +28,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -41,7 +41,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -100,7 +100,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>;
     agents: z.ZodOptional<z.ZodArray<z.ZodObject<{
@@ -113,7 +113,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -124,7 +124,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -136,7 +136,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -146,7 +146,7 @@ export declare const ListDevicesResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>>;
     next_token: z.ZodNullable<z.ZodString>;
@@ -188,7 +188,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Device">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -200,7 +200,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -213,7 +213,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -272,7 +272,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
     agents: z.ZodOptional<z.ZodArray<z.ZodObject<{
@@ -285,7 +285,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -296,7 +296,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -308,7 +308,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -318,7 +318,7 @@ export declare const GetDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>>;
     next_token: z.ZodNullable<z.ZodString>;
@@ -366,7 +366,7 @@ export declare const PatchDeviceResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Device">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -378,7 +378,7 @@ export declare const PatchDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -391,7 +391,7 @@ export declare const PatchDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -450,7 +450,7 @@ export declare const PatchDeviceResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
@@ -472,14 +472,14 @@ export declare const GetDeviceStateResponseSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type GetDeviceStateResponse = z.infer<typeof GetDeviceStateResponseSchema>;
 export declare const UpdateDeviceStateRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateDeviceStateRequest">;
     device_state: z.ZodObject<{
-        '@type': z.ZodLiteral<"DeviceStateBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
@@ -503,7 +503,7 @@ export declare const UpdateDeviceStateResponseSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type UpdateDeviceStateResponse = z.infer<typeof UpdateDeviceStateResponseSchema>;
@@ -549,7 +549,7 @@ export declare const PatchDeviceStateResponseSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type PatchDeviceStateResponse = z.infer<typeof PatchDeviceStateResponseSchema>;
@@ -616,14 +616,14 @@ export declare const GetDeviceStatusResponseSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type GetDeviceStatusResponse = z.infer<typeof GetDeviceStatusResponseSchema>;
 export declare const UpdateDeviceStatusRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateDeviceStatusRequest">;
     device_status: z.ZodObject<{
-        '@type': z.ZodLiteral<"DeviceStatusBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         user_agent: z.ZodNullable<z.ZodString>;
         device_memory: z.ZodNullable<z.ZodNumber>;
@@ -739,7 +739,7 @@ export declare const UpdateDeviceStatusResponseSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type UpdateDeviceStatusResponse = z.infer<typeof UpdateDeviceStatusResponseSchema>;
@@ -831,14 +831,14 @@ export declare const PatchDeviceStatusResponseSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type PatchDeviceStatusResponse = z.infer<typeof PatchDeviceStatusResponseSchema>;
 export declare const CreateDeviceRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"CreateDeviceRequest">;
     device_data: z.ZodObject<{
-        '@type': z.ZodLiteral<"DeviceBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
@@ -857,7 +857,7 @@ export type CreateDeviceResponse = z.infer<typeof CreateDeviceResponseSchema>;
 export declare const CreateDeviceAgentRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"CreateDeviceAgentRequest">;
     agent_data: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
@@ -890,7 +890,7 @@ export declare const ListAgentsResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -901,7 +901,7 @@ export declare const ListAgentsResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -913,7 +913,7 @@ export declare const ListAgentsResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -923,7 +923,7 @@ export declare const ListAgentsResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>;
     next_token: z.ZodNullable<z.ZodString>;
@@ -951,7 +951,7 @@ export type GetAgentAvailabilityResponse = z.infer<typeof GetAgentAvailabilityRe
 export declare const UpdateAgentRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateAgentRequest">;
     agent_data: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
@@ -969,7 +969,7 @@ export declare const UpdateAgentResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -980,7 +980,7 @@ export declare const UpdateAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -992,7 +992,7 @@ export declare const UpdateAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1002,7 +1002,7 @@ export declare const UpdateAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
@@ -1048,7 +1048,7 @@ export declare const PatchAgentResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1059,7 +1059,7 @@ export declare const PatchAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1071,7 +1071,7 @@ export declare const PatchAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1081,7 +1081,7 @@ export declare const PatchAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
@@ -1102,7 +1102,7 @@ export declare const GetAgentResponseSchema: z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1113,7 +1113,7 @@ export declare const GetAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1125,7 +1125,7 @@ export declare const GetAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1135,7 +1135,7 @@ export declare const GetAgentResponseSchema: z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>;
@@ -1143,7 +1143,7 @@ export type GetAgentResponse = z.infer<typeof GetAgentResponseSchema>;
 export declare const UpdateAgentStateRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateAgentStateRequest">;
     agent_state: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentStateBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
@@ -1255,7 +1255,7 @@ export type GetAgentStatusResponse = z.infer<typeof GetAgentStatusResponseSchema
 export declare const UpdateAgentStatusRequestSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateAgentStatusRequest">;
     agent_status: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentStatusBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         detail: z.ZodJSONSchema;
         has_error: z.ZodDefault<z.ZodBoolean>;
@@ -1360,7 +1360,7 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
 }, z.core.$strip>>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateDeviceStateRequest">;
     device_state: z.ZodObject<{
-        '@type': z.ZodLiteral<"DeviceStateBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
@@ -1401,7 +1401,7 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
 }, z.core.$strip>>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateDeviceStatusRequest">;
     device_status: z.ZodObject<{
-        '@type': z.ZodLiteral<"DeviceStatusBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         user_agent: z.ZodNullable<z.ZodString>;
         device_memory: z.ZodNullable<z.ZodNumber>;
@@ -1486,14 +1486,14 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"CreateDeviceRequest">;
     device_data: z.ZodObject<{
-        '@type': z.ZodLiteral<"DeviceBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"CreateDeviceAgentRequest">;
     agent_data: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
@@ -1506,7 +1506,7 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
 }, z.core.$strip>>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateAgentRequest">;
     agent_data: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         name: z.ZodString;
         tags: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
@@ -1542,7 +1542,7 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
 }, z.core.$strip>>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateAgentStateRequest">;
     agent_state: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentStateBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
         push_interval: z.ZodNullable<z.ZodNumber>;
@@ -1584,7 +1584,7 @@ export declare const RmmRequestSchema: z.ZodUnion<readonly [z.ZodOptional<z.ZodO
 }, z.core.$strip>>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateAgentStatusRequest">;
     agent_status: z.ZodObject<{
-        '@type': z.ZodLiteral<"AgentStatusBase">;
+        '@type': z.ZodDefault<z.ZodString>;
         uri: z.ZodNullable<z.ZodString>;
         detail: z.ZodJSONSchema;
         has_error: z.ZodDefault<z.ZodBoolean>;
@@ -1632,7 +1632,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Device">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1644,7 +1644,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1657,7 +1657,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1716,7 +1716,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>;
     agents: z.ZodOptional<z.ZodArray<z.ZodObject<{
@@ -1729,7 +1729,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1740,7 +1740,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1752,7 +1752,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1762,7 +1762,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>>;
     next_token: z.ZodNullable<z.ZodString>;
@@ -1786,7 +1786,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Device">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1798,7 +1798,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1811,7 +1811,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1870,7 +1870,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
     agents: z.ZodOptional<z.ZodArray<z.ZodObject<{
@@ -1883,7 +1883,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1894,7 +1894,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1906,7 +1906,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1916,7 +1916,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>>;
     next_token: z.ZodNullable<z.ZodString>;
@@ -1933,7 +1933,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Device">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -1945,7 +1945,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -1958,7 +1958,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2017,7 +2017,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"DeviceRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
@@ -2033,7 +2033,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateDeviceStateResponse">;
@@ -2048,7 +2048,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"PatchDeviceStateResponse">;
@@ -2063,7 +2063,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"GetDeviceStatusResponse">;
@@ -2124,7 +2124,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"UpdateDeviceStatusResponse">;
@@ -2185,7 +2185,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"PatchDeviceStatusResponse">;
@@ -2246,7 +2246,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"DeviceStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
     '@type': z.ZodLiteral<"CreateDeviceResponse">;
@@ -2277,7 +2277,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -2288,7 +2288,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2300,7 +2300,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2310,7 +2310,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>>;
     next_token: z.ZodNullable<z.ZodString>;
@@ -2333,7 +2333,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -2344,7 +2344,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2356,7 +2356,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2366,7 +2366,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
@@ -2381,7 +2381,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -2392,7 +2392,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2404,7 +2404,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2414,7 +2414,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
@@ -2429,7 +2429,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
         is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"Agent">;
+        '@type': z.ZodDefault<z.ZodString>;
         desired_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
             pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -2440,7 +2440,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentDesiredState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_state: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2452,7 +2452,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeState">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
         runtime_status: z.ZodNullable<z.ZodObject<{
             uri: z.ZodNullable<z.ZodString>;
@@ -2462,7 +2462,7 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
             create_timestamp: z.ZodISODateTime;
             modify_timestamp: z.ZodISODateTime;
             is_deleted: z.ZodDefault<z.ZodBoolean>;
-            '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+            '@type': z.ZodDefault<z.ZodString>;
         }, z.core.$strip>>;
     }, z.core.$strip>;
 }, z.core.$strip>, z.ZodObject<{
@@ -2551,3 +2551,4 @@ export declare const RmmResponseSchema: z.ZodUnion<readonly [z.ZodObject<{
     timestamp: z.ZodISODateTime;
 }, z.core.$strip>]>;
 export type RmmResponse = z.infer<typeof RmmResponseSchema>;
+//# sourceMappingURL=api.schema.d.ts.map

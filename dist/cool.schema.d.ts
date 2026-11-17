@@ -66,3 +66,4 @@ export declare const CoolReportSchema: z.ZodObject<{
     }, z.core.$strip>;
 }, z.core.$strip>;
 export type CoolReport = z.infer<typeof CoolReportSchema>;
+//# sourceMappingURL=cool.schema.d.ts.map

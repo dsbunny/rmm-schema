@@ -38,3 +38,4 @@ export declare const ScreenDetailsSchema: z.ZodObject<{
     }, z.core.$strip>>;
 }, z.core.$strip>;
 export type ScreenDetails = z.infer<typeof ScreenDetailsSchema>;
+//# sourceMappingURL=screen-details.schema.d.ts.map

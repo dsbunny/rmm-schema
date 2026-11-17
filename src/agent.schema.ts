@@ -22,7 +22,7 @@ export const AgentRegistrationSchema = z.object({
 export type AgentRegistration = z.infer<typeof AgentRegistrationSchema>;
 
 export const AgentBaseSchema = z.object({
-	'@type': z.literal('AgentBase')
+	'@type': z.string().default('AgentBase')
 		.describe('Type of the base agent object'),
 	name: z.string()
 		.describe('The name of the agent'),
@@ -82,7 +82,7 @@ export const AgentStatusMetadataSchema = AgentStateMetadataSchema.extend({
 export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadataSchema>;
 
 export const AgentStateBaseSchema = z.object({
-	'@type': z.literal('AgentStateBase')
+	'@type': z.string().default('AgentStateBase')
 		.describe('Type of the base agent state object'),
 	uri: URISchema.nullable()
 		.describe('The URI of the agent'),
@@ -111,7 +111,7 @@ export const AgentStateSchema = AgentStateBaseSchema.extend(AgentStateMetadataSc
 export type AgentState = z.infer<typeof AgentStateSchema>;
 
 export const AgentStatusBaseSchema = z.object({
-	'@type': z.literal('AgentStatusBase')
+	'@type': z.string().default('AgentStatusBase')
 		.describe('Type of the base agent status object'),
 	uri: URISchema.nullable()
 		.describe('The URI of the agent'),
@@ -136,28 +136,28 @@ export const AgentStatusSchema = AgentStatusBaseSchema.extend(AgentStatusMetadat
 export type AgentStatus = z.infer<typeof AgentStatusSchema>;
 
 const AgentBaseWithMetadataSchema = AgentBaseSchema.extend(AgentMetadataSchema.shape).extend({
-	'@type': z.literal('AgentBaseWithMetadata')
+	'@type': z.string().default('AgentBaseWithMetadata')
 		.describe('Type of the agent base with metadata object'),
 }).register(dsbunnyRegistry, {
 	id: 'AgentBaseWithMetadataSchema',
 	description: 'The base information of the agent with metadata',
 });
 const AgentDesiredStateSchema = AgentStateBaseSchema.extend(AgentStateMetadataSchema.shape).extend({
-	'@type': z.literal('AgentDesiredState')
+	'@type': z.string().default('AgentDesiredState')
 		.describe('Type of the desired state of the agent with metadata object'),
 }).register(dsbunnyRegistry, {
 	id: 'AgentDesiredStateSchema',
 	description: 'The desired state of the agent with metadata',
 });
 const AgentRuntimeStateSchema = AgentStateBaseSchema.extend(AgentStateMetadataSchema.shape).extend({
-	'@type': z.literal('AgentRuntimeState')
+	'@type': z.string().default('AgentRuntimeState')
 		.describe('Type of the runtime state of the agent with metadata object'),
 }).register(dsbunnyRegistry, {
 	id: 'AgentRuntimeStateSchema',
 	description: 'The runtime state of the agent with metadata',
 });
 const AgentRuntimeStatusSchema = AgentStatusBaseSchema.extend(AgentStatusMetadataSchema.shape).extend({
-	'@type': z.literal('AgentRuntimeStatus')
+	'@type': z.string().default('AgentRuntimeStatus')
 		.describe('Type of the runtime status of the agent with metadata object'),
 }).register(dsbunnyRegistry, {
 	id: 'AgentRuntimeStatusSchema',
@@ -165,7 +165,7 @@ const AgentRuntimeStatusSchema = AgentStatusBaseSchema.extend(AgentStatusMetadat
 });
 
 export const AgentSchema = AgentBaseWithMetadataSchema.extend({
-	'@type': z.literal('Agent')
+	'@type': z.string().default('Agent')
 		.describe('Type of the full agent object'),
 	desired_state: AgentDesiredStateSchema.nullable()
 		.describe('The desired state of the agent'),

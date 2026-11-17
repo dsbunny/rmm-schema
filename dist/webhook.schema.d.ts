@@ -40,3 +40,4 @@ export declare const RmmWebhookResponseSchema: z.ZodObject<{
     '@type': z.ZodLiteral<"RmmWebhookResponse">;
 }, z.core.$strip>;
 export type RmmWebhookResponse = z.infer<typeof RmmWebhookResponseSchema>;
+//# sourceMappingURL=webhook.schema.d.ts.map

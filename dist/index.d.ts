@@ -4,3 +4,4 @@ export * from './cool.schema.js';
 export * from './device.schema.js';
 export * from './screen-details.schema.js';
 export * from './webhook.schema.js';
+//# sourceMappingURL=index.d.ts.map

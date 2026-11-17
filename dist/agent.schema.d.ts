@@ -8,7 +8,7 @@ export declare const AgentRegistrationSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type AgentRegistration = z.infer<typeof AgentRegistrationSchema>;
 export declare const AgentBaseSchema: z.ZodObject<{
-    '@type': z.ZodLiteral<"AgentBase">;
+    '@type': z.ZodDefault<z.ZodString>;
     name: z.ZodString;
     tags: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
@@ -39,7 +39,7 @@ export declare const AgentStatusMetadataSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type AgentStatusMetadata = z.infer<typeof AgentStatusMetadataSchema>;
 export declare const AgentStateBaseSchema: z.ZodObject<{
-    '@type': z.ZodLiteral<"AgentStateBase">;
+    '@type': z.ZodDefault<z.ZodString>;
     uri: z.ZodNullable<z.ZodString>;
     pull_interval: z.ZodNullable<z.ZodNumber>;
     push_interval: z.ZodNullable<z.ZodNumber>;
@@ -62,7 +62,7 @@ export declare const AgentStateSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type AgentState = z.infer<typeof AgentStateSchema>;
 export declare const AgentStatusBaseSchema: z.ZodObject<{
-    '@type': z.ZodLiteral<"AgentStatusBase">;
+    '@type': z.ZodDefault<z.ZodString>;
     uri: z.ZodNullable<z.ZodString>;
     detail: z.ZodJSONSchema;
     has_error: z.ZodDefault<z.ZodBoolean>;
@@ -90,7 +90,7 @@ export declare const AgentSchema: z.ZodObject<{
     modify_timestamp: z.ZodISODateTime;
     is_deleted: z.ZodDefault<z.ZodBoolean>;
     is_in_desired_state: z.ZodDefault<z.ZodBoolean>;
-    '@type': z.ZodLiteral<"Agent">;
+    '@type': z.ZodDefault<z.ZodString>;
     desired_state: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
         pull_interval: z.ZodNullable<z.ZodNumber>;
@@ -101,7 +101,7 @@ export declare const AgentSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"AgentDesiredState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>>;
     runtime_state: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
@@ -113,7 +113,7 @@ export declare const AgentSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"AgentRuntimeState">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>>;
     runtime_status: z.ZodNullable<z.ZodObject<{
         uri: z.ZodNullable<z.ZodString>;
@@ -123,7 +123,8 @@ export declare const AgentSchema: z.ZodObject<{
         create_timestamp: z.ZodISODateTime;
         modify_timestamp: z.ZodISODateTime;
         is_deleted: z.ZodDefault<z.ZodBoolean>;
-        '@type': z.ZodLiteral<"AgentRuntimeStatus">;
+        '@type': z.ZodDefault<z.ZodString>;
     }, z.core.$strip>>;
 }, z.core.$strip>;
 export type Agent = z.infer<typeof AgentSchema>;
+//# sourceMappingURL=agent.schema.d.ts.map

@@ -18,7 +18,7 @@ export const DeviceRegistrationSchema = z.object({
     description: 'The registration of the device',
 });
 export const DeviceBaseSchema = z.object({
-    '@type': z.literal('DeviceBase')
+    '@type': z.string().default('DeviceBase')
         .describe('Type of the base device object'),
     name: z.string()
         .describe('The name of the device'),
@@ -72,7 +72,7 @@ export const DeviceStatusMetadataSchema = DeviceStateMetadataSchema.extend({
     description: 'The metadata of the device status',
 });
 export const DeviceStateBaseSchema = z.object({
-    '@type': z.literal('DeviceStateBase')
+    '@type': z.string().default('DeviceStateBase')
         .describe('Type of the base device state object'),
     uri: URISchema.nullable()
         .describe('The URI of the device'),
@@ -93,14 +93,14 @@ export const DeviceStateBaseSchema = z.object({
     description: 'The state of the device',
 });
 export const DeviceStateSchema = DeviceStateBaseSchema.extend(DeviceStateMetadataSchema.shape).extend({
-    '@type': z.literal('DeviceState')
+    '@type': z.string().default('DeviceState')
         .describe('Type of the device state object'),
 }).register(dsbunnyRegistry, {
     id: 'DeviceStateSchema',
     description: 'The state of the device with metadata',
 });
 export const DeviceStatusBaseSchema = z.object({
-    '@type': z.literal('DeviceStatusBase')
+    '@type': z.string().default('DeviceStatusBase')
         .describe('Type of the base device status object'),
     uri: URISchema.nullable()
         .describe('The URL of the device'),
@@ -125,42 +125,42 @@ export const DeviceStatusBaseSchema = z.object({
     description: 'The runtime status of the device',
 });
 export const DeviceStatusSchema = DeviceStatusBaseSchema.extend(DeviceStatusMetadataSchema.shape).extend({
-    '@type': z.literal('DeviceStatus')
+    '@type': z.string().default('DeviceStatus')
         .describe('Type of the device status object'),
 }).register(dsbunnyRegistry, {
     id: 'DeviceStatusSchema',
     description: 'The runtime status of the device with metadata',
 });
 const DeviceBaseWithMetadataSchema = DeviceBaseSchema.extend(DeviceMetadataSchema.shape).extend({
-    '@type': z.literal('DeviceBaseWithMetadata')
+    '@type': z.string().default('DeviceBaseWithMetadata')
         .describe('Type of the base device object with metadata'),
 }).register(dsbunnyRegistry, {
     id: 'DeviceBaseWithMetadataSchema',
     description: 'The base information of the device with metadata',
 });
 const DeviceDesiredStateSchema = DeviceStateBaseSchema.extend(DeviceStateMetadataSchema.shape).extend({
-    '@type': z.literal('DeviceDesiredState')
+    '@type': z.string().default('DeviceDesiredState')
         .describe('Type of the desired state of the device with metadata object'),
 }).register(dsbunnyRegistry, {
     id: 'DeviceDesiredStateSchema',
     description: 'The desired state of the device with metadata',
 });
 const DeviceRuntimeStateSchema = DeviceStateBaseSchema.extend(DeviceStateMetadataSchema.shape).extend({
-    '@type': z.literal('DeviceRuntimeState')
+    '@type': z.string().default('DeviceRuntimeState')
         .describe('Type of the runtime state of the device with metadata object'),
 }).register(dsbunnyRegistry, {
     id: 'DeviceRuntimeStateSchema',
     description: 'The runtime state of the device with metadata',
 });
 const DeviceRuntimeStatusSchema = DeviceStatusBaseSchema.extend(DeviceStatusMetadataSchema.shape).extend({
-    '@type': z.literal('DeviceRuntimeStatus')
+    '@type': z.string().default('DeviceRuntimeStatus')
         .describe('Type of the runtime status of the device with metadata object'),
 }).register(dsbunnyRegistry, {
     id: 'DeviceRuntimeStatusSchema',
     description: 'The runtime status of the device with metadata',
 });
 export const DeviceSchema = DeviceBaseWithMetadataSchema.extend({
-    '@type': z.literal('Device')
+    '@type': z.string().default('Device')
         .describe('Type of the device object'),
     desired_state: DeviceDesiredStateSchema
         .nullable()
