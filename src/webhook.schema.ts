@@ -14,17 +14,10 @@ export const RmmWebhookClassSchema = z.enum(['agent', 'device']).register(dsbunn
 });
 export type RmmWebhookClass = z.infer<typeof RmmWebhookClassSchema>;
 
-export const RmmWebhookTypeSchema = z.enum(['new', 'change', 'delete', 'desired-state', 'runtime-state', 'runtime-status']).register(dsbunnyRegistry, {
-        id: 'RmmWebhookTypeSchema',
-        description: 'The type of the webhook event related to RMM operations',
-});
-export type RmmWebhookType = z.infer<typeof RmmWebhookTypeSchema>;
-
 export const RmmWebhookRequestSchema = WebhookRequestSchema.extend({
 	'@type': z.literal('RmmWebhookRequest')
 		.describe('Type of the RMM webhook request object'),
         class: RmmWebhookClassSchema,
-        type: RmmWebhookTypeSchema,
 }).register(dsbunnyRegistry, {
         id: 'RmmWebhookRequestSchema',
         description: 'The schema for webhook requests sent by the RMM system',
